@@ -1,1 +1,624 @@
+!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>هناده دكسن - خطط ميزانيتك</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- خط Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* التنسيقات المشتركة من ملف utils.js (يمكن دمجها لاحقاً في ملف CSS منفصل) */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5; /* لون خلفية فاتح */
+            direction: rtl; /* اتجاه النص من اليمين لليسار */
+            text-align: right; /* محاذاة النص لليمين */
+            padding-top: 4rem; /* مسافة علوية لترك مكان لشريط التنقل الثابت */
+        }
+        /* تنسيق شريط التنقل الثابت */
+        .navbar {
+            position: fixed; /* يجعل الشريط ثابتاً عند التمرير */
+            top: 0;
+            right: 0; /* يبدأ من اليمين بسبب RTL */
+            width: 100%;
+            background-color: #1a202c; /* لون خلفية داكن للشريط */
+            color: white;
+            padding: 0.75rem 1.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000; /* يضمن ظهوره فوق المحتوى الآخر */
+            display: flex;
+            justify-content: center; /* توسيط الأزرار */
+            gap: 1.5rem; /* مسافة بين الأزرار */
+            flex-wrap: wrap; /* للسماح للأزرار بالانتقال لسطر جديد على الشاشات الصغيرة */
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.4rem 0.6rem; /* تم تصغير المسافة الداخلية للزر */
+            border-radius: 0.5rem;
+            transition: background-color 0.2s ease;
+            font-size: 0.9rem; /* تم تصغير حجم الخط هنا */
+        }
+        .navbar a:hover {
+            background-color: #2d3748; /* لون أغمق عند المرور */
+        }
+        /* تنسيق الحاوية الرئيسية للصفحة */
+        .container {
+            max-width: 900px; /* أقصى عرض للحاوية */
+            margin: 2rem auto; /* توسيط الحاوية عمودياً وأفقياً */
+            padding: 1.5rem; /* مساحة داخلية */
+            background-color: #ffffff; /* خلفية بيضاء */
+            border-radius: 1rem; /* زوايا مستديرة */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* ظل خفيف */
+        }
+        /* تنسيق الأقسام الرئيسية */
+        .section-card {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e2e8f0;
+        }
+        .section-card:first-of-type {
+            margin-top: 0;
+            padding-top: 0;
+            border-top: none;
+        }
+        .section-card h2 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        .info-box {
+            background-color: #ffffff;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+        }
+        .info-box h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 0.75rem;
+        }
+        .info-box p, .info-box li {
+            color: #4a5568;
+            line-height: 1.6;
+        }
+        .info-box ul {
+            list-style-type: disc;
+            padding-right: 1.5rem;
+            margin-top: 0.5rem;
+        }
+        /* تنسيق مجموعات الإدخال (الميزانية والفئات) */
+        .input-group label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        .input-group input[type="number"],
+        .input-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            color: #4a5568;
+            background-color: #fdfdfd;
+            transition: border-color 0.2s;
+        }
+        .input-group input[type="number"]:focus,
+        .input-group select:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+        }
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            padding: 0.5rem 0;
+            color: #4a5568;
+        }
+        .checkbox-group input[type="checkbox"] {
+            margin-left: 0.75rem;
+            width: 1.25rem;
+            height: 1.25rem;
+            border-radius: 0.25rem;
+            border: 1px solid #cbd5e0;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-color: #fdfdfd;
+            transition: background-color 0.2s, border-color 0.2s;
+        }
+        .checkbox-group input[type="checkbox"]:checked {
+            background-color: #3b82f6;
+            border-color: #3b82f6;
+            position: relative;
+        }
+        .checkbox-group input[type="checkbox"]:checked::before {
+            content: '✔';
+            display: block;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 0.8rem;
+            color: white;
+        }
+        .btn-primary {
+            background-color: #22c55e;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.75rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .btn-primary:hover {
+            background-color: #16a34a;
+            transform: translateY(-1px);
+        }
+        .btn-primary:active {
+            transform: translateY(0);
+            box-shadow: none;
+        }
+        .results-section {
+            margin-top: 2rem;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 2rem;
+        }
+        .pv-progress-bar {
+            width: 100%;
+            background-color: #e2e8f0;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            height: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .pv-progress {
+            height: 100%;
+            background-color: #3b82f6;
+            width: 0%;
+            border-radius: 0.5rem;
+            transition: width 0.5s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        .option-card {
+            background-color: #ffffff;
+            border: 2px solid #e2e8f0;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+            transition: border-color 0.3s ease;
+        }
+        .option-card:hover {
+            border-color: #3b82f6;
+        }
+        .option-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 1rem;
+        }
+        .option-card .summary-stats p {
+            font-size: 1rem;
+            color: #4a5568;
+            margin-bottom: 0.5rem;
+        }
+        .option-card .summary-stats strong {
+            color: #1a202c;
+        }
+        .option-card .product-list {
+            margin-top: 1rem;
+            border-top: 1px dashed #e2e8f0;
+            padding-top: 1rem;
+        }
+        .option-card .product-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.4rem 0;
+            border-bottom: 1px dotted #ebf4ff;
+        }
+        .option-card .product-item:last-child {
+            border-bottom: none;
+        }
+        .option-card .product-item span {
+            font-size: 0.95rem;
+            color: #4a5568;
+        }
+        .option-card .product-item strong {
+            color: #2d3748;
+        }
 
+        /* رسائل الخطأ */
+        .error-message {
+            background-color: #fee2e2;
+            color: #ef4444;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+            font-weight: 500;
+        }
+        /* رسائل المعلومات */
+        .info-message {
+            background-color: #e0f2fe;
+            color: #0284c7;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+            font-weight: 500;
+        }
+        /* رسائل النجاح */
+        .success-message {
+            background-color: #dcfce7;
+            color: #16a34a;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+            font-weight: 500;
+        }
+        /* تنسيق جدول المنتجات المضافة يدوياً */
+        .manual-products-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        .manual-products-table th, .manual-products-table td {
+            border: 1px solid #e2e8f0;
+            padding: 0.75rem;
+            text-align: right;
+        }
+        .manual-products-table th {
+            background-color: #f0f2f5;
+            font-weight: 600;
+            color: #4a5568;
+        }
+        .manual-products-table td {
+            background-color: #ffffff;
+        }
+        .manual-products-table button {
+            background-color: #ef4444;
+            color: white;
+            padding: 0.3rem 0.6rem;
+            border-radius: 0.5rem;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .manual-products-table button:hover {
+            background-color: #dc2626;
+        }
+        /* تنسيق أزرار الطباعة والمشاركة */
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            justify-content: center;
+        }
+        .action-buttons .btn {
+            background-color: #3b82f6;
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            flex-grow: 1;
+            max-width: 200px;
+        }
+        .action-buttons .btn:hover {
+            background-color: #2563eb;
+        }
+        .action-buttons .btn-print {
+            background-color: #6b7280;
+        }
+        .action-buttons .btn-print:hover {
+            background-color: #4b5563;
+        }
+        /* إخفاء عناصر الصور تماماً */
+        .product-image, .product-image-small {
+            display: none !important; 
+        }
+        /* تعديل عرض الخلاصات لعدم وجود صور */
+        .product-info-item summary {
+            justify-content: flex-start;
+            gap: 0.5rem;
+        }
+        /* تنسيق قسم معلومات عامة */
+        .general-info-section .info-box {
+            background-color: #ffffff;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+        }
+        .general-info-section h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 0.75rem;
+        }
+        .general-info-section p, .general-info-section li {
+            color: #4a5568;
+            line-height: 1.6;
+        }
+        .general-info-section ul {
+            list-style-type: disc;
+            padding-right: 1.5rem;
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- شريط التنقل الثابت -->
+    <nav class="navbar">
+        <a href="index.html">الرئيسية</a>
+        <a href="idea.html">الفكرة الأساسية</a>
+        <a href="mlm.html">فرصة العمل</a>
+        <a href="products.html">المنتجات</a>
+        <a href="commissions.html">العمولات</a>
+        <a href="budget-planner.html" class="bg-blue-700">خطط ميزانيتك</a>
+        <a href="manual-bundle.html">مجموعتك الخاصة</a>
+        <a href="general-info.html">معلومات الريشي</a>
+        <a href="resources.html">مصادر إضافية</a>
+    </nav>
+
+    <div class="container">
+        <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">هناده دكسن</h1>
+        <p class="text-center text-gray-600 mb-8">مرحباً بكِ في دليلكِ الشامل لمنتجات DXN وفرصتها الفريدة! هنا نساعدكِ على اكتشاف عالم الصحة والجمال الطبيعي، وكيف يمكنكِ بناء مشروعكِ الخاص من المنزل.</p>
+
+        <!-- قسم اختر ميزانيتك -->
+        <div id="budget-planner-section" class="section-card">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">اختر ميزانيتك: خطط لمشترياتك الذكية!</h2>
+            <p class="text-center text-gray-600 mb-8">استخدمي هذه الأداة لاختيار ميزانيتك الشهرية وفئات المنتجات المفضلة لديكِ، وسنساعدكِ في العثور على أفضل الخيارات لتحقيق 100 نقطة (PV) شهرياً.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div class="input-group">
+                    <label for="budget">ميزانيتك الشهرية (بالدينار الأردني):</label>
+                    <input type="number" id="budget" min="10" value="70" placeholder="أدخل ميزانيتك">
+                </div>
+
+                <div class="input-group">
+                    <label for="commissionRate">نسبة عمولتك الحالية (%):</label>
+                    <input type="number" id="commissionRate" min="6" max="37" value="6" placeholder="مثال: 6 أو 25">
+                </div>
+
+                <div class="input-group md:col-span-2">
+                    <label>اختر فئات المنتجات:</label>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 checkbox-group">
+                        <label>
+                            <input type="checkbox" name="category" value="أغذية ومشروبات" checked>
+                            <span>أغذية ومشروبات</span>
+                        </label>
+                        <label>
+                            <input type="checkbox" name="category" value="مكملات غذائية صحية" checked>
+                            <span>مكملات غذائية صحية</span>
+                        </label>
+                        <label>
+                            <input type="checkbox" name="category" value="عناية شخصية" checked>
+                            <span>عناية شخصية</span>
+                        </label>
+                        <label>
+                            <input type="checkbox" name="category" value="عناية بالبشرة وتجميل" checked>
+                            <span>عناية بالبشرة وتجميل</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <button id="calculateBtn" class="btn-primary w-full">عرض أفضل الخيارات</button>
+
+            <div id="results" class="results-section hidden">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-4">الخيارات المقترحة:</h2>
+                <div id="pvOverallProgressBar" class="pv-progress-bar mb-4">
+                    <div class="pv-progress" style="width: 0%;">0 PV</div>
+                </div>
+                <p id="overallPvStatus" class="text-gray-600 text-sm mb-4">أفضل نقطة PV يمكن تحقيقها ضمن الميزانية: <span id="maxPossiblePv">0</span> PV.</p>
+                
+                <div id="recommendedBundles" class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- المجموعات المقترحة ستظهر هنا -->
+                </div>
+                <div id="message" class="mt-4">
+                    <!-- الرسائل (مثل تجاوز الميزانية أو تحقيق 100 نقطة) ستظهر هنا -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- استيراد ملفات JavaScript المشتركة -->
+    <script src="data.js" defer></script>
+    <script src="utils.js" defer></script>
+    <script>
+        // استدعاء دالة إنشاء شريط التنقل بعد تحميل DOM
+        window.onload = function() {
+            // "budget-planner-page" هو معرف الصفحة الحالية لتظليلها في شريط التنقل
+            window.createNavbar("budget-planner-page"); 
+            // الوظائف الخاصة بهذه الصفحة
+            const calculateBtn = document.getElementById('calculateBtn');
+            const budgetInput = document.getElementById('budget');
+            const commissionRateInput = document.getElementById('commissionRate');
+            const categoryCheckboxes = document.querySelectorAll('input[name="category"]');
+            const resultsSection = document.getElementById('results');
+            const recommendedBundlesDiv = document.getElementById('recommendedBundles');
+            const pvOverallProgressBar = document.getElementById('pvOverallProgressBar').querySelector('.pv-progress');
+            const maxPossiblePvSpan = document.getElementById('maxPossiblePv');
+            const messageDiv = document.getElementById('message');
+
+            const TARGET_PV = 100;
+
+            calculateBtn.addEventListener('click', calculateBestOptions);
+
+            function calculateBestOptions() {
+                const budget = parseFloat(budgetInput.value);
+                const commissionRate = parseFloat(commissionRateInput.value);
+                const selectedCategories = Array.from(categoryCheckboxes)
+                    .filter(checkbox => checkbox.checked)
+                    .map(checkbox => checkbox.value);
+
+                // Input validation
+                if (isNaN(budget) || budget <= 0) {
+                    window.showMessage('يرجى إدخال ميزانية شهرية صحيحة وموجبة.', 'error');
+                    resultsSection.classList.add('hidden');
+                    return;
+                }
+                if (isNaN(commissionRate) || commissionRate < 6 || commissionRate > 37) {
+                    window.showMessage('يرجى إدخال نسبة عمولة صحيحة (بين 6% و 37%).', 'error');
+                    resultsSection.classList.add('hidden');
+                    return;
+                }
+                if (selectedCategories.length === 0) {
+                    window.showMessage('يرجى اختيار فئة واحدة على الأقل من المنتجات.', 'error');
+                    resultsSection.classList.add('hidden');
+                    return;
+                }
+
+                let filteredProducts = productsData.filter(product =>
+                    selectedCategories.includes(product.category)
+                );
+
+                if (filteredProducts.length === 0) {
+                    window.showMessage('عذراً، لا توجد منتجات في الفئات المختارة.', 'info');
+                    resultsSection.classList.add('hidden');
+                    return;
+                }
+
+                let allCandidateBundles = [];
+
+                // Generate bundles using different strategies
+                allCandidateBundles.push(window.generateBundle(filteredProducts, budget, TARGET_PV, commissionRate, 'efficiency'));
+                allCandidateBundles.push(window.generateBundle(filteredProducts, budget, TARGET_PV, commissionRate, 'cost_per_pv'));
+                allCandidateBundles.push(window.generateBundle(filteredProducts, budget, TARGET_PV, commissionRate, 'highest_pv'));
+                allCandidateBundles.push(window.generateBundle(filteredProducts, budget, TARGET_PV, commissionRate, 'lowest_cost'));
+                // Can add more strategies here for more diversity
+
+                // Filter out invalid bundles
+                let validBundles = allCandidateBundles.filter(b => b.items.length > 0 && b.totalCost <= budget);
+
+                // Remove duplicate bundles
+                const uniqueBundles = new Map(); // Use Map to store unique bundles by key
+                validBundles.forEach(bundle => {
+                    const bundleKey = bundle.items.map(item => `${item.name}:${item.quantity}`).sort().join(';');
+                    // Only add if not already seen, or if this bundle is "better" (e.g., higher PV)
+                    if (!uniqueBundles.has(bundleKey) || uniqueBundles.get(bundleKey).totalPV < bundle.totalPV) {
+                        uniqueBundles.set(bundleKey, bundle);
+                    }
+                });
+                validBundles = Array.from(uniqueBundles.values());
+
+
+                // Sort valid bundles to find the "best" ones
+                validBundles.sort((a, b) => {
+                    const diffA = Math.abs(a.totalPV - TARGET_PV);
+                    const diffB = Math.abs(b.totalPV - TARGET_PV);
+                    if (diffA !== diffB) {
+                        return diffA - diffB;
+                    }
+                    if (a.totalCost !== b.totalCost) {
+                        return a.totalCost - b.totalCost;
+                    }
+                    return b.totalPV - a.totalPV;
+                });
+
+                const topNBundles = validBundles.slice(0, 5); // Display up to 5 best options
+
+                displayResults(topNBundles, budget);
+            }
+
+            // Function to display results in the UI
+            function displayResults(bundles, budget) {
+                resultsSection.classList.remove('hidden');
+                recommendedBundlesDiv.innerHTML = ''; // Clear previous results
+                messageDiv.innerHTML = ''; // Clear previous messages
+
+                if (bundles.length === 0) {
+                    window.showMessage('عذراً، لم نتمكن من العثور على مجموعات منتجات مناسبة ضمن ميزانيتك والفئات المختارة.', 'info');
+                    pvOverallProgressBar.style.width = '0%';
+                    pvOverallProgressBar.textContent = '0 PV';
+                    maxPossiblePvSpan.textContent = '0';
+                    return;
+                }
+
+                let maxAchievedPv = 0;
+                let anyBundleReachedTarget = false;
+
+                // Display each recommended bundle
+                bundles.forEach((bundle, index) => {
+                    const optionCard = document.createElement('div');
+                    optionCard.className = 'option-card';
+                    optionCard.innerHTML = `
+                        <h3 class="mb-4">الخيار رقم ${index + 1}</h3>
+                        <div class="summary-stats mb-4">
+                            <p>إجمالي النقاط (PV): <strong>${bundle.totalPV.toFixed(2)}</strong></p>
+                            <p>إجمالي قيمة المبيعات (SV): <strong>${bundle.totalSV.toFixed(2)}</strong></p>
+                            <p>إجمالي التكلفة (دينار أردني): <strong>${bundle.totalCost.toFixed(2)}</strong></p>
+                            <p>العمولة الشهرية التقديرية: <strong>${bundle.estimatedCommission.toFixed(2)}</strong> دينار أردني</p>
+                            <p>الميزانية المتبقية: <strong>${(budget - bundle.totalCost).toFixed(2)}</strong> دينار أردني</p>
+                        </div>
+                        <div class="pv-progress-bar mb-4">
+                            <div class="pv-progress" style="width: ${Math.min((bundle.totalPV / TARGET_PV) * 100, 100)}%;">
+                                ${bundle.totalPV.toFixed(2)} PV
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-500 mb-2">المنتجات في هذه المجموعة:</p>
+                        <div class="product-list">
+                            ${bundle.items.map(item => `
+                                <div class="product-item">
+                                    <span>${item.name}</span>
+                                    <span>الكمية: <strong>${item.quantity}</strong> | PV: <strong>${(item.PV * item.quantity).toFixed(2)}</strong> | SV: <strong>${(item.SV * item.quantity).toFixed(2)}</strong> | السعر: <strong>${(item.DP * item.quantity).toFixed(2)}</strong></span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+                    recommendedBundlesDiv.appendChild(optionCard);
+
+                    if (bundle.totalPV > maxAchievedPv) {
+                        maxAchievedPv = bundle.totalPV;
+                    }
+                    if (bundle.totalPV >= TARGET_PV) {
+                        anyBundleReachedTarget = true;
+                    }
+                });
+
+                // تحديث شريط التقدم العام وأقصى PV ممكن
+                const overallPvPercentage = Math.min((maxAchievedPv / TARGET_PV) * 100, 100);
+                pvOverallProgressBar.style.width = `${overallPvPercentage}%`;
+                pvOverallProgressBar.textContent = `${maxAchievedPv.toFixed(2)} PV`;
+                if (maxAchievedPv >= TARGET_PV) {
+                    pvOverallProgressBar.style.backgroundColor = '#10b981'; // أخضر للنجاح
+                } else {
+                    pvOverallProgressBar.style.backgroundColor = '#3b82f6'; // أزرق
+                }
+                maxPossiblePvSpan.textContent = maxAchievedPv.toFixed(2);
+
+                // عرض الرسائل النهائية
+                if (anyBundleReachedTarget) {
+                    window.showMessage('تهانينا! تم العثور على خيارات تحقق 100 نقطة (PV) أو أكثر ضمن ميزانيتك.', 'success');
+                } else if (maxAchievedPv > 0) {
+                    window.showMessage(`لم يتم تحقيق 100 نقطة (PV) في أي من الخيارات. أعلى نقاط يمكن تحقيقها هي ${maxAchievedPv.toFixed(2)} PV ضمن ميزانيتك.`, 'info');
+                } else {
+                    window.showMessage('عذراً، لم نتمكن من العثور على أي مجموعات منتجات مناسبة ضمن ميزانيتك والفئات المختارة.', 'info');
+                }
+            }
+
+            // Initial calculation on page load (optional, but good for demo)
+            calculateBestOptions();
+        }; // Changed to window.onload
+    </script>
+</body>
+</html>
