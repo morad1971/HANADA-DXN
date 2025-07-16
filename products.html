@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>هناده دكسن - المنتجات</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- خط Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* التنسيقات المشتركة من ملف utils.js (يمكن دمجها لاحقاً في ملف CSS منفصل) */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+            direction: rtl;
+            text-align: right;
+            padding-top: 4rem; /* مسافة علوية لترك مكان لشريط التنقل الثابت */
+        }
+        .navbar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            background-color: #1a202c;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.4rem 0.6rem;
+            border-radius: 0.5rem;
+            transition: background-color 0.2s ease;
+            font-size: 0.9rem;
+        }
+        .navbar a:hover {
+            background-color: #2d3748;
+        }
+        .container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 1.5rem;
+            background-color: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .section-card {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e2e8f0;
+        }
+        .section-card:first-of-type {
+            margin-top: 0;
+            padding-top: 0;
+            border-top: none;
+        }
+        .section-card h2 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        .info-box {
+            background-color: #ffffff;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+        }
+        .info-box h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 0.75rem;
+        }
+        .info-box p, .info-box li {
+            color: #4a5568;
+            line-height: 1.6;
+        }
+        .info-box ul {
+            list-style-type: disc;
+            padding-right: 1.5rem;
+            margin-top: 0.5rem;
+        }
+        /* تنسيق قسم استخدامات ومزايا المنتجات */
+        .product-info-section .product-info-item {
+            background-color: #ffffff;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+        }
+        .product-info-section .product-info-item summary {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2d3748;
+            cursor: pointer;
+            padding: 0.5rem 0;
+        }
+        .product-info-section .product-info-item ul {
+            list-style-type: disc;
+            padding-right: 1.5rem;
+            margin-top: 0.5rem;
+        }
+        .product-info-section .product-info-item li {
+            color: #4a5568;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <!-- شريط التنقل الثابت -->
+    <nav class="navbar">
+        <a href="index.html">الرئيسية</a>
+        <a href="idea.html">الفكرة الأساسية</a>
+        <a href="mlm.html">فرصة العمل</a>
+        <a href="products.html" class="bg-blue-700">المنتجات</a>
+        <a href="commissions.html">العمولات</a>
+        <a href="budget-planner.html">خطط ميزانيتك</a>
+        <a href="manual-bundle.html">مجموعتك الخاصة</a>
+        <a href="general-info.html">معلومات الريشي</a>
+        <a href="resources.html">مصادر إضافية</a>
+    </nav>
+
+    <div class="container">
+        <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">هناده دكسن</h1>
+        <p class="text-center text-gray-600 mb-8">مرحباً بكِ في دليلكِ الشامل لمنتجات DXN وفرصتها الفريدة! هنا نساعدكِ على اكتشاف عالم الصحة والجمال الطبيعي، وكيف يمكنكِ بناء مشروعكِ الخاص من المنزل.</p>
+
+        <!-- قسم التعرف على منتجات DXN -->
+        <div id="products-section" class="section-card">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">التعرف على منتجات DXN: الفئات والاستخدامات والمزايا</h2>
+            <div id="productInfoList" class="space-y-4">
+                <!-- معلومات المنتجات ستُضاف هنا ديناميكياً بواسطة JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- استيراد ملفات JavaScript المشتركة -->
+    <script src="data.js"></script>
+    <script src="utils.js"></script>
+    <script>
+        // استدعاء دالة إنشاء شريط التنقل بعد تحميل DOM
+        document.addEventListener('DOMContentLoaded', () => {
+            window.createNavbar("products-page"); 
+            window.displayProductInfo(); // استدعاء دالة عرض معلومات المنتجات
+        });
+    </script>
+</body>
+</html>
