@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مخطط منتجات DXN التفاعلي</title>
+    <title>هناده دكسن - الرئيسية</title>
     <!-- Tailwind CSS CDN لاستخدام فئات التصميم الجاهزة -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- خط Inter لتحسين مظهر النص -->
@@ -15,6 +15,35 @@
             background-color: #f0f2f5; /* لون خلفية فاتح */
             direction: rtl; /* اتجاه النص من اليمين لليسار */
             text-align: right; /* محاذاة النص لليمين */
+            padding-top: 4rem; /* مسافة علوية لترك مكان لشريط التنقل الثابت */
+        }
+        /* تنسيق شريط التنقل الثابت */
+        .navbar {
+            position: fixed; /* يجعل الشريط ثابتاً عند التمرير */
+            top: 0;
+            right: 0; /* يبدأ من اليمين بسبب RTL */
+            width: 100%;
+            background-color: #1a202c; /* لون خلفية داكن للشريط */
+            color: white;
+            padding: 0.75rem 1.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000; /* يضمن ظهوره فوق المحتوى الآخر */
+            display: flex;
+            justify-content: center; /* توسيط الأزرار */
+            gap: 1.5rem; /* مسافة بين الأزرار */
+            flex-wrap: wrap; /* للسماح للأزرار بالانتقال لسطر جديد على الشاشات الصغيرة */
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.4rem 0.6rem; /* تم تصغير المسافة الداخلية للزر */
+            border-radius: 0.5rem;
+            transition: background-color 0.2s ease;
+            font-size: 0.9rem; /* تم تصغير حجم الخط هنا */
+        }
+        .navbar a:hover {
+            background-color: #2d3748; /* لون أغمق عند المرور */
         }
         /* تنسيق الحاوية الرئيسية للصفحة */
         .container {
@@ -25,110 +54,118 @@
             border-radius: 1rem; /* زوايا مستديرة */
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* ظل خفيف */
         }
+        /* تنسيق الأقسام الرئيسية */
+        .section-card {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e2e8f0;
+        }
+        .section-card:first-of-type {
+            margin-top: 0;
+            padding-top: 0;
+            border-top: none;
+        }
+        .section-card h2 {
+            font-size: 2.25rem; /* حجم أكبر للعناوين الرئيسية */
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
         /* تنسيق مجموعات الإدخال (الميزانية والفئات) */
         .input-group label {
-            font-weight: 600; /* خط سميك */
-            color: #333; /* لون نص داكن */
-            margin-bottom: 0.5rem; /* مسافة سفلية */
-            display: block; /* لجعل العنوان يأخذ سطراً كاملاً */
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.5rem;
+            display: block;
         }
-        /* تنسيق حقول الإدخال والاختيار */
         .input-group input[type="number"],
         .input-group select {
-            width: 100%; /* عرض كامل */
-            padding: 0.75rem; /* مساحة داخلية */
-            border: 1px solid #e2e8f0; /* حدود رمادية فاتحة */
-            border-radius: 0.5rem; /* زوايا مستديرة */
-            font-size: 1rem; /* حجم الخط */
-            color: #4a5568; /* لون النص */
-            background-color: #fdfdfd; /* خلفية شبه بيضاء */
-            transition: border-color 0.2s; /* انتقال سلس لتغيير لون الحدود */
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            color: #4a5568;
+            background-color: #fdfdfd;
+            transition: border-color 0.2s;
         }
-        /* تنسيق حقول الإدخال عند التركيز عليها */
         .input-group input[type="number"]:focus,
         .input-group select:focus {
-            outline: none; /* إزالة الخط الأزرق الافتراضي */
-            border-color: #3b82f6; /* لون أزرق عند التركيز */
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25); /* ظل أزرق خفيف */
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
         }
-        /* تنسيق مجموعة مربعات الاختيار (الفئات) */
         .checkbox-group label {
-            display: flex; /* لعرض المربع والنص في سطر واحد */
-            align-items: center; /* محاذاة رأسية للعناصر */
-            cursor: pointer; /* مؤشر اليد عند المرور */
-            padding: 0.5rem 0; /* مساحة داخلية عمودية */
-            color: #4a5568; /* لون النص */
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            padding: 0.5rem 0;
+            color: #4a5568;
         }
-        /* تنسيق مربعات الاختيار المخصصة */
         .checkbox-group input[type="checkbox"] {
-            margin-left: 0.75rem; /* مسافة على اليسار (لأن الاتجاه RTL) */
-            width: 1.25rem; /* عرض المربع */
-            height: 1.25rem; /* ارتفاع المربع */
-            border-radius: 0.25rem; /* زوايا مستديرة قليلاً */
-            border: 1px solid #cbd5e0; /* حدود رمادية */
-            appearance: none; /* إزالة المظهر الافتراضي للمتصفح */
+            margin-left: 0.75rem;
+            width: 1.25rem;
+            height: 1.25rem;
+            border-radius: 0.25rem;
+            border: 1px solid #cbd5e0;
+            appearance: none;
             -webkit-appearance: none;
             -moz-appearance: none;
-            background-color: #fdfdfd; /* خلفية بيضاء */
-            transition: background-color 0.2s, border-color 0.2s; /* انتقال سلس للألوان */
+            background-color: #fdfdfd;
+            transition: background-color 0.2s, border-color 0.2s;
         }
-        /* تنسيق مربعات الاختيار عند تحديدها */
         .checkbox-group input[type="checkbox"]:checked {
-            background-color: #3b82f6; /* لون أزرق عند التحديد */
-            border-color: #3b82f6; /* حدود زرقاء */
-            position: relative; /* لتحديد موقع علامة الصح */
+            background-color: #3b82f6;
+            border-color: #3b82f6;
+            position: relative;
         }
-        /* علامة الصح داخل مربعات الاختيار المحددة */
         .checkbox-group input[type="checkbox"]:checked::before {
-            content: '✔'; /* رمز علامة الصح */
-            display: block; /* لعرض الرمز */
-            position: absolute; /* تحديد موقعه بشكل مطلق */
-            top: 50%; /* توسيط عمودي */
-            left: 50%; /* توسيط أفقي */
-            transform: translate(-50%, -50%); /* ضبط دقيق للتوسيط */
-            font-size: 0.8rem; /* حجم الخط */
-            color: white; /* لون أبيض */
+            content: '✔';
+            display: block;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 0.8rem;
+            color: white;
         }
-        /* تنسيق الزر الرئيسي */
         .btn-primary {
-            background-color: #22c55e; /* لون أخضر */
-            color: white; /* لون النص أبيض */
-            padding: 0.75rem 1.5rem; /* مساحة داخلية */
-            border-radius: 0.75rem; /* زوايا مستديرة جداً */
-            font-size: 1.1rem; /* حجم الخط */
-            font-weight: 600; /* خط سميك */
-            cursor: pointer; /* مؤشر اليد عند المرور */
-            transition: background-color 0.3s ease, transform 0.1s ease; /* انتقالات سلسة */
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* ظل للزر */
+            background-color: #22c55e;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.75rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-        /* تأثير الزر عند المرور عليه بالفأرة */
         .btn-primary:hover {
-            background-color: #16a34a; /* لون أخضر أغمق */
-            transform: translateY(-1px); /* رفع الزر قليلاً */
+            background-color: #16a34a;
+            transform: translateY(-1px);
         }
-        /* تأثير الزر عند الضغط عليه */
         .btn-primary:active {
-            transform: translateY(0); /* إعادة الزر لمكانه */
-            box-shadow: none; /* إزالة الظل */
+            transform: translateY(0);
+            box-shadow: none;
         }
-        /* تنسيق قسم النتائج */
         .results-section {
-            margin-top: 2rem; /* مسافة علوية */
-            border-top: 1px solid #e2e8f0; /* خط فاصل علوي */
-            padding-top: 2rem; /* مساحة داخلية علوية */
+            margin-top: 2rem;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 2rem;
         }
-        /* شريط تقدم النقاط */
         .pv-progress-bar {
             width: 100%;
             background-color: #e2e8f0;
             border-radius: 0.5rem;
             overflow: hidden;
             height: 1.5rem;
-            margin-bottom: 0.5rem; /* Adjusted margin for clarity */
+            margin-bottom: 0.5rem;
         }
         .pv-progress {
             height: 100%;
-            background-color: #3b82f6; /* Blue-500 */
+            background-color: #3b82f6;
             width: 0%;
             border-radius: 0.5rem;
             transition: width 0.5s ease-in-out;
@@ -139,22 +176,6 @@
             font-weight: 500;
             font-size: 0.9rem;
         }
-        /* بطاقات المنتجات المقترحة */
-        .product-card {
-            background-color: #f8fafc; /* خلفية رمادية فاتحة جداً */
-            border: 1px solid #e2e8f0; /* حدود رمادية فاتحة */
-            border-radius: 0.75rem; /* زوايا مستديرة */
-            padding: 1rem; /* مساحة داخلية */
-            margin-bottom: 1rem; /* مسافة سفلية */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* ظل خفيف */
-        }
-        .product-card strong {
-            color: #2d3748; /* لون نص داكن */
-        }
-        .product-card span {
-            color: #4a5568; /* لون نص متوسط */
-        }
-        /* تنسيق لبطاقات الخيارات المتعددة */
         .option-card {
             background-color: #ffffff;
             border: 2px solid #e2e8f0;
@@ -205,30 +226,30 @@
 
         /* رسائل الخطأ */
         .error-message {
-            background-color: #fee2e2; /* خلفية حمراء فاتحة */
-            color: #ef4444; /* لون نص أحمر */
-            padding: 0.75rem; /* مساحة داخلية */
-            border-radius: 0.5rem; /* زوايا مستديرة */
-            margin-top: 1rem; /* مسافة علوية */
-            font-weight: 500; /* سمك الخط */
+            background-color: #fee2e2;
+            color: #ef4444;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+            font-weight: 500;
         }
         /* رسائل المعلومات */
         .info-message {
-            background-color: #e0f2fe; /* خلفية زرقاء فاتحة */
-            color: #0284c7; /* لون نص أزرق داكن */
-            padding: 0.75rem; /* مساحة داخلية */
-            border-radius: 0.5rem; /* زوايا مستديرة */
-            margin-top: 1rem; /* مسافة علوية */
-            font-weight: 500; /* سمك الخط */
+            background-color: #e0f2fe;
+            color: #0284c7;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+            font-weight: 500;
         }
         /* رسائل النجاح */
         .success-message {
-            background-color: #dcfce7; /* خلفية خضراء فاتحة */
-            color: #16a34a; /* لون نص أخضر داكن */
-            padding: 0.75rem; /* مساحة داخلية */
-            border-radius: 0.5rem; /* زوايا مستديرة */
-            margin-top: 1rem; /* مسافة علوية */
-            font-weight: 500; /* سمك الخط */
+            background-color: #dcfce7;
+            color: #16a34a;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+            font-weight: 500;
         }
         /* تنسيق جدول المنتجات المضافة يدوياً */
         .manual-products-table {
@@ -250,7 +271,7 @@
             background-color: #ffffff;
         }
         .manual-products-table button {
-            background-color: #ef4444; /* Red-500 */
+            background-color: #ef4444;
             color: white;
             padding: 0.3rem 0.6rem;
             border-radius: 0.5rem;
@@ -259,17 +280,17 @@
             transition: background-color 0.2s;
         }
         .manual-products-table button:hover {
-            background-color: #dc2626; /* Red-600 */
+            background-color: #dc2626;
         }
         /* تنسيق أزرار الطباعة والمشاركة */
         .action-buttons {
             display: flex;
             gap: 1rem;
             margin-top: 1rem;
-            justify-content: center; /* توسيط الأزرار */
+            justify-content: center;
         }
         .action-buttons .btn {
-            background-color: #3b82f6; /* Blue-500 */
+            background-color: #3b82f6;
             color: white;
             padding: 0.6rem 1.2rem;
             border-radius: 0.5rem;
@@ -277,17 +298,17 @@
             font-weight: 500;
             cursor: pointer;
             transition: background-color 0.2s;
-            flex-grow: 1; /* لجعل الأزرار تتمدد */
-            max-width: 200px; /* تحديد أقصى عرض */
+            flex-grow: 1;
+            max-width: 200px;
         }
         .action-buttons .btn:hover {
-            background-color: #2563eb; /* Blue-600 */
+            background-color: #2563eb;
         }
         .action-buttons .btn-print {
-            background-color: #6b7280; /* Gray-500 */
+            background-color: #6b7280;
         }
         .action-buttons .btn-print:hover {
-            background-color: #4b5563; /* Gray-600 */
+            background-color: #4b5563;
         }
         /* إخفاء عناصر الصور تماماً */
         .product-image, .product-image-small {
@@ -295,998 +316,91 @@
         }
         /* تعديل عرض الخلاصات لعدم وجود صور */
         .product-info-item summary {
-            justify-content: flex-start; /* محاذاة لليمين فقط */
-            gap: 0.5rem; /* مسافة بين العناصر */
+            justify-content: flex-start;
+            gap: 0.5rem;
+        }
+        /* تنسيق قسم معلومات عامة */
+        .general-info-section .info-box {
+            background-color: #ffffff;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+        }
+        .general-info-section h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 0.75rem;
+        }
+        .general-info-section p, .general-info-section li {
+            color: #4a5568;
+            line-height: 1.6;
+        }
+        .general-info-section ul {
+            list-style-type: disc;
+            padding-right: 1.5rem;
+            margin-top: 0.5rem;
         }
     </style>
 </head>
 <body>
+    <!-- شريط التنقل الثابت -->
+    <nav class="navbar">
+        <a href="index.html" class="bg-blue-700">الرئيسية</a>
+        <a href="idea.html">الفكرة الأساسية</a>
+        <a href="mlm.html">فرصة العمل</a>
+        <a href="products.html">المنتجات</a>
+        <a href="commissions.html">العمولات</a>
+        <a href="budget-planner.html">خطط ميزانيتك</a>
+        <a href="manual-bundle.html">مجموعتك الخاصة</a>
+        <a href="general-info.html">معلومات الريشي</a>
+        <a href="resources.html">مصادر إضافية</a>
+    </nav>
+
     <div class="container">
-        <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">مخطط منتجات DXN التفاعلي</h1>
-        <p class="text-center text-gray-600 mb-8">اختر ميزانيتك وفئات المنتجات المفضلة لديك، وسنساعدك في العثور على أفضل الخيارات لتحقيق 100 نقطة (PV) شهرياً.</p>
+        <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">هناده دكسن</h1>
+        <p class="text-center text-gray-600 mb-8">مرحباً بكِ في دليلكِ الشامل لمنتجات DXN وفرصتها الفريدة! هنا نساعدكِ على اكتشاف عالم الصحة والجمال الطبيعي، وكيف يمكنكِ بناء مشروعكِ الخاص من المنزل.</p>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-            <div class="input-group">
-                <label for="budget">ميزانيتك الشهرية (بالدينار الأردني):</label>
-                <input type="number" id="budget" min="10" value="70" placeholder="أدخل ميزانيتك">
-            </div>
-
-            <div class="input-group">
-                <label for="commissionRate">نسبة عمولتك الحالية (%):</label>
-                <input type="number" id="commissionRate" min="6" max="37" value="6" placeholder="مثال: 6 أو 25">
-            </div>
-
-            <div class="input-group md:col-span-2">
-                <label>اختر فئات المنتجات:</label>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 checkbox-group">
-                    <label>
-                        <input type="checkbox" name="category" value="أغذية ومشروبات" checked>
-                        <span>أغذية ومشروبات</span>
-                    </label>
-                    <label>
-                        <input type="checkbox" name="category" value="مكملات غذائية صحية" checked>
-                        <span>مكملات غذائية صحية</span>
-                    </label>
-                    <label>
-                        <input type="checkbox" name="category" value="عناية شخصية" checked>
-                        <span>عناية شخصية</span>
-                    </label>
-                    <label>
-                        <input type="checkbox" name="category" value="عناية بالبشرة وتجميل" checked>
-                        <span>عناية بالبشرة وتجميل</span>
-                    </label>
-                </div>
-            </div>
-        </div>
-
-        <button id="calculateBtn" class="btn-primary w-full">عرض أفضل الخيارات</button>
-
-        <!-- قسم الخيارات المقترحة -->
-        <div id="results" class="results-section hidden">
-            <h2 class="text-2xl font-semibold text-gray-700 mb-4">الخيارات المقترحة (حسب الميزانية والفئات):</h2>
-            <div id="pvOverallProgressBar" class="pv-progress-bar mb-4">
-                <div class="pv-progress" style="width: 0%;">0 PV</div>
-            </div>
-            <p id="overallPvStatus" class="text-gray-600 text-sm mb-4">أفضل نقطة PV يمكن تحقيقها ضمن الميزانية: <span id="maxPossiblePv">0</span> PV.</p>
-            
-            <div id="recommendedBundles" class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <!-- المجموعات المقترحة ستظهر هنا -->
-            </div>
-            <div id="message" class="mt-4">
-                <!-- الرسائل (مثل تجاوز الميزانية أو تحقيق 100 نقطة) ستظهر هنا -->
-            </div>
-        </div>
-        <!-- نهاية قسم الخيارات المقترحة -->
-
-        <!-- قسم بناء المجموعة الخاصة -->
-        <div class="manual-bundle-section mt-8 pt-6 border-t border-gray-200">
-            <h2 class="text-2xl font-semibold text-gray-700 mb-4">بناء مجموعتك الخاصة:</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-                <div class="input-group md:col-span-2">
-                    <label for="productSelect">اختر منتجاً:</label>
-                    <select id="productSelect" class="w-full p-2 border border-gray-300 rounded-md">
-                        <!-- خيارات المنتجات ستُضاف هنا بواسطة JavaScript -->
-                    </select>
-                </div>
-                <div class="input-group">
-                    <label for="productQuantity">الكمية:</label>
-                    <input type="number" id="productQuantity" min="1" value="1" class="w-full p-2 border border-gray-300 rounded-md">
-                </div>
-            </div>
-            <button id="addProductBtn" class="btn-primary w-full mb-4">إضافة المنتج للمجموعة</button>
-
-            <div id="manualBundleDisplay" class="mb-6">
-                <h3 class="text-xl font-semibold text-gray-700 mb-2">منتجات مجموعتك المخصصة:</h3>
-                <table class="manual-products-table">
-                    <thead>
-                        <tr>
-                            <th>المنتج</th>
-                            <th>الكمية</th>
-                            <th>PV</th>
-                            <th>SV</th>
-                            <th>السعر (د.أ)</th>
-                            <th>إجراء</th>
-                        </tr>
-                    </thead>
-                    <tbody id="manualProductsTableBody">
-                        <!-- المنتجات المضافة يدوياً ستظهر هنا -->
-                    </tbody>
-                </table>
-                <div class="summary-stats mt-4 p-4 bg-blue-50 rounded-lg border border-blue-200">
-                    <p>إجمالي نقاط المجموعة المخصصة (PV): <strong id="manualTotalPv">0.00</strong></p>
-                    <p>إجمالي قيمة المبيعات للمجموعة المخصصة (SV): <strong id="manualTotalSv">0.00</strong></p>
-                    <p>إجمالي تكلفة المجموعة المخصصة (د.أ): <strong id="manualTotalCost">0.00</strong></p>
-                    <p>العمولة التقديرية للمجموعة المخصصة: <strong id="manualEstimatedCommission">0.00</strong> دينار أردني</p>
-                    <p class="text-sm text-gray-600 mt-2">ملاحظة: العمولة التقديرية تُحسب فقط إذا تجاوزت المجموعة 100 نقطة PV.</p>
-                </div>
-                <div class="action-buttons">
-                    <button id="printManualBundleBtn" class="btn btn-print">طباعة المجموعة</button>
-                    <button id="copyManualBundleBtn" class="btn">مشاركة / نسخ المجموعة</button>
-                </div>
-            </div>
-        </div>
-        <!-- نهاية قسم بناء المجموعة الخاصة -->
-
-        <!-- قسم جديد: استخدامات ومزايا المنتجات -->
-        <div class="product-info-section mt-8 pt-6 border-t border-gray-200">
-            <h2 class="text-2xl font-semibold text-gray-700 mb-4">استخدامات ومزايا منتجات DXN</h2>
-            <div id="productInfoList" class="space-y-4">
-                <!-- معلومات المنتجات ستُضاف هنا ديناميكياً بواسطة JavaScript -->
-            </div>
-        </div>
-        <!-- نهاية قسم استخدامات ومزايا المنتجات -->
-
-        <!-- قسم جديد: معلومات عامة عن فطر الريشي (الجانوديرما) -->
-        <div class="general-info-section mt-8 pt-6 border-t border-gray-200">
-            <h2 class="text-2xl font-semibold text-gray-700 mb-4">معلومات عامة عن فطر الريشي (الجانوديرما)</h2>
+        <div class="section-card">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">مرحباً بكِ في رحلتكِ مع هناده دكسن!</h2>
             <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-100 info-box">
-                <h3 class="text-xl font-semibold text-gray-800 mb-2">ما هو فطر الريشي (الجانوديرما)؟</h3>
                 <p class="text-gray-700 mb-3">
-                    فطر الريشي، المعروف علمياً باسم *Ganoderma lucidum*، هو فطر طبي يستخدم في الطب الصيني التقليدي منذ آلاف السنين. يطلق عليه لقب "ملك الأعشاب" أو "فطر الخلود" نظراً لفوائده الصحية المتعددة. ينمو هذا الفطر عادة على جذوع الأشجار المتحللة في المناطق الدافئة والرطبة في آسيا.
+                    يسعدني أن أكون دليلكِ في استكشاف عالم DXN المذهل. هذه الصفحة مصممة خصيصاً لتكون واجهتكِ المتكاملة لكل ما تحتاجين معرفته عن منتجات DXN الصحية وفرصة العمل الفريدة التي تقدمها.
                 </p>
-                <h3 class="text-xl font-semibold text-gray-800 mb-2">فوائد فطر الريشي الرئيسية:</h3>
+                <p class="text-gray-700 mb-3">
+                    سواء كنتِ تبحثين عن منتجات طبيعية لتحسين صحتكِ، أو فرصة لبناء دخل إضافي من منزلكِ في الأردن، أو ترغبين في الانضمام إلى مجتمع داعم من رائدات الأعمال، فقد وصلتِ إلى المكان الصحيح!
+                </p>
+                <p class="text-gray-700 mb-3">
+                    استخدمي شريط التنقل في الأعلى لاستكشاف الأقسام المختلفة:
+                </p>
                 <ul class="list-disc pr-5 text-gray-700 space-y-1">
-                    <li>**تعزيز الجهاز المناعي:** يساعد على تقوية خلايا المناعة في الجسم، مما يزيد من قدرته على مقاومة الأمراض والالتهابات.</li>
-                    <li>**إزالة السموم من الجسم:** يساهم في تنقية الجسم من السموم المتراكمة في الأنسجة، مما يحسن الصحة العامة ووظائف الأعضاء.</li>
-                    <li>**توازن وظائف الجسم (Adaptogenic Properties):** يعمل كـ "مكيف" يساعد الجسم على التكيف مع الضغوط المختلفة واستعادة التوازن الطبيعي لوظائف الأعضاء.</li>
-                    <li>**دعم الدورة الدموية:** ينشط الدورة الدموية ويزيد من قدرة كريات الدم الحمراء على حمل الأكسجين، مما يحسن من حيوية الخلايا والأنسجة.</li>
-                    <li>**مضاد للأكسدة:** غني بمضادات الأكسدة التي تحارب الجذور الحرة، وتقلل من الإجهاد التأكسدي، وتساهم في تأخير علامات الشيخوخة.</li>
-                    <li>**دعم صحة الكبد والكلى:** يساعد في تحسين وظائف الكبد والكلى، وهما عضوان رئيسيان في عملية إزالة السموم.</li>
-                    <li>**تحسين الهضم والتمثيل الغذائي:** يساهم في تنشيط عمليات الهضم والامتصاص في الجسم.</li>
+                    <li>**الفكرة الأساسية:** اكتشفي جوهر مشروع DXN ومنتجاتها العضوية.</li>
+                    <li>**فرصة العمل:** تعرفي على نموذج التسويق متعدد المستويات وكيف يمكنكِ أن تصبحي مسوقة ناجحة.</li>
+                    <li>**المنتجات:** استعرضي قائمة المنتجات الشاملة مع استخداماتها ومزاياها.</li>
+                    <li>**العمولات:** افهمي كيفية حساب أرباحكِ والمصطلحات الأساسية.</li>
+                    <li>**خطط ميزانيتك:** استخدمي أداتنا التفاعلية لتخطيط مشترياتكِ وتحقيق النقاط.</li>
+                    <li>**مجموعتك الخاصة:** قومي ببناء قائمة مشترياتكِ المخصصة.</li>
+                    <li>**معلومات الريشي:** تعمقي في معرفة المكون الأساسي لمنتجات DXN.</li>
+                    <li>**مصادر إضافية:** روابط مفيدة للتواصل والمزيد من المعلومات.</li>
                 </ul>
                 <p class="text-gray-700 mt-3">
-                    تستخدم DXN فطر الريشي كعنصر أساسي في العديد من منتجاتها لتقديم هذه الفوائد الصحية الشاملة.
+                    هيا بنا نبدأ رحلة الصحة والنجاح معاً!
                 </p>
             </div>
         </div>
-        <!-- نهاية قسم معلومات عامة عن فطر الريشي -->
-
-        <div class="github-wiki-link-section mt-8 pt-6 border-t border-gray-200 text-center">
-            <p class="text-gray-600 mb-4">للمزيد من المعلومات التفصيلية والوثائق  ، يرجى زيارة صفحة ويكي هناده الخاصة بنا على:</p>
-            <a href="" target="_blank" rel="noopener noreferrer" class="btn-primary inline-block">
-                زيارة صفحة ويكي هناده
-            </a>
-        </div>
-
     </div>
 
+    <!-- استيراد ملفات JavaScript المشتركة -->
+    <script src="data.js"></script>
+    <script src="utils.js"></script>
     <script>
-        // بيانات المنتجات كما قدمها المستخدم، مدمجة في مصفوفة واحدة
-        // قيمة SV (Sales Value) مقدرة هنا بنسبة 70% من سعر الموزع (DP) لأغراض التوضيح.
-        // يرجى تحديث قيم SV بالقيم الرسمية من قائمة أسعار DXN لضمان الدقة.
-        // تم إزالة خاصية 'imageUrl' من كل منتج
-        // تم إضافة خصائص 'uses' و 'benefits' لكل منتج (معلومات عامة، يرجى التعديل)
-        const productsData = [
-            // Food & Beverage Series
-            { 
-                id: "FB001", name: "DXN Lingzhi Coffee 3 in 1", category: "أغذية ومشروبات", PV: 10.00, DP: 10.20, SV: 10.20 * 0.70, 
-                uses: ["مشروب يومي للطاقة والتركيز", "بديل صحي للقهوة العادية"],
-                benefits: ["تعزيز الطاقة والحيوية", "دعم الجهاز المناعي بفضل فطر الريشي", "تحسين الهضم", "تقليل التوتر"]
-            },
-            { 
-                id: "FB002", name: "Roselle Juice", category: "أغذية ومشروبات", PV: 12.00, DP: 9.25, SV: 9.25 * 0.70, 
-                uses: ["مشروب منعش يومي", "مصدر للمضادات الأكسدة"],
-                benefits: ["غني بفيتامين C", "مضاد للأكسدة", "يدعم صحة الجهاز الهضمي"]
-            },
-            { 
-                id: "FB003", name: "DXN Morinzhi 3.25g", category: "أغذية ومشروبات", PV: 17.00, DP: 13.25, SV: 13.25 * 0.70, 
-                uses: ["مشروب صحي يومي", "للتخلص من السموم"],
-                benefits: ["يعزز الهضم", "يدعم الجهاز المناعي", "يساعد على إزالة السموم من الجسم"]
-            },
-            { 
-                id: "FB004", name: "DXN Cocozhi", category: "أغذية ومشروبات", PV: 13.00, DP: 13.60, SV: 13.60 * 0.70, 
-                uses: ["مشروب شوكولاتة ساخن أو بارد", "وجبة خفيفة للأطفال والكبار"],
-                benefits: ["يعزز الطاقة والتركيز", "يدعم وظائف الدماغ", "غني بمضادات الأكسدة"]
-            },
-            { 
-                id: "FB005", name: "Spirulina Cereal (30 sachets x 30g)", category: "أغذية ومشروبات", PV: 30.00, DP: 28.00, SV: 28.00 * 0.70, 
-                uses: ["وجبة إفطار صحية", "مكمل غذائي يومي"],
-                benefits: ["غني بالبروتين والفيتامينات والمعادن", "يدعم الطاقة والمناعة", "يساعد في تنظيم الوزن", "غذاء متكامل"]
-            },
-            { 
-                id: "FB006", name: "Gano Pineapple Mix", category: "أغذية ومشروبات", PV: 6.00, DP: 5.40, SV: 5.40 * 0.70, 
-                uses: ["مشروب منعش", "لتحسين الهضم"],
-                benefits: ["يحتوي على إنزيمات هاضمة", "منعش ومفيد للجهاز الهضمي"]
-            },
-            { 
-                id: "FB007", name: "DXN Vinaigrette", category: "أغذية ومشروبات", PV: 28.00, DP: 25.80, SV: 25.80 * 0.70, 
-                uses: ["مضاف للسلطات والأطعمة", "للتنقية الداخلية"],
-                benefits: ["يدعم الهضم", "يساعد في تنظيم مستويات السكر في الدم"]
-            },
-            { 
-                id: "FB008", name: "DXN Kiwi", category: "أغذية ومشروبات", PV: 22.00, DP: 18.55, SV: 18.55 * 0.70, 
-                uses: ["مشروب فاكهة منعش", "مصدر للفيتامينات"],
-                benefits: ["غني بفيتامين C ومضادات الأكسدة", "يدعم صحة الجهاز الهضمي"]
-            },
-            { 
-                id: "FB009", name: "Morinzhi (700ml)", category: "أغذية ومشروبات", PV: 35.00, DP: 29.70, SV: 29.70 * 0.70, 
-                uses: ["مشروب صحي يومي", "للتخلص من السموم"],
-                benefits: ["يعزز الهضم والمناعة", "يساعد على إزالة السموم", "يدعم الصحة العامة", "غني بمضادات الأكسدة"]
-            },
-            { 
-                id: "FB010", name: "DXN Lingzhi Coffee 3 in 1 Lite", category: "أغذية ومشروبات", PV: 10.00, DP: 10.20, SV: 10.20 * 0.70, 
-                uses: ["مشروب قهوة يومي خفيف", "بديل صحي للقهوة العادية"],
-                benefits: ["نفس فوائد قهوة لينجزي 3 في 1 ولكن بنكهة أخف", "تعزيز الطاقة والمناعة"]
-            },
-            { 
-                id: "FB011", name: "DXN Cordyceps Cereal", category: "أغذية ومشروبات", PV: 53.00, DP: 48.65, SV: 48.65 * 0.70, 
-                uses: ["وجبة إفطار أو خفيفة", "لتعزيز الطاقة والتحمل"],
-                benefits: ["يدعم الجهاز التنفسي ويزيد الطاقة", "غني بالعناصر الغذائية", "يعزز القدرة على التحمل"]
-            },
-            { 
-                id: "FB012", name: "DXN Cordyceps Coffee 3 in 1", category: "أغذية ومشروبات", PV: 11.00, DP: 12.90, SV: 12.90 * 0.70, 
-                uses: ["مشروب قهوة يومي", "لزيادة الطاقة والتركيز"],
-                benefits: ["يجمع بين فوائد القهوة والكورديسبس", "يعزز الطاقة والتحمل", "يدعم وظائف الرئة"]
-            },
-            { 
-                id: "FB013", name: "DXN Cream Coffee", category: "أغذية ومشروبات", PV: 11.00, DP: 10.75, SV: 10.75 * 0.70, 
-                uses: ["مشروب قهوة كريمي", "بديل صحي للقهوة العادية"],
-                benefits: ["نكهة غنية وكريمية", "يحتوي على فطر الجانوديرما لدعم الصحة"]
-            },
-            { 
-                id: "FB014", name: "DXN Zhi Mint Plus", category: "أغذية ومشروبات", PV: 28.00, DP: 25.30, SV: 25.30 * 0.70, 
-                uses: ["منعش للفم والحلق", "لتهدئة السعال الخفيف"],
-                benefits: ["يحتوي على فطر الجانوديرما", "منعش ومريح للجهاز التنفسي"]
-            },
-            { 
-                id: "FB015", name: "DXN Lemonzhi", category: "أغذية ومشروبات", PV: 8.00, DP: 8.80, SV: 8.80 * 0.70, 
-                uses: ["مشروب شاي بالليمون", "منعش ومرطب"],
-                benefits: ["منعش ومريح", "يحتوي على مكونات طبيعية"]
-            },
-            { 
-                id: "FB016", name: "DXN Ganoodle", category: "أغذية ومشروبات", PV: 5.00, DP: 6.60, SV: 6.60 * 0.70, 
-                uses: ["وجبة سريعة وصحية", "بديل للنودلز التقليدية"],
-                benefits: ["مصنوعة من مكونات طبيعية", "خالية من الألوان الصناعية"]
-            },
-            { 
-                id: "FB017", name: "DXN Spirudle", category: "أغذية ومشروبات", PV: 5.00, DP: 6.60, SV: 6.60 * 0.70, 
-                uses: ["وجبة سريعة وصحية", "مدعمة بالسبيرولينا"],
-                benefits: ["تحتوي على السبيرولينا لتعزيز القيمة الغذائية", "خيار صحي لوجبة سريعة"]
-            },
-            { 
-                id: "FB018", name: "DXN Organic Virgin Coconut Oil", category: "أغذية ومشروبات", PV: 14.00, DP: 15.30, SV: 15.30 * 0.70, 
-                uses: ["للطهي", "للعناية بالبشرة والشعر"],
-                benefits: ["زيت عضوي نقي", "غني بالأحماض الدهنية الصحية", "متعدد الاستخدامات"]
-            },
-            { 
-                id: "FB019", name: "DXN Aloe Vita", category: "أغذية ومشروبات", PV: 4.00, DP: 3.55, SV: 3.55 * 0.70, 
-                uses: ["مشروب مرطب ومنعش", "لصحة الجهاز الهضمي"],
-                benefits: ["يحتوي على الألوفيرا المعروفة بفوائدها الهضمية", "مرطب للجسم"]
-            },
-            { 
-                id: "FB020", name: "DXN Lingzhi Tea Latte (12 sachets x 30g)", category: "أغذية ومشروبات", PV: 12.00, DP: 13.60, SV: 13.60 * 0.70, 
-                uses: ["مشروب شاي لاتيه", "للاسترخاء والراحة"],
-                benefits: ["نكهة غنية ومريحة", "يحتوي على فطر الجانوديرما"]
-            },
-            { 
-                id: "FB021", name: "DXN Sugar (30 packs x 5g)", category: "أغذية ومشروبات", PV: 2.00, DP: 1.90, SV: 1.90 * 0.70, 
-                uses: ["للتحلية اليومية"],
-                benefits: ["سكر طبيعي نقي", "خيار صحي للتحلية"]
-            },
-            { 
-                id: "FB022", name: "DXN Natural Sidr Honey", category: "أغذية ومشروبات", PV: 28.00, DP: 29.90, SV: 29.90 * 0.70, 
-                uses: ["للتحلية", "كمكمل غذائي طبيعي"],
-                benefits: ["عسل سدر طبيعي نقي", "معروف بخصائصه الصحية والمغذية"]
-            },
-
-            // Health Food Supplement Series
-            { 
-                id: "HF001", name: "DXN Lion’s Mane Tablet 120’s", category: "مكملات غذائية صحية", PV: 26.00, DP: 24.10, SV: 24.10 * 0.70, 
-                uses: ["لدعم صحة الدماغ والجهاز العصبي", "لتحسين الذاكرة والتركيز"],
-                benefits: ["يعزز الوظائف الإدراكية", "يدعم صحة الجهاز الهضمي", "مضاد للالتهابات"]
-            },
-            { 
-                id: "HF002", name: "DXN Cordyceps Tablet 120’s", category: "مكملات غذائية صحية", PV: 60.00, DP: 54.95, SV: 54.95 * 0.70, 
-                uses: ["لزيادة الطاقة والتحمل البدني", "لدعم صحة الجهاز التنفسي والكلى"],
-                benefits: ["يعزز مستويات الطاقة والقدرة على التحمل", "يدعم وظائف الرئة والكلى", "يقوي الجهاز المناعي"]
-            },
-            { 
-                id: "HF003", name: "DXN Spirulina Tablet 120’s", category: "مكملات غذائية صحية", PV: 20.00, DP: 16.35, SV: 16.35 * 0.70, 
-                uses: ["مكمل غذائي يومي شامل", "لتعويض نقص الفيتامينات والمعادن"],
-                benefits: ["غذاء سوبر غني بالبروتين والفيتامينات والمعادن", "يعزز المناعة والطاقة", "يساعد في إزالة السموم"]
-            },
-            { 
-                id: "HF004", name: "DXN Spirulina Tablet 500’s", category: "مكملات غذائية صحية", PV: 70.00, DP: 56.85, SV: 56.85 * 0.70, 
-                uses: ["مكمل غذائي يومي شامل", "لتعويض نقص الفيتامينات والمعادن"],
-                benefits: ["غذاء سوبر غني بالبروتين والفيتامينات والمعادن", "يعزز المناعة والطاقة", "يساعد في إزالة السموم"]
-            },
-            { 
-                id: "HF005", name: "DXN MycoVeggie (115g)", category: "مكملات غذائية صحية", PV: 70.00, DP: 51.65, SV: 51.65 * 0.70, 
-                uses: ["لتنظيف الجهاز الهضمي", "كمصدر للألياف الغذائية"],
-                benefits: ["يدعم صحة الجهاز الهضمي", "يساعد على إزالة السموم", "غني بالألياف والفيتامينات"]
-            },
-            { 
-                id: "HF006", name: "Reishi Mushroom Powder 70g", category: "مكملات غذائية صحية", PV: 70.00, DP: 53.70, SV: 53.70 * 0.70, 
-                uses: ["مكمل غذائي يومي لدعم الصحة العامة", "لتعزيز المناعة"],
-                benefits: ["ملك الأعشاب: يدعم المناعة", "يساعد على إزالة السموم", "يعزز التوازن في الجسم"]
-            },
-            { 
-                id: "HF007", name: "DXN Bee Pollen Granule 40g", category: "مكملات غذائية صحية", PV: 17.00, DP: 14.10, SV: 14.10 * 0.70, 
-                uses: ["مكمل غذائي طبيعي", "لزيادة الطاقة والحيوية"],
-                benefits: ["غني بالفيتامينات والمعادن والبروتينات", "يعزز الطاقة والمناعة"]
-            },
-            // NEW PRODUCT: DXN Potenzhi 30 Capsules
-            {
-                id: "HF008", name: "DXN Potenzhi 30 Capsules", category: "مكملات غذائية صحية", PV: 25.00, DP: 25.00, SV: 25.00 * 0.70,
-                uses: ["لزيادة الحيوية والطاقة", "لدعم الأداء البدني", "لصحة الرجال والنساء"],
-                benefits: ["يحسن الدورة الدموية", "يزيد مستويات الطاقة والقدرة على التحمل", "يتغلب على الإرهاق الذهني", "يقوي الأداء البدني", "يدعم صحة الكلى", "يخفض الكوليسترول", "يحتوي على مركبات الفلافونويد وفيتامين E"]
-            },
-            // NEW PRODUCT: DXN Potenzhi 90 Capsules
-            {
-                id: "HF009", name: "DXN Potenzhi 90 Capsules", category: "مكملات غذائية صحية", PV: 60.00, DP: 55.00, SV: 55.00 * 0.70,
-                uses: ["لزيادة الحيوية والطاقة", "لدعم الأداء البدني", "لصحة الرجال والنساء"],
-                benefits: ["يحسن الدورة الدموية", "يزيد مستويات الطاقة والقدرة على التحمل", "يتغلب على الإرهاق الذهني", "يقوي الأداء البدني", "يدعم صحة الكلى", "يخفض الكوليسترول", "يحتوي على مركبات الفلافونويد وفيتامين E"]
-            },
-
-            // Personal Care Series
-            { 
-                id: "PC001", name: "DXN Ganozhi Shampoo", category: "عناية شخصية", PV: 11.00, DP: 7.80, SV: 7.80 * 0.70, 
-                uses: ["تنظيف الشعر وفروة الرأس", "لشعر صحي ولامع"],
-                benefits: ["يحتوي على خلاصة الجانوديرما", "يغذي فروة الرأس", "يمنح الشعر لمعاناً وحيوية"]
-            },
-            { 
-                id: "PC002", name: "DXN Ganozhi Body Foam", category: "عناية شخصية", PV: 11.00, DP: 7.80, SV: 7.80 * 0.70, 
-                uses: ["تنظيف الجسم أثناء الاستحمام", "لترطيب البشرة"],
-                benefits: ["ينظف البشرة بلطف دون تجفيفها", "يحتوي على الجانوديرما لترطيب البشرة"]
-            },
-            { 
-                id: "PC003", name: "Ganozhi Toothpaste 10g", category: "عناية شخصية", PV: 6.00, DP: 5.85, SV: 5.85 * 0.70, 
-                uses: ["تنظيف الأسنان يومياً", "لصحة الفم واللثة"],
-                benefits: ["يحتوي على الجانوديرما والمنثول", "ينظف الأسنان بفاعلية", "يقوي اللثة ويمنح نفساً منعشاً"]
-            },
-            { 
-                id: "PC004", name: "Gano Massage Oil", category: "عناية شخصية", PV: 9.00, DP: 7.60, SV: 7.60 * 0.70, 
-                uses: ["للتدليك المريح", "لتهدئة العضلات والمفاصل"],
-                benefits: ["يحتوي على خلاصة الجانوديرما وزيت النخيل", "يساعد على الاسترخاء وتخفيف التوتر"]
-            },
-            { 
-                id: "PC005", name: "DXN Talcum Powder", category: "عناية شخصية", PV: 9.00, DP: 7.45, SV: 7.45 * 0.70, 
-                uses: ["للحفاظ على البشرة جافة ومنتعشة", "لتقليل الاحتكاك"],
-                benefits: ["يمتص الرطوبة الزائدة", "يمنح شعوراً بالانتعاش والراحة"]
-            },
-            { 
-                id: "PC006", name: "DXN Ganozhi Toiletries Travel Kit", category: "عناية شخصية", PV: 6.00, DP: 8.20, SV: 8.20 * 0.70, 
-                uses: ["للعناية الشخصية أثناء السفر", "لتجربة منتجات جانوزي"],
-                benefits: ["مجموعة عملية ومتكاملة للسفر", "تضم شامبو، جل استحمام، ومعجون أسنان"]
-            },
-            { 
-                id: "PC007", name: "DXN Ganozhi Plus Toothpaste", category: "عناية شخصية", PV: 6.00, DP: 5.85, SV: 5.85 * 0.70, 
-                uses: ["تنظيف الأسنان يومياً", "لصحة الفم واللثة"],
-                benefits: ["تركيبة محسنة مع الجانوديرما", "تنظيف عميق وحماية للثة", "نفس منعش"]
-            },
-            { 
-                id: "PC008", name: "DXN Ganozhi Toothpaste 4x40g", category: "عناية شخصية", PV: 8.00, DP: 7.40, SV: 7.40 * 0.70, 
-                uses: ["للاستخدام العائلي", "عبوات صغيرة عملية"],
-                benefits: ["قيمة اقتصادية", "عبوات متعددة للاستخدامات المختلفة"]
-            },
-            { 
-                id: "PC009", name: "DXN Ganozhi Soap Bag", category: "عناية شخصية", PV: 3.00, DP: 2.70, SV: 2.70 * 0.70, 
-                uses: ["تنظيف البشرة يومياً", "للوجه والجسم"],
-                benefits: ["ينظف ويرطب البشرة", "يحتوي على الجانوديرما وزيت النخيل", "مناسب لجميع أنواع البشرة"]
-            },
-            { 
-                id: "PC010", name: "DXN Ganozhi Plus Shampoo", category: "عناية شخصية", PV: 12.00, DP: 8.20, SV: 8.20 * 0.70, 
-                uses: ["تنظيف الشعر وفروة الرأس", "لشعر صحي ولامع"],
-                benefits: ["تركيبة محسنة مع الجانوديرما", "يغذي الشعر ويمنحه قوة ولمعاناً"]
-            },
-            { 
-                id: "PC011", name: "DXN Toothbrush (For Adults)", category: "عناية شخصية", PV: 1.50, DP: 2.45, SV: 2.45 * 0.70, 
-                uses: ["تنظيف الأسنان اليومي"],
-                benefits: ["تصميم فعال لتنظيف الأسنان"]
-            },
-            { 
-                id: "PC012", name: "DXN Toothbrush (For Children)", category: "عناية شخصية", PV: 1.50, DP: 2.45, SV: 2.45 * 0.70, 
-                uses: ["تنظيف أسنان الأطفال"],
-                benefits: ["تصميم مناسب للأطفال"]
-            },
-            { 
-                id: "PC013", name: "DXN Ganozhi Plus Toothpaste 150g", category: "عناية شخصية", PV: 6.00, DP: 5.85, SV: 5.85 * 0.70, 
-                uses: ["تنظيف الأسنان اليومي للعائلة"],
-                benefits: ["عبوة اقتصادية", "نفس فوائد معجون جانوزي بلس"]
-            },
-
-            // Skin Care & Cosmetics Series
-            { 
-                id: "SC001", name: "Tea Tree Cream", category: "عناية بالبشرة وتجميل", PV: 6.00, DP: 5.85, SV: 5.85 * 0.70, 
-                uses: ["لتهدئة البشرة المتهيجة", "للعناية بالبشرة المعرضة لحب الشباب"],
-                benefits: ["يحتوي على زيت شجرة الشاي المعروف بخصائصه المطهرة والمهدئة", "يساعد على تهدئة البشرة"]
-            },
-            { 
-                id: "SC002", name: "Ganozhi Toner", category: "عناية بالبشرة وتجميل", PV: 36.00, DP: 27.65, SV: 27.65 * 0.70, 
-                uses: ["لتنظيف البشرة بعد الغسول", "لتحضير البشرة للمرطب"],
-                benefits: ["ينظف المسام بعمق", "يوازن درجة حموضة البشرة", "يحتوي على الجانوديرما لدعم صحة البشرة"]
-            },
-            { 
-                id: "SC003", name: "Ganozhi Moisturizing Micro Emulsion", category: "عناية بالبشرة وتجميل", PV: 40.00, DP: 31.65, SV: 31.65 * 0.70, 
-                uses: ["لترطيب البشرة يومياً", "للحفاظ على نضارة البشرة"],
-                benefits: ["يرطب البشرة بعمق", "يساعد على الحفاظ على مرونة البشرة", "يحتوي على الجانوديرما"]
-            },
-            { 
-                id: "SC004", name: "Ganozhi Liquid Cleanser", category: "عناية بالبشرة وتجميل", PV: 36.00, DP: 27.65, SV: 27.65 * 0.70, 
-                uses: ["لتنظيف الوجه يومياً", "لإزالة الشوائب والمكياج"],
-                benefits: ["ينظف البشرة بلطف وفعالية", "يترك البشرة منتعشة ونظيفة", "يحتوي على الجانوديرما"]
-            },
-            { 
-                id: "SC005", name: "DXN Chubby Baby Oil", category: "عناية بالبشرة وتجميل", PV: 7.00, DP: 5.65, SV: 5.65 * 0.70, 
-                uses: ["لترطيب بشرة الأطفال الحساسة", "للتدليك اللطيف"],
-                benefits: ["تركيبة لطيفة ومغذية", "يحافظ على نعومة بشرة الطفل"]
-            },
-            { 
-                id: "SC006", name: "Ganozhi Lipstick - Coco Red", category: "عناية بالبشرة وتجميل", PV: 17.00, DP: 12.40, SV: 12.40 * 0.70, 
-                uses: ["لتلوين الشفاه", "لترطيب الشفاه"],
-                benefits: ["ألوان جذابة", "يرطب الشفاه ويحميها", "يحتوي على الجانوديرما"]
-            },
-            { 
-                id: "SC007", name: "Ganozhi Lipstick - Pearly Red", category: "عناية بالبشرة وتجميل", PV: 17.00, DP: 12.40, SV: 12.40 * 0.70, 
-                uses: ["لتلوين الشفاه", "لترطيب الشفاه"],
-                benefits: ["ألوان جذابة", "يرطب الشفاه ويحميها", "يحتوي على الجانوديرما"]
-            },
-            { 
-                id: "SC008", name: "Ganozhi Lipstick - Pearly Pink", category: "عناية بالبشرة وتجميل", PV: 17.00, DP: 12.40, SV: 12.40 * 0.70, 
-                uses: ["لتلوين الشفاه", "لترطيب الشفاه"],
-                benefits: ["ألوان جذابة", "يرطب الشفاه ويحميها", "يحتوي على الجانوديرما"]
-            },
-            { 
-                id: "SC009", name: "Ganozhi Lipstick - Pearly Grape", category: "عناية بالبشرة وتجميل", PV: 17.00, DP: 12.40, SV: 12.40 * 0.70, 
-                uses: ["لتلوين الشفاه", "لترطيب الشفاه"],
-                benefits: ["ألوان جذابة", "يرطب الشفاه ويحميها", "يحتوي على الجانوديرما"]
-            },
-            { 
-                id: "SC010", name: "DXN Aloe V Cleansing Gel", category: "عناية بالبشرة وتجميل", PV: 7.00, DP: 5.65, SV: 5.65 * 0.70, 
-                uses: ["لتنظيف البشرة بلطف", "لإزالة الشوائب"],
-                benefits: ["ينظف البشرة دون تجفيفها", "يحتوي على الألوفيرا لتهدئة البشرة"]
-            },
-            { 
-                id: "SC011", name: "DXN Aloe V Hydrating Toner", category: "عناية بالبشرة وتجميل", PV: 7.00, DP: 6.10, SV: 6.10 * 0.70, 
-                uses: ["لترطيب البشرة بعد التنظيف", "لتحضير البشرة للمرطب"],
-                benefits: ["يرطب البشرة وينعشها", "يساعد على توازن البشرة"]
-            },
-            { 
-                id: "SC012", name: "DXN Aloe V Aqua Gel", category: "عناية بالبشرة وتجميل", PV: 14.00, DP: 11.65, SV: 11.65 * 0.70, 
-                uses: ["لترطيب البشرة الخفيف", "للبشرة الدهنية والمختلطة"],
-                benefits: ["تركيبة خفيفة وسريعة الامتصاص", "يرطب البشرة بعمق دون ترك ملمس دهني"]
-            },
-            { 
-                id: "SC013", name: "DXN Aloe V Nutricare Cream", category: "عناية بالبشرة وتجميل", PV: 10.00, DP: 8.30, SV: 8.30 * 0.70, 
-                uses: ["لتغذية البشرة الجافة والعادية", "للعناية اليومية بالبشرة"],
-                benefits: ["يغذي البشرة ويمنحها النضارة", "يساعد على تحسين مرونة البشرة"]
-            },
-            { 
-                id: "SC014", name: "DXN Aloe V Hand & Body Lotion", category: "عناية بالبشرة وتجميل", PV: 7.00, DP: 6.00, SV: 6.00 * 0.70, 
-                uses: ["لترطيب اليدين والجسم يومياً", "للبشرة الجافة"],
-                benefits: ["يرطب البشرة بعمق", "يترك البشرة ناعمة وملساء"]
-            },
-            { 
-                id: "SC015", name: "DXN Ganozhi Complete Skin Care Series Travel Kit", category: "عناية بالبشرة وتجميل", PV: 34.00, DP: 23.95, SV: 23.95 * 0.70, 
-                uses: ["للعناية الشخصية أثناء السفر", "لتجربة منتجات جانوزي للعناية بالبشرة"],
-                benefits: ["مجموعة متكاملة للعناية بالبشرة بحجم السفر", "تضم غسول، تونر، ومرطب"]
-            },
-            { 
-                id: "SC016", name: "DXN Aloe. V Facial Scrub", category: "عناية بالبشرة وتجميل", PV: 7.40, DP: 6.35, SV: 6.35 * 0.70, 
-                uses: ["لتقشير الوجه بلطف", "لإزالة الخلايا الميتة"],
-                benefits: ["ينظف المسام ويجدد البشرة", "يترك البشرة ناعمة ومشرقة"]
-            },
-            { 
-                id: "SC017", name: "DXN Aloe. V Hydrating Mask", category: "عناية بالبشرة وتجميل", PV: 9.60, DP: 8.30, SV: 8.30 * 0.70, 
-                uses: ["لترطيب البشرة بعمق", "لتهدئة البشرة المتعبة"],
-                benefits: ["يرطب البشرة ويغذيها", "يمنح البشرة مظهراً صحياً ومشرقاً"]
-            },
-            { 
-                id: "SC018", name: "Ganozhi Lipstick - Coral Pink", category: "عناية بالبشرة وتجميل", PV: 17.00, DP: 12.40, SV: 12.40 * 0.70, 
-                uses: ["لتلوين الشفاه", "لترطيب الشفاه"],
-                benefits: ["ألوان جذابة", "يرطب الشفاه ويحميها", "يحتوي على الجانوديرما"]
-            },
-            { 
-                id: "SC019", name: "DXN Papaya Facial Scrub", category: "عناية بالبشرة وتجميل", PV: 8.00, DP: 8.05, SV: 8.05 * 0.70, 
-                uses: ["لتقشير الوجه بلطف", "لإزالة الخلايا الميتة"],
-                benefits: ["يحتوي على خلاصة البابايا لتجديد البشرة", "ينظف المسام ويمنح البشرة إشراقة"]
-            },
-            { 
-                id: "SC020", name: "DXN Chubby Baby Oil 40ml", category: "عناية بالبشرة وتجميل", PV: 2.00, DP: 1.70, SV: 1.70 * 0.70, 
-                uses: ["لترطيب بشرة الأطفال الحساسة", "للتدليك اللطيف"],
-                benefits: ["تركيبة لطيفة ومغذية", "يحافظ على نعومة بشرة الطفل"]
-            }
-        ];
-
-        // Get DOM elements
-        const calculateBtn = document.getElementById('calculateBtn');
-        const budgetInput = document.getElementById('budget');
-        const commissionRateInput = document.getElementById('commissionRate');
-        const categoryCheckboxes = document.querySelectorAll('input[name="category"]');
-        const resultsSection = document.getElementById('results');
-        const recommendedBundlesDiv = document.getElementById('recommendedBundles');
-        const pvOverallProgressBar = document.getElementById('pvOverallProgressBar').querySelector('.pv-progress');
-        const maxPossiblePvSpan = document.getElementById('maxPossiblePv');
-        const messageDiv = document.getElementById('message');
-
-        // Elements for manual bundle section
-        const productSelect = document.getElementById('productSelect');
-        const productQuantityInput = document.getElementById('productQuantity');
-        const addProductBtn = document.getElementById('addProductBtn');
-        const manualProductsTableBody = document.getElementById('manualProductsTableBody');
-        const manualTotalPvSpan = document.getElementById('manualTotalPv');
-        const manualTotalSvSpan = document.getElementById('manualTotalSv');
-        const manualTotalCostSpan = document.getElementById('manualTotalCost');
-        const manualEstimatedCommissionSpan = document.getElementById('manualEstimatedCommission');
-        const printManualBundleBtn = document.getElementById('printManualBundleBtn');
-        const copyManualBundleBtn = document.getElementById('copyManualBundleBtn');
-
-        // Elements for product info section
-        const productInfoListDiv = document.getElementById('productInfoList');
-
-
-        // Array to hold manually added products
-        let manualBundleItems = [];
-
-        // Target PV for qualification
-        const TARGET_PV = 100;
-
-        // --- Event Listeners ---
-        calculateBtn.addEventListener('click', calculateBestOptions);
-        addProductBtn.addEventListener('click', addProductToManualBundle);
-        commissionRateInput.addEventListener('input', updateManualBundleSummary);
-        printManualBundleBtn.addEventListener('click', printManualBundle);
-        copyManualBundleBtn.addEventListener('click', copyManualBundle);
-
-
-        // --- Initialization ---
-        populateProductSelect(); // Populate the dropdown with all products
-        updateManualBundleSummary(); // Initial update for manual bundle summary
-        displayProductInfo(); // Display product uses and benefits on load
-
-
-        // --- Helper Functions ---
-
-        // Populate the product dropdown in the manual bundle section
-        function populateProductSelect() {
-            productSelect.innerHTML = '<option value="">اختر منتج...</option>'; // Default option
-            productsData.forEach(product => {
-                const option = document.createElement('option');
-                option.value = product.id; // Use product ID as value
-                option.textContent = `${product.name} (PV: ${product.PV}, السعر: ${product.DP.toFixed(2)} د.أ)`;
-                productSelect.appendChild(option);
-            });
-        }
-
-        // Add product to manual bundle
-        function addProductToManualBundle() {
-            const selectedProductId = productSelect.value;
-            const quantity = parseInt(productQuantityInput.value);
-
-            if (!selectedProductId || isNaN(quantity) || quantity <= 0) {
-                showMessage('يرجى اختيار منتج وإدخال كمية صحيحة.', 'error');
-                return;
-            }
-
-            const productToAdd = productsData.find(p => p.id === selectedProductId);
-            if (!productToAdd) {
-                showMessage('المنتج المختار غير موجود.', 'error');
-                return;
-            }
-
-            // Check if product already exists in manual bundle, then update quantity
-            const existingItemIndex = manualBundleItems.findIndex(item => item.id === selectedProductId);
-            if (existingItemIndex > -1) {
-                manualBundleItems[existingItemIndex].quantity += quantity;
-            } else {
-                manualBundleItems.push({ ...productToAdd, quantity: quantity });
-            }
-
-            updateManualBundleDisplay();
-            updateManualBundleSummary();
-            showMessage('تمت إضافة المنتج بنجاح إلى مجموعتك المخصصة.', 'success');
-        }
-
-        // Remove product from manual bundle
-        function removeProductFromManualBundle(productId) {
-            manualBundleItems = manualBundleItems.filter(item => item.id !== productId);
-            updateManualBundleDisplay();
-            updateManualBundleSummary();
-            showMessage('تمت إزالة المنتج من مجموعتك المخصصة.', 'info');
-        }
-
-        // Update the display table for manual bundle
-        function updateManualBundleDisplay() {
-            manualProductsTableBody.innerHTML = ''; // Clear table
-            manualBundleItems.forEach(item => {
-                const row = manualProductsTableBody.insertRow();
-                row.innerHTML = `
-                    <td>${item.name}</td>
-                    <td>${item.quantity}</td>
-                    <td>${(item.PV * item.quantity).toFixed(2)}</td>
-                    <td>${(item.SV * item.quantity).toFixed(2)}</td>
-                    <td>${(item.DP * item.quantity).toFixed(2)}</td>
-                    <td><button onclick="removeProductFromManualBundle('${item.id}')">حذف</button></td>
-                `;
-            });
-        }
-
-        // Update the summary for manual bundle
-        function updateManualBundleSummary() {
-            const commissionRate = parseFloat(commissionRateInput.value);
-            const bundle = createBundle(manualBundleItems, commissionRate);
-
-            manualTotalPvSpan.textContent = bundle.totalPV.toFixed(2);
-            manualTotalSvSpan.textContent = bundle.totalSV.toFixed(2);
-            manualTotalCostSpan.textContent = bundle.totalCost.toFixed(2);
-            manualEstimatedCommissionSpan.textContent = bundle.estimatedCommission.toFixed(2);
-        }
-
-        // Function to print the manual bundle
-        function printManualBundle() {
-            const printContent = document.getElementById('manualBundleDisplay').innerHTML;
-            const originalBody = document.body.innerHTML;
-
-            // Create a new window for printing
-            const printWindow = window.open('', '_blank');
-            printWindow.document.open();
-            printWindow.document.write(`
-                <html>
-                <head>
-                    <title>مجموعتك المخصصة من DXN</title>
-                    <style>
-                        body { font-family: 'Inter', sans-serif; direction: rtl; text-align: right; margin: 20px; }
-                        h3 { font-size: 24px; margin-bottom: 20px; text-align: center; }
-                        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-                        th, td { border: 1px solid #ddd; padding: 8px; text-align: right; }
-                        th { background-color: #f2f2f2; }
-                        .summary-stats { margin-top: 20px; padding: 15px; border: 1px solid #eee; background-color: #f9f9f9; border-radius: 8px; }
-                        .summary-stats p { margin-bottom: 5px; }
-                        .summary-stats strong { font-weight: bold; }
-                        /* Hide buttons in print view */
-                        .manual-products-table button, .action-buttons { display: none; }
-                    </style>
-                </head>
-                <body>
-                    ${printContent}
-                </body>
-                </html>
-            `);
-            printWindow.document.close();
-            printWindow.focus();
-            printWindow.print();
-            printWindow.close();
-        }
-
-        // Function to copy the manual bundle summary to clipboard
-        function copyManualBundle() {
-            const totalPv = manualTotalPvSpan.textContent;
-            const totalSv = manualTotalSvSpan.textContent;
-            const totalCost = manualTotalCostSpan.textContent;
-            const estimatedCommission = manualEstimatedCommissionSpan.textContent;
-
-            let textSummary = `ملخص مجموعتك المخصصة من DXN:\n\n`;
-            textSummary += `المنتجات:\n`;
-            manualBundleItems.forEach(item => {
-                textSummary += `- ${item.name} (الكمية: ${item.quantity}) - PV: ${(item.PV * item.quantity).toFixed(2)}, SV: ${(item.SV * item.quantity).toFixed(2)}, السعر: ${(item.DP * item.quantity).toFixed(2)} د.أ\n`;
-            });
-            textSummary += `\nإجمالي النقاط (PV): ${totalPv}\n`;
-            textSummary += `إجمالي قيمة المبيعات (SV): ${totalSv}\n`;
-            textSummary += `إجمالي التكلفة: ${totalCost} د.أ\n`;
-            textSummary += `العمولة الشهرية التقديرية: ${estimatedCommission} د.أ\n`;
-            textSummary += `\nملاحظة: العمولة التقديرية تُحسب فقط إذا تجاوزت المجموعة 100 نقطة PV.\n`;
-            textSummary += `\nللمزيد من التفاصيل أو لطلب المنتجات، يرجى التواصل معي.`; // يمكنك إضافة رابط هنا
-
-            // Use document.execCommand('copy') as it's more reliable in sandboxed environments
-            const textarea = document.createElement('textarea');
-            textarea.value = textSummary;
-            document.body.appendChild(textarea);
-            textarea.select();
-            try {
-                document.execCommand('copy');
-                showMessage('تم نسخ ملخص المجموعة إلى الحافظة بنجاح!', 'success');
-            } catch (err) {
-                console.error('فشل نسخ الملخص باستخدام document.execCommand("copy"): ', err);
-                showMessage('فشل نسخ الملخص. يرجى المحاولة يدوياً.', 'error');
-            }
-            document.body.removeChild(textarea);
-        }
-
-
-        // Helper function to create a bundle object (used by both auto and manual)
-        function createBundle(items, commissionRate) {
-            let totalPV = 0;
-            let totalCost = 0;
-            let totalSV = 0;
-            items.forEach(item => {
-                totalPV += item.PV * item.quantity;
-                totalCost += item.DP * item.quantity;
-                totalSV += item.SV * item.quantity;
-            });
-            // Calculate estimated commission based on total SV and commission rate
-            // Commission is only earned if 100 PV is achieved
-            const estimatedCommission = (totalPV >= TARGET_PV) ? (totalSV * (commissionRate / 100)) : 0;
-            return { items, totalPV, totalCost, totalSV, estimatedCommission };
-        }
-
-        // Function to generate a bundle based on a specific strategy
-        function generateBundle(products, budget, targetPV, commissionRate, strategy = 'efficiency') {
-            let currentBundleMap = new Map();
-            let currentPV = 0;
-            let currentCost = 0;
-            let currentSV = 0;
-            let tempBudget = budget;
-
-            let sortedProducts = [...products];
-
-            if (strategy === 'efficiency') { // Maximize PV per JOD
-                sortedProducts.sort((a, b) => (b.PV / b.DP) - (a.PV / a.DP));
-            } else if (strategy === 'cost_per_pv') { // Minimize JOD per PV
-                sortedProducts.sort((a, b) => (a.DP / a.PV) - (b.DP / b.PV));
-            } else if (strategy === 'highest_pv') { // Prioritize highest PV products
-                sortedProducts.sort((a, b) => b.PV - a.PV);
-            } else if (strategy === 'lowest_cost') { // Prioritize lowest cost products
-                sortedProducts.sort((a, b) => a.DP - b.DP);
-            }
-
-            // First pass: add one unit of each product, prioritizing by strategy
-            for (const product of sortedProducts) {
-                if (tempBudget >= product.DP) {
-                    currentBundleMap.set(product.name, { ...product, quantity: 1 });
-                    currentPV += product.PV;
-                    currentCost += product.DP;
-                    currentSV += product.SV;
-                    tempBudget -= product.DP;
-
-                    if (currentPV >= targetPV) {
-                        break;
-                    }
-                }
-            }
-
-            // Second pass: try to add more units to reach target PV or exhaust budget
-            let hasAddedMoreInPass = true;
-            while (currentPV < targetPV && tempBudget > 0 && hasAddedMoreInPass) {
-                hasAddedMoreInPass = false;
-                for (const product of sortedProducts) {
-                    if (currentPV >= targetPV || tempBudget < product.DP) continue;
-                    
-                    const existingBundleItem = currentBundleMap.get(product.name);
-                    if (existingBundleItem) {
-                        if (tempBudget >= product.DP) {
-                            existingBundleItem.quantity++;
-                            currentPV += product.PV;
-                            currentCost += product.DP;
-                            currentSV += product.SV;
-                            tempBudget -= product.DP;
-                            hasAddedMoreInPass = true;
-                        }
-                    } else if (tempBudget >= product.DP) {
-                        currentBundleMap.set(product.name, { ...product, quantity: 1 });
-                        currentPV += product.PV;
-                        currentCost += product.DP;
-                        currentSV += product.SV;
-                        tempBudget -= product.DP;
-                        hasAddedMoreInPass = true;
-                    }
-                }
-            }
-
-            const itemsArray = []; // Explicitly initialize itemsArray
-            currentBundleMap.forEach(item => itemsArray.push(item)); // Populate itemsArray
-
-            // Calculate estimated commission for this bundle
-            const estimatedCommission = (currentPV >= TARGET_PV) ? (currentSV * (commissionRate / 100)) : 0;
-
-            return { items: itemsArray, totalPV: currentPV, totalCost: currentCost, totalSV: currentSV, estimatedCommission };
-        }
-
-        // Main calculation logic for auto-generated bundles
-        function calculateBestOptions() {
-            const budget = parseFloat(budgetInput.value);
-            const commissionRate = parseFloat(commissionRateInput.value);
-            const selectedCategories = Array.from(categoryCheckboxes)
-                .filter(checkbox => checkbox.checked)
-                .map(checkbox => checkbox.value);
-
-            // Input validation
-            if (isNaN(budget) || budget <= 0) {
-                showMessage('يرجى إدخال ميزانية شهرية صحيحة وموجبة.', 'error');
-                resultsSection.classList.add('hidden');
-                return;
-            }
-            if (isNaN(commissionRate) || commissionRate < 6 || commissionRate > 37) {
-                showMessage('يرجى إدخال نسبة عمولة صحيحة (بين 6% و 37%).', 'error');
-                resultsSection.classList.add('hidden');
-                return;
-            }
-            if (selectedCategories.length === 0) {
-                showMessage('يرجى اختيار فئة واحدة على الأقل من المنتجات.', 'error');
-                resultsSection.classList.add('hidden');
-                return;
-            }
-
-            let filteredProducts = productsData.filter(product =>
-                selectedCategories.includes(product.category)
-            );
-
-            if (filteredProducts.length === 0) {
-                showMessage('عذراً، لا توجد منتجات في الفئات المختارة.', 'info');
-                resultsSection.classList.add('hidden');
-                return;
-            }
-
-            let allCandidateBundles = [];
-
-            // Generate bundles using different strategies
-            allCandidateBundles.push(generateBundle(filteredProducts, budget, TARGET_PV, commissionRate, 'efficiency'));
-            allCandidateBundles.push(generateBundle(filteredProducts, budget, TARGET_PV, commissionRate, 'cost_per_pv'));
-            allCandidateBundles.push(generateBundle(filteredProducts, budget, TARGET_PV, commissionRate, 'highest_pv'));
-            allCandidateBundles.push(generateBundle(filteredProducts, budget, TARGET_PV, commissionRate, 'lowest_cost'));
-            // Can add more strategies here for more diversity
-
-            // Filter out invalid bundles
-            let validBundles = allCandidateBundles.filter(b => b.items.length > 0 && b.totalCost <= budget);
-
-            // Remove duplicate bundles
-            const uniqueBundles = new Map(); // Use Map to store unique bundles by key
-            validBundles.forEach(bundle => {
-                const bundleKey = bundle.items.map(item => `${item.name}:${item.quantity}`).sort().join(';');
-                // Only add if not already seen, or if this bundle is "better" (e.g., higher PV)
-                if (!uniqueBundles.has(bundleKey) || uniqueBundles.get(bundleKey).totalPV < bundle.totalPV) {
-                    uniqueBundles.set(bundleKey, bundle);
-                }
-            });
-            validBundles = Array.from(uniqueBundles.values());
-
-
-            // Sort valid bundles to find the "best" ones
-            validBundles.sort((a, b) => {
-                const diffA = Math.abs(a.totalPV - TARGET_PV);
-                const diffB = Math.abs(b.totalPV - TARGET_PV);
-                if (diffA !== diffB) {
-                    return diffA - diffB;
-                }
-                if (a.totalCost !== b.totalCost) {
-                    return a.totalCost - b.totalCost;
-                }
-                return b.totalPV - a.totalPV;
-            });
-
-            const topNBundles = validBundles.slice(0, 5); // Display up to 5 best options
-
-            displayResults(topNBundles, budget);
-        }
-
-        // Function to display results in the UI
-        function displayResults(bundles, budget) {
-            resultsSection.classList.remove('hidden');
-            recommendedBundlesDiv.innerHTML = ''; // Clear previous results
-            messageDiv.innerHTML = ''; // Clear previous messages
-
-            if (bundles.length === 0) {
-                showMessage('عذراً، لم نتمكن من العثور على مجموعات منتجات مناسبة ضمن ميزانيتك والفئات المختارة.', 'info');
-                pvOverallProgressBar.style.width = '0%';
-                pvOverallProgressBar.textContent = '0 PV';
-                maxPossiblePvSpan.textContent = '0';
-                return;
-            }
-
-            let maxAchievedPv = 0;
-            let anyBundleReachedTarget = false;
-
-            // Display each recommended bundle
-            bundles.forEach((bundle, index) => {
-                const optionCard = document.createElement('div');
-                optionCard.className = 'option-card';
-                optionCard.innerHTML = `
-                    <h3 class="mb-4">الخيار رقم ${index + 1}</h3>
-                    <div class="summary-stats mb-4">
-                        <p>إجمالي النقاط (PV): <strong>${bundle.totalPV.toFixed(2)}</strong></p>
-                        <p>إجمالي قيمة المبيعات (SV): <strong>${bundle.totalSV.toFixed(2)}</strong></p>
-                        <p>إجمالي التكلفة (دينار أردني): <strong>${bundle.totalCost.toFixed(2)}</strong></p>
-                        <p>العمولة الشهرية التقديرية: <strong>${bundle.estimatedCommission.toFixed(2)}</strong> دينار أردني</p>
-                        <p>الميزانية المتبقية: <strong>${(budget - bundle.totalCost).toFixed(2)}</strong> دينار أردني</p>
-                    </div>
-                    <div class="pv-progress-bar mb-4">
-                        <div class="pv-progress" style="width: ${Math.min((bundle.totalPV / TARGET_PV) * 100, 100)}%;">
-                            ${bundle.totalPV.toFixed(2)} PV
-                        </div>
-                    </div>
-                    <p class="text-sm text-gray-500 mb-2">المنتجات في هذه المجموعة:</p>
-                    <div class="product-list">
-                        ${bundle.items.map(item => `
-                            <div class="product-item">
-                                <span>${item.name}</span>
-                                <span>الكمية: <strong>${item.quantity}</strong> | PV: <strong>${(item.PV * item.quantity).toFixed(2)}</strong> | SV: <strong>${(item.SV * item.quantity).toFixed(2)}</strong> | السعر: <strong>${(item.DP * item.quantity).toFixed(2)}</strong></span>
-                            </div>
-                        `).join('')}
-                    </div>
-                `;
-                recommendedBundlesDiv.appendChild(optionCard);
-
-                if (bundle.totalPV > maxAchievedPv) {
-                    maxAchievedPv = bundle.totalPV;
-                }
-                if (bundle.totalPV >= TARGET_PV) {
-                    anyBundleReachedTarget = true;
-                }
-            });
-
-            // تحديث شريط التقدم العام وأقصى PV ممكن
-            const overallPvPercentage = Math.min((maxAchievedPv / TARGET_PV) * 100, 100);
-            pvOverallProgressBar.style.width = `${overallPvPercentage}%`;
-            pvOverallProgressBar.textContent = `${maxAchievedPv.toFixed(2)} PV`;
-            if (maxAchievedPv >= TARGET_PV) {
-                pvOverallProgressBar.style.backgroundColor = '#10b981'; // أخضر للنجاح
-            } else {
-                pvOverallProgressBar.style.backgroundColor = '#3b82f6'; // أزرق
-            }
-            maxPossiblePvSpan.textContent = maxAchievedPv.toFixed(2);
-
-            // عرض الرسائل النهائية
-            if (anyBundleReachedTarget) {
-                showMessage('تهانينا! تم العثور على خيارات تحقق 100 نقطة (PV) أو أكثر ضمن ميزانيتك.', 'success');
-            } else if (maxAchievedPv > 0) {
-                showMessage(`لم يتم تحقيق 100 نقطة (PV) في أي من الخيارات. أعلى نقاط يمكن تحقيقها هي ${maxAchievedPv.toFixed(2)} PV ضمن ميزانيتك.`, 'info');
-            } else {
-                showMessage('عذراً، لم نتمكن من العثور على أي مجموعات منتجات مناسبة ضمن ميزانيتك والفئات المختارة.', 'info');
-            }
-        }
-
-        // وظيفة مساعدة لعرض الرسائل (خطأ، معلومات، نجاح)
-        function showMessage(msg, type) {
-            messageDiv.innerHTML = `<div class="${type}-message">${msg}</div>`;
-        }
-
-        // وظيفة لعرض معلومات المنتجات (الاستخدامات والمزايا)
-        function displayProductInfo() {
-            const productInfoListDiv = document.getElementById('productInfoList');
-            productInfoListDiv.innerHTML = ''; // مسح المحتوى السابق
-
-            // Group products by category
-            const productsByCategory = productsData.reduce((acc, product) => {
-                if (!acc[product.category]) {
-                    acc[product.category] = [];
-                }
-                acc[product.category].push(product);
-                return acc;
-            }, {});
-
-            for (const category in productsByCategory) {
-                const categoryDetails = document.createElement('details');
-                categoryDetails.className = 'product-info-item bg-white p-4 rounded-lg shadow-sm border border-gray-100 mb-4';
-                
-                const categorySummary = document.createElement('summary');
-                categorySummary.className = 'text-xl font-bold text-gray-800 cursor-pointer py-2';
-                categorySummary.textContent = category;
-                categoryDetails.appendChild(categorySummary);
-
-                const categoryContentContainer = document.createElement('div'); // Container for products within this category
-                categoryContentContainer.className = 'mt-3 space-y-3';
-
-                productsByCategory[category].forEach(product => {
-                    const productDetails = document.createElement('details');
-                    productDetails.className = 'bg-gray-50 p-3 rounded-lg border border-gray-200';
-
-                    const productSummary = document.createElement('summary');
-                    productSummary.className = 'text-lg font-medium text-gray-700 cursor-pointer flex justify-content-between items-center';
-                    productSummary.innerHTML = `
-                        <span>${product.name}</span>
-                        <!-- تم إزالة الصورة الصغيرة من هنا -->
-                    `;
-
-                    // Create productContent div for each product
-                    const productContent = document.createElement('div'); 
-                    productContent.className = 'mt-2 text-gray-600';
-                    productContent.innerHTML = `
-                        ${product.uses && product.uses.length > 0 ? `<p class="font-semibold mb-1">الاستخدامات:</p><ul class="list-disc pr-5 mb-2">${product.uses.map(use => `<li>${use}</li>`).join('')}</ul>` : ''}
-                        ${product.benefits && product.benefits.length > 0 ? `<p class="font-semibold mb-1">المزايا:</p><ul class="list-disc pr-5">${product.benefits.map(benefit => `<li>${benefit}</li>`).join('')}</ul>` : ''}
-                    `;
-                    
-                    productDetails.appendChild(productSummary);
-                    productDetails.appendChild(productContent); // Append the product-specific content
-                    categoryContentContainer.appendChild(productDetails); // Append the product details to the category container
-                });
-                categoryDetails.appendChild(categoryContentContainer); // Append the category container to the category details
-                productInfoListDiv.appendChild(categoryDetails);
-            }
-        }
-
-
-        // تنفيذ الحساب الأولي وعرض معلومات المنتجات عند تحميل الصفحة
-        calculateBestOptions();
-        displayProductInfo();
+        // استدعاء دالة إنشاء شريط التنقل بعد تحميل DOM
+        document.addEventListener('DOMContentLoaded', () => {
+            // "index-page" هو معرف الصفحة الحالية لتظليلها في شريط التنقل
+            // تأكدنا الآن أن createNavbar متاحة عالمياً من utils.js
+            window.createNavbar("index-page"); 
+        });
     </script>
 </body>
 </html>
