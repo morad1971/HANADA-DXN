@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>هناده دكسن - العمولات</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- خط Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* التنسيقات المشتركة من ملف utils.js (يمكن دمجها لاحقاً في ملف CSS منفصل) */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5; /* لون خلفية فاتح */
+            direction: rtl; /* اتجاه النص من اليمين لليسار */
+            text-align: right; /* محاذاة النص لليمين */
+            padding-top: 4rem; /* مسافة علوية لترك مكان لشريط التنقل الثابت */
+        }
+        /* تنسيق شريط التنقل الثابت */
+        .navbar {
+            position: fixed; /* يجعل الشريط ثابتاً عند التمرير */
+            top: 0;
+            right: 0; /* يبدأ من اليمين بسبب RTL */
+            width: 100%;
+            background-color: #1a202c; /* لون خلفية داكن للشريط */
+            color: white;
+            padding: 0.75rem 1.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000; /* يضمن ظهوره فوق المحتوى الآخر */
+            display: flex;
+            justify-content: center; /* توسيط الأزرار */
+            gap: 1.5rem; /* مسافة بين الأزرار */
+            flex-wrap: wrap; /* للسماح للأزرار بالانتقال لسطر جديد على الشاشات الصغيرة */
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.4rem 0.6rem; /* تم تصغير المسافة الداخلية للزر */
+            border-radius: 0.5rem;
+            transition: background-color 0.2s ease;
+            font-size: 0.9rem; /* تم تصغير حجم الخط هنا */
+        }
+        .navbar a:hover {
+            background-color: #2d3748; /* لون أغمق عند المرور */
+        }
+        /* تنسيق الحاوية الرئيسية للصفحة */
+        .container {
+            max-width: 900px; /* أقصى عرض للحاوية */
+            margin: 2rem auto; /* توسيط الحاوية عمودياً وأفقياً */
+            padding: 1.5rem; /* مساحة داخلية */
+            background-color: #ffffff; /* خلفية بيضاء */
+            border-radius: 1rem; /* زوايا مستديرة */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* ظل خفيف */
+        }
+        /* تنسيق الأقسام الرئيسية */
+        .section-card {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e2e8f0;
+        }
+        .section-card:first-of-type {
+            margin-top: 0;
+            padding-top: 0;
+            border-top: none;
+        }
+        .section-card h2 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        .info-box {
+            background-color: #ffffff;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+        }
+        .info-box h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 0.75rem;
+        }
+        .info-box p, .info-box li {
+            color: #4a5568;
+            line-height: 1.6;
+        }
+        .info-box ul {
+            list-style-type: disc;
+            padding-right: 1.5rem;
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- شريط التنقل الثابت -->
+    <nav class="navbar">
+        <a href="index.html">الرئيسية</a>
+        <a href="idea.html">الفكرة الأساسية</a>
+        <a href="mlm.html">فرصة العمل</a>
+        <a href="products.html">المنتجات</a>
+        <a href="commissions.html" class="bg-blue-700">العمولات</a>
+        <a href="budget-planner.html">خطط ميزانيتك</a>
+        <a href="manual-bundle.html">مجموعتك الخاصة</a>
+        <a href="general-info.html">معلومات الريشي</a>
+        <a href="resources.html">مصادر إضافية</a>
+    </nav>
+
+    <div class="container">
+        <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">هناده دكسن</h1>
+        <p class="text-center text-gray-600 mb-8">مرحباً بكِ في دليلكِ الشامل لمنتجات DXN وفرصتها الفريدة! هنا نساعدكِ على اكتشاف عالم الصحة والجمال الطبيعي، وكيف يمكنكِ بناء مشروعكِ الخاص من المنزل.</p>
+
+        <!-- قسم كيفية الحصول على العمولات والمصطلحات -->
+        <div id="commissions-section" class="section-card">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">كيفية الحصول على العمولات والمصطلحات الأساسية</h2>
+            <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-100 info-box">
+                <p class="text-gray-700 mb-3">
+                    تعتمد عمولاتكِ في DXN على نظام نقاط واضح ومكافآت عادلة. إليكِ أهم المصطلحات وكيفية حساب عمولتكِ التقديرية:
+                </p>
+                <h3 class="text-xl font-semibold text-gray-800 mb-2">المصطلحات الأساسية:</h3>
+                <ul class="list-disc pr-5 text-gray-700 space-y-1 mb-3">
+                    <li>**PV (Point Value - القيمة النقطية):** لكل منتج قيمة نقطية محددة. هذه النقاط هي التي تحدد رتبتكِ وتأهلكِ للحصول على العمولات.</li>
+                    <li>**SV (Sales Value - قيمة المبيعات):** هي القيمة المالية للمنتج التي تُستخدم لحساب عمولتكِ النقدية. تُحسب العمولة كنسبة مئوية من الـ SV.</li>
+                    <li>**DP (Distributor Price - سعر الموزع):** هو السعر الذي تدفعينه كعضو لشراء المنتجات، وهو أقل من سعر التجزئة.</li>
+                    <li>**الـ 100 نقطة (PV) الشهرية:** هذا هو الشرط الأساسي لتأهيلكِ للحصول على عمولاتكِ في ذلك الشهر. يجب أن تحققي 100 نقطة شخصية أو أكثر من مشترياتكِ/مبيعاتكِ كل شهر.</li>
+                </ul>
+                <h3 class="text-xl font-semibold text-gray-800 mb-2">كيف تُحسب العمولة التقديرية؟</h3>
+                <p class="text-gray-700 mb-3">
+                    عمولتكِ الشهرية تُحسب بناءً على **قيمة المبيعات (SV)** لمنتجاتكِ التي اشتريتها أو بعتها، مضروبة في **نسبة عمولتكِ الحالية** (والتي تزداد كلما زادت نقاطكِ التراكمية ورتبتكِ).
+                </p>
+                <p class="text-gray-700 mb-3">
+                    **مثال مبسط:**
+                    إذا كانت نسبة عمولتكِ الحالية 6%، وقمتِ بشراء منتجات بقيمة SV إجمالية قدرها 50 ديناراً (وتجاوزتِ 100 PV في الشهر)، فإن عمولتكِ التقديرية من مشترياتكِ الشخصية ستكون:
+                    <br>
+                    $ \text{العمولة} = \text{إجمالي SV} \times (\text{نسبة العمولة} / 100) $
+                    <br>
+                    $ \text{العمولة} = 50 \text{ د.أ} \times (6 / 100) = 3 \text{ د.أ} $
+                </p>
+                <p class="text-gray-700 mb-3">
+                    تزداد هذه العمولة بشكل كبير مع نمو فريقكِ وتحقيقهم للنقاط، حيث تحصلين على فارق النسبة المئوية بينكِ وبين أعضاء فريقكِ. كلما ارتفعت رتبتكِ (مثل وكيل نجم، نجم ياقوتي، نجم ماسي)، زادت نسبتكِ المئوية وزادت أنواع العمولات التي تحصلين عليها (مثل علاوة التطوير ومشاركة الأرباح الدولية).
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- استيراد ملفات JavaScript المشتركة -->
+    <script src="data.js"></script>
+    <script src="utils.js"></script>
+    <script>
+        // استدعاء دالة إنشاء شريط التنقل بعد تحميل DOM
+        document.addEventListener('DOMContentLoaded', () => {
+            // "commissions-page" هو معرف الصفحة الحالية لتظليلها في شريط التنقل
+            window.createNavbar("commissions-page"); 
+        });
+    </script>
+</body>
+</html>
