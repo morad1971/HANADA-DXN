@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>هناده دكسن - الرئيسية</title>
-    <!-- Tailwind CSS CDN لاستخدام فئات التصميم الجاهزة -->
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- خط Inter لتحسين مظهر النص -->
+    <!-- خط Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         /* التنسيقات الأساسية للجسم والخط والاتجاه */
@@ -16,6 +16,7 @@
             direction: rtl; /* اتجاه النص من اليمين لليسار */
             text-align: right; /* محاذاة النص لليمين */
             padding-top: 4rem; /* مسافة علوية لترك مكان لشريط التنقل الثابت */
+            color: #1e40af; /* لون أزرق داكن جديد للنص الأساسي (blue-800) */
         }
         /* تنسيق شريط التنقل الثابت */
         .navbar {
@@ -66,22 +67,37 @@
             border-top: none;
         }
         .section-card h2 {
-            font-size: 2.25rem; /* حجم أكبر للعناوين الرئيسية */
+            font-size: 2.25rem;
             font-weight: 700;
-            color: #2d3748;
+            color: #1e3a8a; /* أزرق أغمق قليلاً للعناوين (blue-900) */
             margin-bottom: 1.5rem;
             text-align: center;
         }
-
-        /* تنسيق مجموعات الإدخال (الميزانية والفئات) */
-        .input-group label {
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 0.5rem;
-            display: block;
+        .info-box {
+            background-color: #ffffff;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
         }
-        .input-group input[type="number"],
-        .input-group select {
+        .info-box h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #1e3a8a; /* أزرق أغمق قليلاً للعناوين (blue-900) */
+            margin-bottom: 0.75rem;
+        }
+        .info-box p, .info-box li {
+            color: #1e40af; /* لون أزرق داكن جديد للنص الأساسي (blue-800) */
+            line-height: 1.6;
+        }
+        .info-box ul {
+            list-style-type: disc;
+            padding-right: 1.5rem;
+            margin-top: 0.5rem;
+        }
+        /* تنسيق حقول الإدخال في قسم التواصل */
+        .contact-form input[type="text"],
+        .contact-form input[type="tel"] {
             width: 100%;
             padding: 0.75rem;
             border: 1px solid #e2e8f0;
@@ -90,48 +106,15 @@
             color: #4a5568;
             background-color: #fdfdfd;
             transition: border-color 0.2s;
+            margin-bottom: 1rem; /* مسافة بين الحقول */
         }
-        .input-group input[type="number"]:focus,
-        .input-group select:focus {
+        .contact-form input[type="text"]:focus,
+        .contact-form input[type="tel"]:focus {
             outline: none;
             border-color: #3b82f6;
             box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
         }
-        .checkbox-group label {
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-            padding: 0.5rem 0;
-            color: #4a5568;
-        }
-        .checkbox-group input[type="checkbox"] {
-            margin-left: 0.75rem;
-            width: 1.25rem;
-            height: 1.25rem;
-            border-radius: 0.25rem;
-            border: 1px solid #cbd5e0;
-            appearance: none;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            background-color: #fdfdfd;
-            transition: background-color 0.2s, border-color 0.2s;
-        }
-        .checkbox-group input[type="checkbox"]:checked {
-            background-color: #3b82f6;
-            border-color: #3b82f6;
-            position: relative;
-        }
-        .checkbox-group input[type="checkbox"]:checked::before {
-            content: '✔';
-            display: block;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 0.8rem;
-            color: white;
-        }
-        .btn-primary {
+        .contact-form .btn-submit {
             background-color: #22c55e;
             color: white;
             padding: 0.75rem 1.5rem;
@@ -141,206 +124,45 @@
             cursor: pointer;
             transition: background-color 0.3s ease, transform 0.1s ease;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
         }
-        .btn-primary:hover {
+        .contact-form .btn-submit:hover {
             background-color: #16a34a;
             transform: translateY(-1px);
         }
-        .btn-primary:active {
+        .contact-form .btn-submit:active {
             transform: translateY(0);
             box-shadow: none;
         }
-        .results-section {
-            margin-top: 2rem;
-            border-top: 1px solid #e2e8f0;
-            padding-top: 2rem;
+        /* تنسيق زر واتساب المباشر */
+        .whatsapp-button-container {
+            text-align: center;
+            margin-top: 1.5rem;
         }
-        .pv-progress-bar {
-            width: 100%;
-            background-color: #e2e8f0;
-            border-radius: 0.5rem;
-            overflow: hidden;
-            height: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-        .pv-progress {
-            height: 100%;
-            background-color: #3b82f6;
-            width: 0%;
-            border-radius: 0.5rem;
-            transition: width 0.5s ease-in-out;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .whatsapp-button {
+            display: inline-block;
+            background-color: #25d366; /* لون واتساب أخضر */
             color: white;
-            font-weight: 500;
-            font-size: 0.9rem;
-        }
-        .option-card {
-            background-color: #ffffff;
-            border: 2px solid #e2e8f0;
-            border-radius: 1rem;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
-            transition: border-color 0.3s ease;
-        }
-        .option-card:hover {
-            border-color: #3b82f6;
-        }
-        .option-card h3 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #2d3748;
-            margin-bottom: 1rem;
-        }
-        .option-card .summary-stats p {
-            font-size: 1rem;
-            color: #4a5568;
-            margin-bottom: 0.5rem;
-        }
-        .option-card .summary-stats strong {
-            color: #1a202c;
-        }
-        .option-card .product-list {
-            margin-top: 1rem;
-            border-top: 1px dashed #e2e8f0;
-            padding-top: 1rem;
-        }
-        .option-card .product-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 0.4rem 0;
-            border-bottom: 1px dotted #ebf4ff;
-        }
-        .option-card .product-item:last-child {
-            border-bottom: none;
-        }
-        .option-card .product-item span {
-            font-size: 0.95rem;
-            color: #4a5568;
-        }
-        .option-card .product-item strong {
-            color: #2d3748;
-        }
-
-        /* رسائل الخطأ */
-        .error-message {
-            background-color: #fee2e2;
-            color: #ef4444;
-            padding: 0.75rem;
-            border-radius: 0.5rem;
-            margin-top: 1rem;
-            font-weight: 500;
-        }
-        /* رسائل المعلومات */
-        .info-message {
-            background-color: #e0f2fe;
-            color: #0284c7;
-            padding: 0.75rem;
-            border-radius: 0.5rem;
-            margin-top: 1rem;
-            font-weight: 500;
-        }
-        /* رسائل النجاح */
-        .success-message {
-            background-color: #dcfce7;
-            color: #16a34a;
-            padding: 0.75rem;
-            border-radius: 0.5rem;
-            margin-top: 1rem;
-            font-weight: 500;
-        }
-        /* تنسيق جدول المنتجات المضافة يدوياً */
-        .manual-products-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 1rem;
-        }
-        .manual-products-table th, .manual-products-table td {
-            border: 1px solid #e2e8f0;
-            padding: 0.75rem;
-            text-align: right;
-        }
-        .manual-products-table th {
-            background-color: #f0f2f5;
+            padding: 0.8rem 2rem;
+            border-radius: 0.75rem;
+            font-size: 1.1rem;
             font-weight: 600;
-            color: #4a5568;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-        .manual-products-table td {
-            background-color: #ffffff;
+        .whatsapp-button:hover {
+            background-color: #1da851;
+            transform: translateY(-1px);
         }
-        .manual-products-table button {
-            background-color: #ef4444;
-            color: white;
-            padding: 0.3rem 0.6rem;
-            border-radius: 0.5rem;
-            font-size: 0.8rem;
-            cursor: pointer;
-            transition: background-color 0.2s;
+        .whatsapp-button:active {
+            transform: translateY(0);
+            box-shadow: none;
         }
-        .manual-products-table button:hover {
-            background-color: #dc2626;
-        }
-        /* تنسيق أزرار الطباعة والمشاركة */
-        .action-buttons {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
-            justify-content: center;
-        }
-        .action-buttons .btn {
-            background-color: #3b82f6;
-            color: white;
-            padding: 0.6rem 1.2rem;
-            border-radius: 0.5rem;
-            font-size: 0.95rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background-color 0.2s;
-            flex-grow: 1;
-            max-width: 200px;
-        }
-        .action-buttons .btn:hover {
-            background-color: #2563eb;
-        }
-        .action-buttons .btn-print {
-            background-color: #6b7280;
-        }
-        .action-buttons .btn-print:hover {
-            background-color: #4b5563;
-        }
-        /* إخفاء عناصر الصور تماماً */
-        .product-image, .product-image-small {
-            display: none !important; 
-        }
-        /* تعديل عرض الخلاصات لعدم وجود صور */
-        .product-info-item summary {
-            justify-content: flex-start;
-            gap: 0.5rem;
-        }
-        /* تنسيق قسم معلومات عامة */
-        .general-info-section .info-box {
-            background-color: #ffffff;
-            padding: 1.5rem;
-            border-radius: 1rem;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            border: 1px solid #e2e8f0;
-        }
-        .general-info-section h3 {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: #2d3748;
-            margin-bottom: 0.75rem;
-        }
-        .general-info-section p, .general-info-section li {
-            color: #4a5568;
-            line-height: 1.6;
-        }
-        .general-info-section ul {
-            list-style-type: disc;
-            padding-right: 1.5rem;
-            margin-top: 0.5rem;
+        /* تنسيق النصوص داخل قسم "من هي هناده؟" و "لماذا هذا التطبيق؟" */
+        #who-is-hanada-section .info-box p,
+        #why-this-app-section .info-box p {
+            font-size: 0.95rem; /* تصغير حجم الخط قليلاً */
         }
     </style>
 </head>
@@ -362,6 +184,57 @@
         <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">هناده دكسن</h1>
         <p class="text-center text-gray-600 mb-8">مرحباً بكِ في دليلكِ الشامل لمنتجات DXN وفرصتها الفريدة! هنا نساعدكِ على اكتشاف عالم الصحة والجمال الطبيعي، وكيف يمكنكِ بناء مشروعكِ الخاص من المنزل.</p>
 
+        <!-- قسم من هي هناده؟ -->
+        <div id="who-is-hanada-section" class="section-card">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">من هي هناده؟</h2>
+            <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-100 info-box">
+                <p class="mb-3">
+                    أهلاً بكِ في عالمي! أنا **هناده**، رائدة أعمال وشغوفة بالصحة والجمال الطبيعي. رحلتي مع DXN بدأت كبحث شخصي عن حلول صحية لي ولعائلتي، وسرعان ما تحولت إلى شغف ورسالة أؤمن بها. **أنا ربة منزل**، وهذا يمنحني فهماً عميقاً لاحتياجات السيدات اللواتي يبحثن عن التوازن بين الحياة الأسرية والطموح المهني.
+                </p>
+                <p class="mb-3">
+                    منذ انضمامي إلى عائلة DXN، لم ألمس التغيير الإيجابي في صحتي وحيويتي فحسب، بل اكتشفت أيضاً فرصة عمل مرنة ومجزية، سمحت لي بتحقيق الاستقلال المالي ومساعدة العديد من السيدات في الأردن وخارجه على تحقيق أهدافهن الصحية والمالية.
+                </p>
+                <p>
+                    هدفي من هذا التطبيق هو أن أشارككِ خلاصة تجربتي ومعرفتي، وأن أكون دليلكِ الموثوق في رحلتكِ مع DXN.
+                </p>
+            </div>
+        </div>
+
+        <!-- قسم لماذا هذا التطبيق؟ -->
+        <div id="why-this-app-section" class="section-card">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">لماذا هذا التطبيق؟ مجهود فردي لتبسيط فكرة DXN!</h2>
+            <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-100 info-box">
+                <p class="mb-3">
+                    هذا التطبيق هو ثمرة جهدي الشخصي، وصممته لأقدم لكِ فكرة DXN ومنتجاتها وفرصة العمل بطريقة مبسطة، منظمة، وسلسة في التسلسل.
+                </p>
+                <p class="mb-3">
+                    غالباً ما تكون المعلومات حول التسويق الشبكي والمنتجات الصحية كثيرة ومعقدة. هدفي هنا هو أن أزيل عنكِ عناء البحث والتشتت، وأقدم لكِ كل ما تحتاجينه في مكان واحد، وبأسلوب سهل الفهم، خطوة بخطوة.
+                </p>
+                <p>
+                    سواء كنتِ مهتمة بالمنتجات الصحية، أو تبحثين عن فرصة دخل إضافي، أو لديكِ فضول لمعرفة المزيد عن DXN، فإن هذا التطبيق سيوفر لكِ المعلومات والأدوات اللازمة لاتخاذ قرار مستنير.
+                </p>
+            </div>
+        </div>
+
+        <!-- قسم تواصلي معي! -->
+        <div id="contact-me-section" class="section-card">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">تواصلي معي!</h2>
+            <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-100 info-box">
+                <p class="mb-3">
+                    إذا كان لديكِ أي أسئلة، أو ترغبين في الانضمام إلى فريقي، أو تحتاجين مساعدة في اختيار المنتجات، لا تترددي في التواصل معي مباشرةً عبر واتساب:
+                </p>
+                <div class="whatsapp-button-container">
+                    <a href="https://api.whatsapp.com/message/4KM3HRA62B3BK1?autoload=1&app_absent=0" target="_blank" rel="noopener noreferrer" class="whatsapp-button">
+                        تواصلي مع هناده عبر واتساب
+                    </a>
+                </div>
+                <p class="text-sm text-gray-500 mt-4 text-center">
+                    (سيتم فتح محادثة واتساب مباشرةً عند النقر على الزر)
+                </p>
+            </div>
+        </div>
+
+        <!-- قسم ترحيبي عام (المحتوى الأصلي الذي كان في بداية الصفحة) -->
         <div class="section-card">
             <h2 class="text-2xl font-semibold text-gray-700 mb-4">مرحباً بكِ في رحلتكِ مع هناده دكسن!</h2>
             <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-100 info-box">
@@ -376,7 +249,7 @@
                 </p>
                 <ul class="list-disc pr-5 text-gray-700 space-y-1">
                     <li>**الفكرة الأساسية:** اكتشفي جوهر مشروع DXN ومنتجاتها العضوية.</li>
-                    <li>**فرصة العمل:** تعرفي على نموذج التسويق متعدد المستويات وكيف يمكنكِ أن تصبحي مسوقة ناجحة.</li>
+                    <li>**فرصة العمل:** تعرفي على نموذج التسويق متعدد المستويات وكيف يمكنكِ أن تصبحي مسوقة ناجاح.</li>
                     <li>**المنتجات:** استعرضي قائمة المنتجات الشاملة مع استخداماتها ومزاياها.</li>
                     <li>**العمولات:** افهمي كيفية حساب أرباحكِ والمصطلحات الأساسية.</li>
                     <li>**خطط ميزانيتك:** استخدمي أداتنا التفاعلية لتخطيط مشترياتكِ وتحقيق النقاط.</li>
@@ -392,31 +265,17 @@
     </div>
 
     <!-- استيراد ملفات JavaScript المشتركة -->
-    <script src="data.js"></script>
-    <script src="utils.js"></script>
+    <script src="data.js" defer></script>
+    <script src="utils.js" defer></script>
     <script>
         // استدعاء دالة إنشاء شريط التنقل بعد تحميل DOM
-        document.addEventListener('DOMContentLoaded', () => {
-            // "index-page" هو معرف الصفحة الحالية لتظليلها في شريط التنقل
-            // تأكدنا الآن أن createNavbar متاحة عالمياً من utils.js
-            window.createNavbar("index-page"); 
-        });
+        window.onload = function() {
+            if (typeof window.createNavbar === 'function') {
+                window.createNavbar("index-page"); 
+            } else {
+                console.error("Error: window.createNavbar is not defined. utils.js might not have loaded correctly.");
+            }
+        };
     </script>
-</body>
-</html>
-<!-- Import shared JavaScript files -->
-<script src="data.js" defer></script>
-<script src="utils.js" defer></script>
-<script>
-    // Call the navbar creation function after all content and scripts are loaded
-    window.onload = function() {
-        // Make sure the ID here matches the current page's identifier
-        // Example for index.html:
-        window.createNavbar("index-page");
-        // If this page has its own specific JavaScript functions, call them here
-        // Example for products.html:
-        // window.displayProductInfo();
-    };
-</script>
 </body>
 </html>
