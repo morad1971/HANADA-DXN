@@ -404,3 +404,19 @@
     </script>
 </body>
 </html>
+<!-- Import shared JavaScript files -->
+<script src="data.js" defer></script>
+<script src="utils.js" defer></script>
+<script>
+    // Call the navbar creation function after all content and scripts are loaded
+    window.onload = function() {
+        // Make sure the ID here matches the current page's identifier
+        // Example for index.html:
+        window.createNavbar("index-page");
+        // If this page has its own specific JavaScript functions, call them here
+        // Example for products.html:
+        // window.displayProductInfo();
+    };
+</script>
+</body>
+</html>
