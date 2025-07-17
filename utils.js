@@ -1,3 +1,6 @@
+// رسالة لتأكيد تحميل الملف
+console.log("utils.js loaded successfully.");
+
 // تعريف النقاط المستهدفة للتأهيل (100 نقطة)
 const TARGET_PV = 100;
 
@@ -104,7 +107,7 @@ function generateBundle(products, budget, targetPV, commissionRate, strategy = '
     currentBundleMap.forEach(item => itemsArray.push(item)); // تعبئة المصفوفة
 
     // حساب العمولة التقديرية لهذه الحزمة
-    const estimatedCommission = (currentPV >= targetPV) ? (currentSV * (commissionRate / 100)) : 0;
+    const estimatedCommission = (currentPV >= targetPV) ? (totalSV * (commissionRate / 100)) : 0;
 
     return { items: itemsArray, totalPV: currentPV, totalCost: currentCost, totalSV: currentSV, estimatedCommission };
 }
