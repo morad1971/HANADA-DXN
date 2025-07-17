@@ -152,6 +152,16 @@
             margin-top: 0.5rem;
             display: block;
         }
+        /* تنسيق قسم قائمة المنتجات الكاملة */
+        .all-products-list-section .product-list-item {
+            font-size: 1rem;
+            color: #4a5568;
+            padding: 0.4rem 0;
+            border-bottom: 1px dotted #ebf4ff;
+        }
+        .all-products-list-section .product-list-item:last-child {
+            border-bottom: none;
+        }
     </style>
 </head>
 <body>
@@ -221,6 +231,20 @@
             </div>
 
         </div>
+
+        <!-- قسم جميع أسماء المنتجات -->
+        <div id="all-products-list-section" class="section-card">
+            <h2 style="font-size: 1.75rem;" class="text-2xl font-semibold text-gray-700 mb-4">قائمة بجميع منتجات DXN</h2>
+            <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-100 info-box">
+                <p class="text-gray-700 mb-3">
+                    إليكِ قائمة بجميع المنتجات المتوفرة من DXN. يمكنكِ النقر على الفئات أعلاه لمعرفة المزيد عن كل منتج.
+                </p>
+                <ul id="allProductsList" class="list-none space-y-1">
+                    <!-- أسماء المنتجات ستُضاف هنا بواسطة JavaScript -->
+                </ul>
+            </div>
+        </div>
+
     </div>
 
     <!-- استيراد ملفات JavaScript المشتركة -->
@@ -233,6 +257,7 @@
                 if (typeof window.createNavbar === 'function') {
                     window.createNavbar("products-page"); 
                     displayProductInfo(); // استدعاء دالة عرض معلومات المنتجات
+                    displayAllProductNames(); // استدعاء دالة عرض جميع أسماء المنتجات
                 } else {
                     console.error("Error: window.createNavbar is not defined. utils.js might not have loaded correctly.");
                 }
@@ -292,6 +317,19 @@
                     targetDiv.appendChild(productDetails);
                 });
             }
+        }
+
+        // وظيفة جديدة لعرض جميع أسماء المنتجات في قائمة واحدة
+        function displayAllProductNames() {
+            const allProductsListDiv = document.getElementById('allProductsList');
+            allProductsListDiv.innerHTML = ''; // مسح المحتوى السابق
+
+            productsData.forEach(product => {
+                const listItem = document.createElement('li');
+                listItem.className = 'product-list-item';
+                listItem.textContent = product.name;
+                allProductsListDiv.appendChild(listItem);
+            });
         }
     </script>
 </body>
