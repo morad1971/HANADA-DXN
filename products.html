@@ -120,6 +120,7 @@
             border-right: 4px solid #3b82f6; /* Blue border on the right for RTL */
             border-radius: 0.5rem;
         }
+        /* تنسيق عناصر الـ details/summary للمنتجات */
         .product-category-section .product-details-item {
             background-color: #f8fafc; /* خلفية فاتحة للمنتج الواحد */
             padding: 1rem;
@@ -127,11 +128,25 @@
             border: 1px solid #e2e8f0;
             margin-bottom: 1rem;
         }
-        .product-category-section .product-details-item h4 {
+        .product-category-section .product-details-item summary {
             font-size: 1.1rem;
             font-weight: 600;
             color: #1a202c;
-            margin-bottom: 0.5rem;
+            cursor: pointer;
+            padding: 0.5rem 0;
+            list-style: none; /* إزالة النقطة الافتراضية */
+        }
+        .product-category-section .product-details-item summary::-webkit-details-marker {
+            display: none; /* إزالة المثلث الافتراضي في كروم */
+        }
+        .product-category-section .product-details-item summary::before {
+            content: '▼'; /* إضافة مثلث مخصص */
+            float: left; /* وضعه على اليسار */
+            margin-left: 0.5rem; /* مسافة عن النص */
+            transition: transform 0.2s; /* حركة عند الفتح */
+        }
+        .product-category-section .product-details-item[open] summary::before {
+            transform: rotate(90deg); /* تدوير المثلث عند الفتح */
         }
         .product-category-section .product-details-item p,
         .product-category-section .product-details-item li {
@@ -143,14 +158,6 @@
             list-style-type: disc;
             padding-right: 1.5rem;
             margin-top: 0.25rem;
-        }
-        .product-category-section .product-details-item .details-toggle {
-            cursor: pointer;
-            color: #3b82f6;
-            font-weight: 500;
-            text-decoration: underline;
-            margin-top: 0.5rem;
-            display: block;
         }
         /* تنسيق قسم قائمة المنتجات الكاملة */
         .all-products-list-section .product-list-item {
@@ -232,7 +239,7 @@
 
         </div>
 
-        <!-- قسم جميع أسماء المنتجات -->
+        <!-- قسم جميع أسماء المنتجات (اختياري) -->
         <div id="all-products-list-section" class="section-card">
             <h2 style="font-size: 1.75rem;" class="text-2xl font-semibold text-gray-700 mb-4">قائمة بجميع منتجات DXN</h2>
             <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-100 info-box">
@@ -297,11 +304,21 @@
                 if (!targetDiv) continue; // Skip if target div not found
 
                 productsByCategory[category].forEach(product => {
-                    const productDetails = document.createElement('div'); // Changed from <details> to <div> for consistent display
+                    // إنشاء عنصر <details> لكل منتج
+                    const productDetails = document.createElement('details'); 
                     productDetails.className = 'product-details-item bg-gray-50 p-3 rounded-lg border border-gray-200';
 
-                    let productInfoHtml = `<h4>${product.name}</h4>`;
+                    // إنشاء عنصر <summary> لاسم المنتج (العنوان القابل للطي)
+                    const productSummary = document.createElement('summary');
+                    productSummary.className = 'text-lg font-medium text-gray-700 cursor-pointer flex justify-content-between items-center';
+                    productSummary.innerHTML = `<span>${product.name}</span>`;
+                    productDetails.appendChild(productSummary);
+
+                    // إنشاء div لمحتوى المنتج (الاستخدامات، الفوائد، المكونات)
+                    const productContent = document.createElement('div'); 
+                    productContent.className = 'mt-2 text-gray-600';
                     
+                    let productInfoHtml = '';
                     if (product.uses && product.uses.length > 0) {
                         productInfoHtml += `<p class="font-semibold mb-1">الاستخدامات:</p><ul class="list-disc pr-5 mb-2">${product.uses.map(use => `<li>${use}</li>`).join('')}</ul>`;
                     }
@@ -313,13 +330,15 @@
                         productInfoHtml += `<p class="font-semibold mb-1">المكونات:</p><ul class="list-disc pr-5">${product.ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}</ul>`;
                     }
 
-                    productDetails.innerHTML = productInfoHtml;
-                    targetDiv.appendChild(productDetails);
+                    productContent.innerHTML = productInfoHtml;
+                    productDetails.appendChild(productContent); // إضافة المحتوى إلى الـ <details>
+                    
+                    targetDiv.appendChild(productDetails); // إضافة الـ <details> إلى قسم الفئة
                 });
             }
         }
 
-        // وظيفة جديدة لعرض جميع أسماء المنتجات في قائمة واحدة
+        // وظيفة جديدة لعرض جميع أسماء المنتجات في قائمة واحدة (في القسم السفلي)
         function displayAllProductNames() {
             const allProductsListDiv = document.getElementById('allProductsList');
             allProductsListDiv.innerHTML = ''; // مسح المحتوى السابق
