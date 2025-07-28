@@ -3,698 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تطبيق هناده دكسن الشامل</title>
-    <!-- تضمين Tailwind CSS من CDN لتطبيق أنماط سريعة ومتجاوبة -->
+    <title>دليل هناده دكسن</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- ربط خط Cairo من Google Fonts لتحسين جمالية النص ودعم اللغة العربية -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&family=Almarai:wght@700&display=swap" rel="stylesheet">
     <style>
-        /* تعريف الخط الافتراضي للجسم بالكامل مع سلوك التمرير السلس */
-        body {
-            font-family: 'Cairo', sans-serif;
+        body { 
+            font-family: 'Cairo', sans-serif; 
             scroll-behavior: smooth;
         }
-        /* نمط للرابط النشط في شريط التنقل */
-        .nav-link.active {
-            color: #15803d; /* أخضر داكن */
-            border-bottom-width: 3px;
-            border-color: #15803d;
+        /* New font class for titles */
+        .font-title {
+            font-family: 'Almarai', sans-serif;
         }
-        /* أنماط للعناوين الرئيسية والثانوية */
-        h2 { font-size: 1.75rem; font-weight: 700; } /* حجم أكبر لـ h2 */
-        h3 { font-size: 1.25rem; font-weight: 600; } /* حجم أكبر لـ h3 */
-        /* نمط بطاقة المنتج */
-        .product-card {
-            border: 1px solid #e5e7eb; /* حدود رمادية فاتحة */
-            border-radius: 0.5rem; /* زوايا مستديرة */
-            padding: 1rem; /* مساحة داخلية */
-            margin-bottom: 0.5rem; /* هامش سفلي */
-            background-color: #f9fafb; /* خلفية رمادية فاتحة جداً */
-            transition: all 0.2s ease-in-out; /* انتقال سلس عند التفاعل */
+        .bg-brand-beige { background-color: #F5F5DC; }
+        .bg-brand-green { background-color: #556B2F; }
+        .text-brand-green { color: #556B2F; }
+        .text-brand-dark { color: #3D405B; }
+        .border-brand-green { border-color: #556B2F; }
+        
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
-        /* تأثير التحويم على بطاقة المنتج */
-        .product-card:hover {
-            transform: translateY(-3px); /* رفع البطاقة قليلاً */
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); /* ظل خفيف */
-        }
-        /* أنماط مخصصة لنتائج مخطط الميزانية */
-        .budget-result-card {
-            transition: all 0.3s ease-in-out;
-        }
-        /* تأثير التحويم على بطاقة نتيجة الميزانية */
-        .budget-result-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
-<body class="bg-gray-50">
+<body class="bg-brand-beige text-brand-dark">
 
-    <!-- شريط التنقل (Navigation Bar) -->
-    <nav class="bg-white shadow-lg sticky top-0 z-50">
-        <div class="max-w-6xl mx-auto px-4">
-            <div class="flex justify-between h-16">
-                <!-- شعار التطبيق -->
-                <div class="flex items-center">
-                    <a href="#home" class="flex items-center py-4 px-2">
-                        <span class="font-bold text-gray-700 text-xl">هناده دكسن</span>
-                    </a>
-                </div>
-                <!-- عناصر شريط التنقل الأساسية (لشاشات الكمبيوتر) -->
-                <div class="hidden md:flex items-center space-x-1 space-x-reverse">
-                    <a href="#home" class="nav-link py-4 px-2 text-gray-500 font-semibold hover:text-green-700 transition duration-300">الرئيسية</a>
-                    <a href="#idea" class="nav-link py-4 px-2 text-gray-500 font-semibold hover:text-green-700 transition duration-300">الفكرة الأساسية</a>
-                    <a href="#opportunity" class="nav-link py-4 px-2 text-gray-500 font-semibold hover:text-green-700 transition duration-300">فرصة العمل</a>
-                    <a href="#products" class="nav-link py-4 px-2 text-gray-500 font-semibold hover:text-green-700 transition duration-300">المنتجات</a>
-                    <a href="#commissions" class="nav-link py-4 px-2 text-gray-500 font-semibold hover:text-green-700 transition duration-300">العمولات</a>
-                    <a href="#budget" class="nav-link py-4 px-2 text-gray-500 font-semibold hover:text-green-700 transition duration-300">خطط ميزانيتك</a>
-                    <a href="#my_set" class="nav-link py-4 px-2 text-gray-500 font-semibold hover:text-green-700 transition duration-300">مجموعتك الخاصة</a>
-                    <a href="#ingredients" class="nav-link py-4 px-2 text-gray-500 font-semibold hover:text-green-700 transition duration-300">دليل المكونات</a>
-                    <a href="#resources" class="nav-link py-4 px-2 text-gray-500 font-semibold hover:text-green-700 transition duration-300">مصادر إضافية</a>
-                </div>
-                <!-- زر قائمة الجوال (لشاشات الجوال) -->
-                <div class="md:hidden flex items-center">
-                    <button class="outline-none mobile-menu-button">
-                        <svg class="w-6 h-6 text-gray-500 hover:text-green-700" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
-                            <path d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
-                    </button>
-                </div>
-            </div>
+    <!-- Header -->
+    <header class="bg-white shadow-md">
+        <div class="max-w-5xl mx-auto py-6 px-4 text-center">
+            <h1 class="text-4xl font-bold text-brand-green font-title">هناده دكسن</h1>
+            <p class="mt-2 text-lg text-gray-600">دليلك لاستكشاف عالم الصحة والفرص مع دكسن</p>
         </div>
-        <!-- قائمة الجوال (تظهر عند النقر على الزر) -->
-        <div class="hidden mobile-menu">
-            <ul class="">
-                <li><a href="#home" class="mobile-nav-link block text-sm px-2 py-4 hover:bg-green-700 hover:text-white transition duration-300">الرئيسية</a></li>
-                <li><a href="#idea" class="mobile-nav-link block text-sm px-2 py-4 hover:bg-green-700 hover:text-white transition duration-300">الفكرة الأساسية</a></li>
-                <li><a href="#opportunity" class="mobile-nav-link block text-sm px-2 py-4 hover:bg-green-700 hover:text-white transition duration-300">فرصة العمل</a></li>
-                <li><a href="#products" class="mobile-nav-link block text-sm px-2 py-4 hover:bg-green-700 hover:text-white transition duration-300">المنتجات</a></li>
-                <li><a href="#commissions" class="mobile-nav-link block text-sm px-2 py-4 hover:bg-green-700 hover:text-white transition duration-300">العمولات</a></li>
-                <li><a href="#budget" class="mobile-nav-link block text-sm px-2 py-4 hover:bg-green-700 hover:text-white transition duration-300">خطط ميزانيتك</a></li>
-                <li><a href="#my_set" class="mobile-nav-link block text-sm px-2 py-4 hover:bg-green-700 hover:text-white transition duration-300">مجموعتك الخاصة</a></li>
-                <li><a href="#ingredients" class="mobile-nav-link block text-sm px-2 py-4 hover:bg-green-700 hover:text-white transition duration-300">دليل المكونات</a></li>
-                <li><a href="#resources" class="mobile-nav-link block text-sm px-2 py-4 hover:bg-green-700 hover:text-white transition duration-300">مصادر إضافية</a></li>
-            </ul>
-        </div>
-    </nav>
+    </header>
 
-    <!-- المحتوى الرئيسي للصفحة -->
-    <main>
-        <!-- القسم 1: الرئيسية (Home) -->
-        <section id="home" class="pt-16 min-h-screen flex items-center justify-center">
-            <div class="max-w-4xl mx-auto p-6 md:p-8 space-y-6">
-                <div class="bg-white p-6 rounded-lg shadow text-center">
-                    <h1 class="text-3xl font-bold text-gray-800">مرحباً بكِ في دليلكِ الشامل لمنتجات DXN وفرصتها الفريدة!</h1>
-                    <p class="mt-4 text-lg text-gray-600 leading-relaxed">هنا نساعدكِ على اكتشاف عالم الصحة والجمال الطبيعي، وكيف يمكنكِ بناء مشروعكِ الخاص من المنزل من خلال منتجات DXN المبتكرة.</p>
-                    <p class="mt-2 text-gray-500">استكشفي أقسام التطبيق المختلفة لتتعرفي على الفكرة الأساسية، فرصة العمل، منتجاتنا الرائعة، نظام العمولات، وحتى خططي ميزانيتك بذكاء.</p>
-                </div>
+    <!-- Main Content -->
+    <main class="mt-10">
+        <!-- Hero Section -->
+        <section id="home" class="max-w-5xl mx-auto px-4 py-16 text-center fade-in-section">
+            <h2 class="text-3xl font-bold md:text-4xl font-title">تطبيق هناده ديكسن</h2>
+            <p class="mt-4 text-xl text-gray-700">معاكي من اول خطوة تعالي معايا في رحلة التغيير</p>
+            <div class="mt-8 flex flex-col sm:flex-row justify-center items-center gap-4">
+                <a href="#tools" class="px-8 py-3 bg-brand-green text-white font-bold rounded-full hover:bg-opacity-90 transition duration-300 shadow-lg w-full sm:w-auto">اسمحيلي اشرحلك</a>
+                <a href="#tools" class="px-8 py-3 bg-brand-green text-white font-bold rounded-full hover:bg-opacity-90 transition duration-300 shadow-lg w-full sm:w-auto">بعد الشرح</a>
+                <a href="#" class="px-8 py-3 bg-brand-green text-white font-bold rounded-full hover:bg-opacity-90 transition duration-300 shadow-lg w-full sm:w-auto">اشرحلك اكثر ؟</a>
             </div>
         </section>
 
-        <!-- القسم 2: الفكرة الأساسية (Basic Idea) -->
-        <section id="idea" class="pt-16 bg-gray-100 min-h-screen flex items-center justify-center">
-            <div class="max-w-4xl mx-auto p-6 md:p-8">
-                <div class="bg-white p-6 rounded-lg shadow">
-                    <h2 class="text-2xl font-bold text-center text-gray-800 mb-4">الفكرة الأساسية</h2>
-                    <p class="text-gray-700 leading-loose text-lg">تعتمد فكرة DXN الأساسية على مفهوم "المنتج الواحد، السوق العالمي". تقدم DXN منتجات صحية عالية الجودة تعتمد على المكونات الطبيعية مثل فطر الجانوديرما (الريشي)، السبيرولينا، والكورديسيبس. تهدف الشركة إلى تمكين الأفراد من تحقيق الصحة الجسدية والحرية المالية من خلال نموذج البيع المباشر.</p>
-                    <p class="text-gray-700 leading-loose text-lg mt-4">نحن نؤمن بأن الصحة هي الثروة الحقيقية، وأن توفير منتجات طبيعية ومغذية يمكن أن يحسن جودة حياة الأفراد. بالإضافة إلى ذلك، تقدم DXN فرصة عمل مرنة ومجزية، حيث يمكن للأعضاء بناء شبكاتهم الخاصة وتحقيق دخل مستدام من خلال مشاركة هذه المنتجات والفرصة مع الآخرين.</p>
+        <!-- Tools Section -->
+        <section id="tools" class="py-20 bg-white fade-in-section">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-brand-dark font-title">أدوات عملية لنجاحك</h2>
+                    <p class="mt-2 text-gray-600">أدوات تفاعلية صممتها لمساعدتك في رحلتك مع دكسن.</p>
                 </div>
-            </div>
-        </section>
-
-        <!-- القسم 3: فرصة العمل (Business Opportunity) -->
-        <section id="opportunity" class="pt-16 min-h-screen flex items-center justify-center">
-            <div class="max-w-4xl mx-auto p-6 md:p-8">
-                <div class="bg-white p-6 rounded-lg shadow">
-                    <h2 class="text-2xl font-bold text-center text-gray-800 mb-4">فرصة العمل مع DXN</h2>
-                    <p class="text-gray-700 leading-loose text-lg">تقدم DXN نموذج عمل فريداً يعتمد على البيع المباشر والتسويق الشبكي، مما يتيح لك بناء مشروعك الخاص من المنزل دون الحاجة لرأس مال كبير أو خبرة مسبقة. كل ما تحتاجه هو الشغف بالصحة والرغبة في مساعدة الآخرين.</p>
-                    <ul class="list-disc pr-6 mt-4 text-gray-700 leading-loose text-lg">
-                        <li><strong>المرونة:</strong> اعملي في الأوقات التي تناسبكِ ومن أي مكان.</li>
-                        <li><strong>الدخل المتنامي:</strong> احصلي على عمولات ومكافآت بناءً على مبيعاتك ومبيعات فريقك.</li>
-                        <li><strong>التطوير الشخصي:</strong> استفيدي من التدريبات والدعم المستمر من DXN وفريقك.</li>
-                        <li><strong>منتجات عالية الجودة:</strong> قومي بتسويق منتجات صحية وطبيعية يثق بها الناس.</li>
-                    </ul>
-                    <p class="text-gray-700 leading-loose text-lg mt-4">انضمي إلى مجتمع DXN العالمي وابدئي رحلتك نحو الصحة والحرية المالية اليوم!</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- القسم 4: المنتجات (Products) - تم تحسينه ليصبح تفاعلياً -->
-        <section id="products" class="pt-16 bg-gray-100">
-            <div class="max-w-6xl mx-auto p-6 md:p-8">
-                <div class="bg-white p-6 rounded-lg shadow">
-                    <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">منتجات DXN</h2>
-                    <p class="text-center text-gray-600 mb-6">استكشفي مجموعتنا الواسعة من المنتجات الصحية والطبيعية. يمكنكِ تصفية المنتجات حسب الفئة أو البحث بالاسم.</p>
-
-                    <!-- فلاتر المنتجات وشريط البحث -->
-                    <div class="mb-6 flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0 md:space-x-4 md:space-x-reverse">
-                        <!-- فلاتر الفئات -->
-                        <div id="product-category-filters" class="flex flex-wrap gap-2 justify-center">
-                            <!-- سيتم تحميل الفئات هنا بواسطة JavaScript -->
-                        </div>
-                        <!-- شريط البحث -->
-                        <div class="w-full md:w-1/3">
-                            <input type="text" id="product-search" placeholder="ابحث عن منتج..." class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500">
-                        </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Tool Card 1 -->
+                    <div class="bg-brand-beige p-8 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                        <h3 class="text-2xl font-bold text-brand-green font-title">كتالوج المنتجات</h3>
+                        <p class="mt-4 text-gray-700">
+                            استكشفي كتالوج المنتجات الكامل، واعرفي كل تفاصيله وفوائده الصحية لمساعدتك في شرحه بثقة.
+                        </p>
+                        <a href="#" class="mt-6 inline-block font-semibold text-brand-green hover:underline">استكشفي المنتجات الآن &rarr;</a>
                     </div>
-
-                    <!-- منطقة عرض المنتجات (الشبكة) -->
-                    <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                        <!-- سيتم إدراج بطاقات المنتجات هنا بواسطة JavaScript -->
+                    <!-- Tool Card 2 -->
+                    <div class="bg-brand-beige p-8 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                        <h3 class="text-2xl font-bold text-brand-green font-title">دليل الفوائد الصحية</h3>
+                        <p class="mt-4 text-gray-700">
+                            تعمقي في فهم القوة الحقيقية لمنتجات دكسن، واكتشفي كيف تساهم المكونات الطبيعية في صحتك وحيويتك.
+                        </p>
+                         <a href="#" class="mt-6 inline-block font-semibold text-brand-green hover:underline">اعرفي المزيد عن الفوائد &rarr;</a>
                     </div>
-
-                    <!-- نافذة تفاصيل المنتج المنبثقة (Modal) - مخفية افتراضياً -->
-                    <div id="product-detail-modal" class="fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center p-4 z-[100] hidden">
-                        <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl mx-auto p-6 relative">
-                            <!-- زر إغلاق المودال -->
-                            <button id="close-product-modal" class="absolute top-3 right-3 text-gray-500 hover:text-gray-800 text-2xl font-bold">&times;</button>
-                            <h3 id="modal-product-name" class="text-2xl font-bold text-green-800 mb-4"></h3>
-                            <div class="space-y-3 text-gray-700 text-lg">
-                                <p><strong class="text-green-700">الكود:</strong> <span id="modal-product-code"></span></p>
-                                <p><strong class="text-green-700">الفئة:</strong> <span id="modal-product-category"></span></p>
-                                <p><strong class="text-green-700">السعر (د.أ):</strong> <span id="modal-product-price"></span></p>
-                                <p><strong class="text-green-700">النقاط (PV):</strong> <span id="modal-product-pv"></span></p>
-                                <p><strong class="text-green-700">SV:</strong> <span id="modal-product-sv"></span></p>
-                                <p><strong class="text-green-700">الفوائد:</strong> <span id="modal-product-benefits" class="block mt-1"></span></p>
-                                <p><strong class="text-green-700">الاستخدامات:</strong> <span id="modal-product-uses" class="block mt-1"></span></p>
-                                <p><strong class="text-green-700">المكونات:</strong> <span id="modal-product-ingredients" class="block mt-1"></span></p>
-                                <p><strong class="text-green-700">معلومات غذائية:</strong> <span id="modal-product-nutritional-facts" class="block mt-1"></span></p>
-                                <p><strong class="text-green-700">تفاصيل أخرى:</strong> <span id="modal-product-other-details" class="block mt-1"></span></p>
-                            </div>
-                        </div>
+                    <!-- Tool Card 3 -->
+                    <div class="bg-brand-beige p-8 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                        <h3 class="text-2xl font-bold text-brand-green font-title">اداة مخطط الميزانية و تحقيق النقاط</h3>
+                        <p class="mt-4 text-gray-700">
+                           استخدمي هاي الأداة عشان تخططي لميزانيتك الشهرية وتعرفي أحسن المنتجات اللي بتحققلك النقاط.
+                        </p>
+                         <a href="#" class="mt-6 inline-block font-semibold text-brand-green hover:underline">خططي لميزانيتك الآن &rarr;</a>
                     </div>
-
-                </div>
-            </div>
-        </section>
-
-        <!-- القسم 5: العمولات (Commissions) -->
-        <section id="commissions" class="pt-16 min-h-screen flex items-center justify-center">
-            <div class="max-w-4xl mx-auto p-6 md:p-8">
-                <div class="bg-white p-6 rounded-lg shadow">
-                    <h2 class="text-2xl font-bold text-center text-gray-800 mb-4">نظام العمولات والمكافآت</h2>
-                    <p class="text-gray-700 leading-loose text-lg">تعتمد DXN نظام عمولات سخي ومجزي يكافئ الأعضاء على جهودهم في المبيعات وبناء الفريق. كلما زادت مبيعاتك ومبيعات فريقك، زادت نقاطك (PV) وقيمتك البيعية (SV)، وبالتالي تزداد عمولتك.</p>
-                    <h3 class="text-xl font-semibold text-green-700 mt-6 mb-2">كيف يتم حساب العمولات؟</h3>
-                    <p class="text-gray-700 leading-loose text-lg">تُحسب العمولات بناءً على نظام النقاط التراكمي (PV) ونسبة العمولة الخاصة بك (والتي تزداد مع تقدمك في الرتب). بالإضافة إلى ذلك، هناك مكافآت إضافية ومشاركات في الأرباح العالمية عند تحقيق مستويات معينة.</p>
-                    <ul class="list-disc pr-6 mt-4 text-gray-700 leading-loose text-lg">
-                        <li><strong>نقاط القيمة (PV):</strong> نقاط تُخصص لكل منتج، وهي أساس تقدمك في الرتب.</li>
-                        <li><strong>قيمة المبيعات (SV):</strong> قيمة مالية تُستخدم لحساب العمولات.</li>
-                        <li><strong>نسبة العمولة:</strong> تبدأ من 6% وتزداد تدريجياً لتصل إلى 25% أو أكثر كوكيل نجم.</li>
-                        <li><strong>مكافآت إضافية:</strong> مثل مكافأة التطوير، مكافأة القيادة، ومكافأة السفر.</li>
-                    </ul>
-                    <p class="text-gray-700 leading-loose text-lg mt-4">للحصول على تفاصيل دقيقة حول خطة التسويق والعمولات، يرجى الرجوع إلى المصادر الإضافية أو التواصل مع وكيل DXN الخاص بك.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- القسم 6: خطط ميزانيتك (Plan Your Budget) - موجود مسبقاً -->
-        <section id="budget" class="pt-16 bg-gray-100">
-            <div class="max-w-4xl mx-auto p-6 md:p-8">
-                <div class="bg-white p-6 rounded-lg shadow">
-                    <h2 class="text-2xl font-bold text-center text-gray-800 mb-2">اختر ميزانيتك: خطط لمشترياتك الذكية!</h2>
-                    <p class="text-center text-gray-600 mb-6">استخدمي هذه الأداة لاختيار ميزانيتك الشهرية وفئات المنتجات المفضلة لديكِ، وسنساعدكِ في العثور على أفضل الخيارات لتحقيق 100 نقطة (PV) شهرياً.</p>
-
-                    <!-- نموذج تفاعلي -->
-                    <form id="budget-form" class="space-y-4">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <label for="monthly-budget" class="block text-sm font-medium text-gray-700">ميزانيتك الشهرية (بالدينار الأردني):</label>
-                                <input type="number" id="monthly-budget" name="monthly-budget" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500" placeholder="مثال: 70" required>
-                            </div>
-                            <div>
-                                <label for="commission-rate" class="block text-sm font-medium text-gray-700">نسبة عمولتك الحالية (%):</label>
-                                <input type="number" id="commission-rate" name="commission-rate" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500" placeholder="مثال: 6" required>
-                            </div>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700">اختر فئات المنتجات:</label>
-                            <div id="category-checkboxes" class="mt-2 grid grid-cols-2 md:grid-cols-4 gap-4">
-                                <!-- مربعات الاختيار سيتم إدراجها ديناميكياً هنا -->
-                            </div>
-                        </div>
-                        <div class="text-center">
-                            <button type="submit" class="w-full md:w-auto inline-flex justify-center py-2 px-8 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
-                                عرض أفضل الخيارات
-                            </button>
-                        </div>
-                    </form>
-
-                    <!-- منطقة النتائج -->
-                    <div id="budget-results" class="mt-8 space-y-6">
-                        <!-- سيتم عرض الخيارات المقترحة هنا -->
+                    <!-- Tool Card 4 -->
+                    <div class="bg-brand-beige p-8 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                        <h3 class="text-2xl font-bold text-brand-green font-title">المقارنة المالية</h3>
+                        <p class="mt-4 text-gray-700">
+                           هل منتجات دكسن أوفر؟ استخدمي هاي الأداة عشان تقارني مصاريفك الحالية مع منتجات دكسن وتشوفي الفرق.
+                        </p>
+                         <a href="#" class="mt-6 inline-block font-semibold text-brand-green hover:underline">ابدأي المقارنة الآن &rarr;</a>
                     </div>
                 </div>
             </div>
         </section>
-
-        <!-- القسم 7: مجموعتك الخاصة (Your Own Collection) -->
-        <section id="my_set" class="pt-16 min-h-screen flex items-center justify-center">
-            <div class="max-w-4xl mx-auto p-6 md:p-8">
-                <div class="bg-white p-6 rounded-lg shadow">
-                    <h2 class="text-2xl font-bold text-center text-gray-800 mb-4">مجموعتك الخاصة من منتجات DXN</h2>
-                    <p class="text-gray-700 leading-loose text-lg">هذا القسم مخصص لمساعدتك في تتبع المنتجات التي تهمك أو التي ترغب في شرائها مستقبلاً. يمكنكِ بناء قائمة مخصصة بمنتجاتك المفضلة أو التي تناسب احتياجاتك الصحية والجمالية.</p>
-                    <p class="text-gray-700 leading-loose text-lg mt-4">في التحديثات المستقبلية، قد نضيف ميزة تتيح لكِ إضافة المنتجات مباشرة إلى هذه المجموعة، أو إنشاء قوائم تسوق خاصة بكِ، مما يسهل عليكِ إدارة مشترياتك وتتبع نقاطك.</p>
-                    <p class="text-center text-gray-500 mt-6"><em>(هذا القسم قيد التطوير وقد يتم إضافة ميزات تفاعلية إليه لاحقاً.)</em></p>
-                </div>
-            </div>
-        </section>
-
-        <!-- القسم 8: دليل المكونات (Ingredients Guide) -->
-        <section id="ingredients" class="pt-16 bg-gray-100 min-h-screen flex items-center justify-center">
-            <div class="max-w-4xl mx-auto p-6 md:p-8">
-                <div class="bg-white p-6 rounded-lg shadow">
-                    <h2 class="text-2xl font-bold text-center text-gray-800 mb-4">دليل المكونات الرئيسية في منتجات DXN</h2>
-                    <p class="text-gray-700 leading-loose text-lg">تعرفي على المكونات الطبيعية الفعالة التي تشكل أساس منتجات DXN. هذه المكونات مختارة بعناية لتقديم أقصى الفوائد الصحية.</p>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-                        <!-- مثال لمكون: الجانوديرما (الريشي) -->
-                        <div class="bg-gray-50 p-4 rounded-lg shadow-sm border border-gray-200">
-                            <h3 class="text-xl font-semibold text-green-700 mb-2">فطر الجانوديرما (الريشي)</h3>
-                            <p class="text-gray-700 text-base">يعرف بـ "ملك الأعشاب" لفوائده الصحية المتعددة. يدعم جهاز المناعة، يساعد على إزالة السموم من الجسم، ويحسن الدورة الدموية. يتواجد في العديد من منتجات DXN مثل القهوة، الشاي، والمعاجين.</p>
-                        </div>
-                        <!-- مثال لمكون: سبيرولينا -->
-                        <div class="bg-gray-50 p-4 rounded-lg shadow-sm border border-gray-200">
-                            <h3 class="text-xl font-semibold text-green-700 mb-2">سبيرولينا</h3>
-                            <p class="text-gray-700 text-base">طحلب أخضر مزرق غني بالبروتين، الفيتامينات، والمعادن الأساسية. يعتبر غذاءً كاملاً يساعد على تعزيز الطاقة، دعم المناعة، ومكافحة سوء التغذية. يستخدم في حبوب السبيرولينا وسيريال السبيرولينا.</p>
-                        </div>
-                        <!-- مثال لمكون: كورديسيبس -->
-                        <div class="bg-gray-50 p-4 rounded-lg shadow-sm border border-gray-200">
-                            <h3 class="text-xl font-semibold text-green-700 mb-2">كورديسيبس</h3>
-                            <p class="text-gray-700 text-base">فطر طبيعي معروف بقدرته على زيادة الطاقة والقدرة على التحمل، ودعم صحة الجهاز التنفسي والكلى. يوجد في قهوة الكورديسيبس وسيريال الكورديسيبس.</p>
-                        </div>
-                        <!-- مثال لمكون: فاكهة النوني (المورينزي) -->
-                        <div class="bg-gray-50 p-4 rounded-lg shadow-sm border border-gray-200">
-                            <h3 class="text-xl font-semibold text-green-700 mb-2">فاكهة النوني (المورينزي)</h3>
-                            <p class="text-gray-700 text-base">فاكهة استوائية غنية بمضادات الأكسدة والإنزيمات. تساعد على تحسين الهضم، إزالة السموم، وتوازن درجة حموضة الجسم. المكون الرئيسي في عصير المورينزي.</p>
-                        </div>
-                    </div>
-                    <p class="text-center text-gray-500 mt-6"><em>(يمكن إضافة المزيد من المكونات وتفاصيل عنها في هذا القسم.)</em></p>
-                </div>
-            </div>
-        </section>
-
-        <!-- القسم 9: مصادر إضافية (Additional Resources) -->
-        <section id="resources" class="pt-16 min-h-screen flex items-center justify-center">
-            <div class="max-w-4xl mx-auto p-6 md:p-8">
-                <div class="bg-white p-6 rounded-lg shadow">
-                    <h2 class="text-2xl font-bold text-center text-gray-800 mb-4">مصادر إضافية ومفيدة</h2>
-                    <p class="text-gray-700 leading-loose text-lg">هنا ستجدين روابط وموارد إضافية لمساعدتك في رحلتك مع DXN، سواء كنتِ عضوة جديدة أو تبحثين عن معلومات أعمق.</p>
-                    <ul class="list-disc pr-6 mt-4 text-gray-700 leading-loose text-lg space-y-2">
-                        <li><a href="https://www.dxn2u.com/" target="_blank" class="text-green-700 hover:underline">الموقع الرسمي لشركة DXN العالمية</a>: للحصول على أحدث المعلومات والأخبار الرسمية.</li>
-                        <li><a href="https://www.dxn2u.com/web/index.php?r=site%2Flogin" target="_blank" class="text-green-700 hover:underline">بوابة الأعضاء (DXN eWorld)</a>: لتسجيل الدخول إلى حسابك، تتبع عمولاتك، وإدارة فريقك.</li>
-                        <li><a href="#" class="text-green-700 hover:underline">دليل المنتجات الكامل (PDF)</a>: (يمكنك استبدال # برابط لدليل PDF إذا كان متوفراً).</li>
-                        <li><a href="#" class="text-green-700 hover:underline">خطة التسويق والعمولات (PDF)</a>: (يمكنك استبدال # برابط لخطة التسويق إذا كانت متوفرة).</li>
-                        <li><strong>قنوات DXN على وسائل التواصل الاجتماعي:</strong> (يمكنك إضافة أيقونات وروابط هنا لصفحات DXN الرسمية على فيسبوك، يوتيوب، إلخ).</li>
-                        <li><strong>تواصل مع فريق الدعم:</strong> (يمكنك إضافة معلومات الاتصال بفريق الدعم أو وكيلك هنا).</li>
-                    </ul>
-                    <p class="text-center text-gray-500 mt-6"><em>(تأكدي من تحديث الروابط بعناوين URL الصحيحة إذا كانت متوفرة لديك.)</em></p>
-                </div>
-            </div>
-        </section>
-
     </main>
 
-    <!-- تذييل الصفحة (Footer) -->
-    <footer class="text-center p-4 mt-8 bg-white shadow-inner">
-        <p class="text-sm text-gray-500">&copy; 2025 - تطبيق هناده دكسن. كل الحقوق محفوظة.</p>
+    <!-- Footer -->
+    <footer class="text-center p-6 bg-gray-800 text-white mt-10">
+        <p>&copy; 2025 - تطبيق مبتكر لدعم فريقي.</p>
     </footer>
 
     <script>
     document.addEventListener('DOMContentLoaded', function () {
-        // --- بيانات المنتجات (مدمجة مباشرة لتجنب أخطاء جلب البيانات) ---
-        const allProducts = [
-            {"Product Code": "FB301", "Product Name (AR)": "شاي لاتيه لينجزي", "Product Name (EN)": "DXN Lingzhi Latte Tea", "Category (AR)": "أغذية ومشروبات", "Category (EN)": "Food & Beverage Series", "DP (JOD)": 13.6, "NMP (JOD)": 15.0, "PV": 12.0, "SV": 6.5, "Benefits": "نكهة غنية ومميزة, يحتوي على مستخلص فطر الجانوديرما, يعزز الطاقة والحيوية", "Uses": "مشروب يومي للطاقة والحيوية, بديل صحي للشاي العادي", "Ingredients": "مسحوق شاي ممتاز, كريمة غير ألبان, مستخلص فطر الجانوديرما", "Nutritional Facts": "{'energy_kcal': 135, 'total_fat_g': 4.5, 'carbohydrate_g': 22.5}", "Other Details": "12 كيس"},
-            {"Product Code": "FB002", "Product Name (AR)": "قهوة لينجزي 3 في 1", "Product Name (EN)": "DXN Lingzhi Coffee 3 in 1", "Category (AR)": "أغذية ومشروبات", "Category (EN)": "Food & Beverage Series", "DP (JOD)": 10.2, "NMP (JOD)": 13.75, "PV": 10.0, "SV": 4.85, "Benefits": "خالي من الألوان والنكهات الصناعية, يعزز النشاط والحيوية, يقوي الجهاز المناعي", "Uses": "مشروب يومي للقهوة, لمكافحة ضغوط العمل", "Ingredients": "سكر, كريمة غير ألبان, قهوة فورية, مستخلص الجانوديرما", "Nutritional Facts": "{'energy_kcal': 100, 'total_fat_g': 3.0, 'carbohydrate_g': 16.0}", "Other Details": "20 كيس"},
-            {"Product Code": "FB005", "Product Name (AR)": "عصير روسيل", "Product Name (EN)": "Roselle Juice", "Category (AR)": "أغذية ومشروبات", "Category (EN)": "Food & Beverage Series", "DP (JOD)": 9.25, "NMP (JOD)": 12.0, "PV": 12.0, "SV": 4.45, "Benefits": "غني بفيتامين C ومضادات الأكسدة, يدعم صحة القلب والدورة الدموية, يحسن الهضم", "Uses": "مشروب صحي منعش, لترطيب الجسم, للعناية بالبشرة", "Ingredients": "خلاصة كؤوس الكركديه (الروسيل), ماء نقي, سكر", "Nutritional Facts": "{'energy_kcal': 49, 'carbohydrate_g': 11, 'protein_g': 0.96}", "Other Details": "285ml"},
-            {"Product Code": "FB007", "Product Name (AR)": "مورينزي", "Product Name (EN)": "DXN Morinzyme", "Category (AR)": "أغذية ومشروبات", "Category (EN)": "Food & Beverage Series", "DP (JOD)": 13.25, "NMP (JOD)": 16.0, "PV": 17.0, "SV": 6.75, "Benefits": "يوازن درجة الحموضة بالجسم, يساعد على إزالة السموم, ينشط الدورة الدموية, يحسن الهضم", "Uses": "مشروب نباتي مغذي, لصحة الجهاز الهضمي, لتعزيز الصحة العامة", "Ingredients": "مستخلص فاكهة النوني (الموريندا سيتريفوليا), روسيل", "Nutritional Facts": "غني بفيتامين C، فيتامين A، ومعادن أساسية", "Other Details": "285ml"},
-            {"Product Code": "FB025", "Product Name (AR)": "كوكوزي", "Product Name (EN)": "DXN Cocozhi", "Category (AR)": "أغذية ومشروبات", "Category (EN)": "Food & Beverage Series", "DP (JOD)": 13.6, "NMP (JOD)": 15.2, "PV": 13.0, "SV": 6.1, "Benefits": "يعزز الطاقة والتركيز, يدعم صحة القلب, يساعد في نمو الدماغ عند الأطفال", "Uses": "مشروب شوكولاتة جاهز للشرب, لزيادة النشاط الذهني والجسدي", "Ingredients": "كاكاو, مستخلص الجانوديرما, مستخلص الشعير, كريمة نباتية, حليب خالي الدسم", "Nutritional Facts": "{'calories_kcal': 140}", "Other Details": "20 كيس"},
-            {"Product Code": "FB032", "Product Name (AR)": "سيريال سبيرولينا", "Product Name (EN)": "Spirulina Cereal", "Category (AR)": "أغذية ومشروبات", "Category (EN)": "Food & Beverage Series", "DP (JOD)": 28.0, "NMP (JOD)": 34.0, "PV": 30.0, "SV": 12.0, "Benefits": "غني بالبروتين والفيتامينات والمعادن, يعزز المناعة, يساعد في تنظيم الوزن", "Uses": "وجبة إفطار صحية, لمكافحة سوء التغذية, لتنظيف الجسم من السموم", "Ingredients": "حبوب (سيريال) عالية الجودة, مسحوق سبيرولينا, قمح, شعير, شوفان", "Nutritional Facts": "{'energy_kcal': 100, 'protein_g': 4, 'fat_g': 1, 'carbohydrate_g': 20}", "Other Details": "30 كيس"},
-            {"Product Code": "FB050", "Product Name (AR)": "خل DXN", "Product Name (EN)": "DXN Vinegar", "Category (AR)": "أغذية ومشروبات", "Category (EN)": "Food & Beverage Series", "DP (JOD)": 25.8, "NMP (JOD)": 32.2, "PV": 28.0, "SV": 11.15, "Benefits": "يساعد على تحسين الهضم, يدعم توازن الجسم, يعزز طاقة الجسم, يخلص الجسم من السموم", "Uses": "لتحسين الصحة العامة, لإضافة نكهة للطعام, للسلطات", "Ingredients": "خل الأرز, فطر الجانوديرما (الريشي), مادة الموناسكوس", "Nutritional Facts": "يحتوي حمض الخليك ومادة الموناسكوس وفطر الجانوديرما", "Other Details": "700ml"},
-            {"Product Code": "FB057", "Product Name (AR)": "كيوي DXN", "Product Name (EN)": "DXN Kiwi", "Category (AR)": "أغذية ومشروبات", "Category (EN)": "Food & Beverage Series", "DP (JOD)": 18.55, "NMP (JOD)": 24.6, "PV": 22.0, "SV": 9.2, "Benefits": "غني بفيتامين C, يدعم صحة الجهاز الهضمي, يعزز المناعة, يقلل من ضغط الدم", "Uses": "مشروب فاكهة منعش, مصدر للفيتامينات, لترطيب الجسم", "Ingredients": "مستخلص الكيوي, ماء نقي, سكر", "Nutritional Facts": "{'energy_kcal': 61, 'carbohydrates_g': 14, 'fiber_g': 3}", "Other Details": "285ml"},
-            {"Product Code": "FB065", "Product Name (AR)": "مورينزي", "Product Name (EN)": "Morinzyme", "Category (AR)": "أغذية ومشروبات", "Category (EN)": "Food & Beverage Series", "DP (JOD)": 29.7, "NMP (JOD)": 34.11, "PV": 35.0, "SV": 14.3, "Benefits": "يساعد على إزالة السموم وتجديد الخلايا, ينشط الدورة الدموية, يحسن الهضم ويقلل الحموضة", "Uses": "مشروب نباتي مغذي, لتعزيز الصحة العامة, لتنظيم النوم", "Ingredients": "مستخلص فاكهة النوني (الموريندا سيتريفوليا), روسيل", "Nutritional Facts": "غني بفيتامين C، فيتامين A، ومعادن أساسية", "Other Details": "700ml"},
-            {"Product Code": "FB066", "Product Name (AR)": "قهوة لينجزي 3 في 1 لايت", "Product Name (EN)": "DXN Lingzhi Coffee 3 in 1 Lite", "Category (AR)": "أغذية ومشروبات", "Category (EN)": "Food & Beverage Series", "DP (JOD)": 10.2, "NMP (JOD)": 13.0, "PV": 10.0, "SV": 5.05, "Benefits": "مذاق سلس وكريمي, قليل الكافيين, يعزز المناعة ويساعد في طرد السموم", "Uses": "مشروب قهوة يومي, لتحضير سريع وسهل", "Ingredients": "مسحوق قهوة ممتاز, كريمة غير ألبان, مستخلص فطر الجانوديرما, سكر قليل", "Nutritional Facts": "{'energy_kcal': 91, 'fat_g': 2.3, 'carbohydrates_g': 17}", "Other Details": "20 كيس"},
-            {"Product Code": "FB069", "Product Name (AR)": "كورديسيبس سيريال", "Product Name (EN)": "DXN Cordyceps Cereal", "Category (AR)": "أغذية ومشروبات", "Category (EN)": "Food & Beverage Series", "DP (JOD)": 48.65, "NMP (JOD)": 53.5, "PV": 53.0, "SV": 23.55, "Benefits": "يدعم الجهاز التنفسي ويزيد الطاقة, يعزز القدرة على التحمل, يحسن الدورة الدموية", "Uses": "وجبة يومية صحية, مصدر للألياف الغذائية", "Ingredients": "شوفان, قمح, مستخلص الكورديسيبس, كاكاو بودرة", "Nutritional Facts": "غني بالبروتين، الفيتامينات (B1, B2, B12, E, K)، والمعادن", "Other Details": "20 كيس"},
-            {"Product Code": "FB033", "Product Name (AR)": "مربى أناناس جانو", "Product Name (EN)": "Gano Pineapple Jam", "Category (AR)": "أغذية ومشروبات", "Category (EN)": "Food & Beverage Series", "DP (JOD)": 5.4, "NMP (JOD)": 7.2, "PV": 6.0, "SV": 2.3, "Benefits": "يساعد على إخراج السموم من الجسم, يقوي المناعة, يفيد المعدة ويساعد على الهضم", "Uses": "للفطور مع التوست, لحشوات الكعك والمعجنات", "Ingredients": "أناناس نقي 100%, ميسيليوم الجانوديرما, سكر, بكتين", "Nutritional Facts": "غني بفيتامين C، مضادات الأكسدة", "Other Details": "400g"},
-            {"Product Code": "FB129", "Product Name (AR)": "قهوة كورديسيبس 3 في 1", "Product Name (EN)": "DXN Cordyceps Coffee 3 in 1", "Category (AR)": "أغذية ومشروبات", "Category (EN)": "Food & Beverage Series", "DP (JOD)": 12.9, "NMP (JOD)": 14.2, "PV": 11.0, "SV": 6.1, "Benefits": "تساعد على زيادة مستوى الطاقة, تتغلب على التعب, تزيد اليقظة, تحسن الدورة الدموية", "Uses": "مشروب قهوة يومي, لزيادة الطاقة والتركيز", "Ingredients": "مسحوق قهوة سريعة التحضير, خلاصة الكورديسيبس, كريمة نباتية, سكر", "Nutritional Facts": "{'energy_kcal': 100, 'total_fat_g': 3.0, 'carbohydrates_g': 16.0}", "Other Details": "20 كيس"},
-            {"Product Code": "FB130", "Product Name (AR)": "قهوة الكريمة", "Product Name (EN)": "DXN Cream Coffee", "Category (AR)": "أغذية ومشروبات", "Category (EN)": "Food & Beverage Series", "DP (JOD)": 10.75, "NMP (JOD)": 12.3, "PV": 11.0, "SV": 5.15, "Benefits": "غنية بالرائحة, قوام حريري ناعم, مذاق لا يقاوم, خالية من السكر المضاف", "Uses": "مشروب قهوة كريمي, لتقليل تناول السكر اليومي", "Ingredients": "مسحوق قهوة سريعة التحضير, خلاصة الجانوديرما, كريمة غير ألبان", "Nutritional Facts": "لا يوجد سكر مضاف", "Other Details": "20 كيس"},
-            {"Product Code": "FB143", "Product Name (AR)": "زي منت بلس", "Product Name (EN)": "DXN Zhi Mint Plus", "Category (AR)": "أغذية ومشروبات", "Category (EN)": "Food & Beverage Series", "DP (JOD)": 25.3, "NMP (JOD)": 28.9, "PV": 28.0, "SV": 10.6, "Benefits": "يمنح راحة فورية للحلق, يترك شعوراً بالانتعاش والنظافة, يساعد في تهدئة السعال", "Uses": "لتخفيف تهيج الحلق, لتحسين رائحة الفم الكريهة", "Ingredients": "مستخلص الجانوديرما، نكهات النعناع الطبيعية، مالتتيول", "Nutritional Facts": "8 سعرات حرارية للحبة", "Other Details": "12 حبة * 12 عبوة"},
-            {"Product Code": "FB155", "Product Name (AR)": "ليمونزي", "Product Name (EN)": "DXN Lemonzhi", "Category (AR)": "أغذية ومشروبات", "Category (EN)": "Food & Beverage Series", "DP (JOD)": 8.8, "NMP (JOD)": 11.0, "PV": 8.0, "SV": 4.0, "Benefits": "ينعش الجسم، يعزز الطاقة والتركيز، يروي العطش بفعالية", "Uses": "مشروب منعش مناسب لبداية اليوم أو خلال استراحة الشاي", "Ingredients": "مستخلص الليمون، مسحوق الشاي، مستخلص الجانوديرما", "Nutritional Facts": "87.6 سعرة حرارية للكيس", "Other Details": "20 كيس"},
-            {"Product Code": "FB172", "Product Name (AR)": "نودلز جانو", "Product Name (EN)": "DXN Ganoodle", "Category (AR)": "أغذية ومشروبات", "Category (EN)": "Food & Beverage Series", "DP (JOD)": 6.6, "NMP (JOD)": 8.11, "PV": 5.0, "SV": 2.8, "Benefits": "يحتوي على جانوديرما، خالٍ من التلوين والنكهات الصناعية", "Uses": "شوربة نودلز فورية سهلة التحضير", "Ingredients": "دقيق القمح، مستخلص الجانوديرما، توابل توم يام", "Nutritional Facts": "382.5 سعرة حرارية للعبوة", "Other Details": "4 عبوات * 85g"},
-            {"Product Code": "FB173", "Product Name (AR)": "نودلز سبيرولينا", "Product Name (EN)": "DXN Spirudle", "Category (AR)": "أغذية ومشروبات", "Category (EN)": "Food & Beverage Series", "DP (JOD)": 6.6, "NMP (JOD)": 8.1, "PV": 5.0, "SV": 2.8, "Benefits": "يحتوي على سبيرولينا، خالٍ من التلوين والنكهات الصناعية", "Uses": "شوربة نودلز فورية مدعمة بالسبيرولينا", "Ingredients": "دقيق القمح، سبيرولينا، توابل توم يام", "Nutritional Facts": "400.4 سعرة حرارية للعبوة", "Other Details": "4 عبوات * 85g"},
-            {"Product Code": "FB176", "Product Name (AR)": "زيت جوز الهند العضوي", "Product Name (EN)": "DXN Organic Virgin Coconut Oil", "Category (AR)": "أغذية ومشروبات", "Category (EN)": "Food & Beverage Series", "DP (JOD)": 15.3, "NMP (JOD)": 18.0, "PV": 14.0, "SV": 6.85, "Benefits": "غني بالأحماض الدهنية متوسطة السلسلة سهلة الهضم", "Uses": "للاستخدامات الطبخ، الخَبز، وتتبيلات السلطات", "Ingredients": "زيت جوز الهند العضوي البكر 100%", "Nutritional Facts": "130 سعرة حرارية للملعقة", "Other Details": "500ml"},
-            {"Product Code": "FB368", "Product Name (AR)": "عسل السدر الطبيعي", "Product Name (EN)": "DXN Natural Sidr Honey", "Category (AR)": "أغذية ومشروبات", "Category (EN)": "Food & Beverage Series", "DP (JOD)": 29.9, "NMP (JOD)": 35.88, "PV": 28.0, "SV": 12.75, "Benefits": "تقوية المناعة، مضاد للميكروبات، دعم الجهاز الهضمي، مصدر للطاقة", "Uses": "كمكمل غذائي، لتهدئة الحلق والسعال", "Ingredients": "عسل سدر صافٍ 100%", "Nutritional Facts": "لكل 100 جرام: 320.5 سعرة حرارية", "Other Details": "500g"},
-            {"Product Code": "FB219", "Product Name (AR)": "ألو فيتا", "Product Name (EN)": "DXN Aloe Vita", "Category (AR)": "أغذية ومشروبات", "Category (EN)": "Food & Beverage Series", "DP (JOD)": 3.55, "NMP (JOD)": 5.2, "PV": 4.0, "SV": 1.6, "Benefits": "مشروب منعش ومرطب، يدعم الجهاز الهضمي، يساعد على إزالة السموم", "Uses": "لترطيب الجسم والاستمتاع بمشروب منعش", "Ingredients": "ماء، سكر، لب الصبار الطازج، حمض الستريك", "Nutritional Facts": "غير متوفر", "Other Details": "285ml"},
-            {"Product Code": "FB360", "Product Name (AR)": "سكر DXN", "Product Name (EN)": "DXN Sugar", "Category (AR)": "أغذية ومشروبات", "Category (EN)": "Food & Beverage Series", "DP (JOD)": 1.9, "NMP (JOD)": 2.25, "PV": 2.0, "SV": 0.75, "Benefits": "يمنح حلاوة متوازنة دون أن يطغى على النكهة الطبيعية للمشروب", "Uses": "تحلية المشروبات مثل القهوة والشاي", "Ingredients": "سكر قصب حبيبي", "Nutritional Facts": "للكيس الواحد (5 جرام): حوالي 20 سعرة حرارية", "Other Details": "30 كيس * 5 جرام"},
-            {"Product Code": "HF029", "Product Name (AR)": "أقراص عرف الأسد", "Product Name (EN)": "DXN Lion’s Mane Tablet", "Category (AR)": "المكملات الغذائية الصحية", "Category (EN)": "Health Food Supplement Series", "DP (JOD)": 24.1, "NMP (JOD)": 28.0, "PV": 26.0, "SV": 10.85, "Benefits": "دعم صحة الدماغ والجهاز العصبي، تحسين الذاكرة والتركيز، دعم الجهاز الهضمي", "Uses": "كمكمل غذائي لدعم الوظائف الإدراكية والعصبية", "Ingredients": "كل قرص يحتوي على 180 مجم من فطر عرف الأسد (Hericium erinaceus)، سواغ", "Nutritional Facts": "غير متوفر", "Other Details": "120 قرص"},
-            {"Product Code": "HF030", "Product Name (AR)": "أقراص كورديسيبس", "Product Name (EN)": "DXN Cordyceps Tablet", "Category (AR)": "المكملات الغذائية الصحية", "Category (EN)": "Health Food Supplement Series", "DP (JOD)": 54.95, "NMP (JOD)": 59.6, "PV": 60.0, "SV": 25.95, "Benefits": "زيادة الطاقة والأداء الرياضي، دعم صحة الجهاز التنفسي، دعم وظائف الكلى والكبد", "Uses": "كمكمل غذائي لزيادة الطاقة والحيوية", "Ingredients": "كل قرص يحتوي على 450 مجم من فطر الكورديسيبس (Cordyceps sinensis)، سواغ", "Nutritional Facts": "غير متوفر", "Other Details": "120 قرص"},
-            {"Product Code": "HF031", "Product Name (AR)": "أقراص سبيرولينا", "Product Name (EN)": "DXN Spirulina Tablet", "Category (AR)": "المكملات الغذائية الصحية", "Category (EN)": "Health Food Supplement Series", "DP (JOD)": 16.35, "NMP (JOD)": 19.9, "PV": 20.0, "SV": 8.25, "Benefits": "غذاء متكامل (بروتين, فيتامينات, معادن), مضاد للأكسدة, دعم صحة الدم والقلب", "Uses": "كمكمل غذائي لتعويض نقص التغذية ومكافحة فقر الدم", "Ingredients": "كل قرص يحتوي على 250 مجم من سبيرولينا (Spirulina platensis)، سواغ", "Nutritional Facts": "غني بالبروتين والحديد وفيتامين ب", "Other Details": "120 قرص"},
-            {"Product Code": "HF038", "Product Name (AR)": "أقراص سبيرولينا", "Product Name (EN)": "DXN Spirulina Tablet", "Category (AR)": "المكملات الغذائية الصحية", "Category (EN)": "Health Food Supplement Series", "DP (JOD)": 56.85, "NMP (JOD)": 65.9, "PV": 70.0, "SV": 29.1, "Benefits": "غذاء متكامل (بروتين, فيتامينات, معادن), مضاد للأكسدة, دعم صحة الدم والقلب", "Uses": "كمكمل غذائي لتعويض نقص التغذية ومكافحة فقر الدم", "Ingredients": "كل قرص يحتوي على 250 مجم من سبيرولينا (Spirulina platensis)، سواغ", "Nutritional Facts": "غني بالبروتين والحديد وفيتامين ب", "Other Details": "500 قرص"},
-            {"Product Code": "HF039", "Product Name (AR)": "مايكوفيجي", "Product Name (EN)": "DXN MycoVeggie", "Category (AR)": "المكملات الغذائية الصحية", "Category (EN)": "Health Food Supplement Series", "DP (JOD)": 51.65, "NMP (JOD)": 58.8, "PV": 70.0, "SV": 26.75, "Benefits": "تنظيف الجهاز الهضمي والقولون, إدارة الوزن, إزالة السموم من الجسم, مصدر غني بالألياف", "Uses": "كمكمل غذائي غني بالألياف لدعم الهضم", "Ingredients": "قشور السيليوم, كرفس, فطر, سبيرولينا, شاي أخضر, فواكه وأعشاب", "Nutritional Facts": "لكل حصة (5 جرام): 15.65 سعرة حرارية", "Other Details": "115g"},
-            {"Product Code": "HF041", "Product Name (AR)": "مسحوق فطر الريشي", "Product Name (EN)": "Reishi Mushroom Powder", "Category (AR)": "المكملات الغذائية الصحية", "Category (EN)": "Health Food Supplement Series", "DP (JOD)": 53.7, "NMP (JOD)": 61.8, "PV": 70.0, "SV": 28.6, "Benefits": "دعم وتقوية جهاز المناعة, التخفيف من التوتر وتحسين النوم, إزالة السموم ودعم صحة الكبد", "Uses": "كمكمل غذائي لتعزيز الصحة العامة وتقوية المناعة", "Ingredients": "الجسم الثمري والميسيليوم لفطر الجانوديرما لوسيدوم", "Nutritional Facts": "غير متوفر", "Other Details": "70g"},
-            {"Product Code": "HF082", "Product Name (AR)": "حبيبات لقاح النحل", "Product Name (EN)": "DXN Bee Pollen Granule", "Category (AR)": "المكملات الغذائية الصحية", "Category (EN)": "Health Food Supplement Series", "DP (JOD)": 14.1, "NMP (JOD)": 16.5, "PV": 17.0, "SV": 6.8, "Benefits": "غذاء طبيعي متكامل, مصدر للطاقة والحيوية, دعم جهاز المناعة, المساعدة في تخفيف الحساسية الموسمية", "Uses": "كمكمل غذائي لزيادة الطاقة والحيوية", "Ingredients": "حبوب لقاح النحل، سواغ", "Nutritional Facts": "غني جداً بالعناصر الغذائية", "Other Details": "40g"},
-            {"Product Code": "PC004", "Product Name (AR)": "شامبو جانوزي", "Product Name (EN)": "DXN Ganozhi Shampoo", "Category (AR)": "العناية الشخصية", "Category (EN)": "Personal Care Series", "DP (JOD)": 7.8, "NMP (JOD)": 9.36, "PV": 11.0, "SV": 4.1, "Benefits": "ينظف الشعر بلطف ويغذيه بفضل خلاصة الجانوديرما وفيتامين B5", "Uses": "للاستخدام اليومي للعناية بالشعر", "Ingredients": "خلاصة الجانوديرما, فيتامين B5", "Nutritional Facts": "N/A", "Other Details": "250ml"},
-            {"Product Code": "PC005", "Product Name (AR)": "رغوة الجسم جانوزي", "Product Name (EN)": "DXN Ganozhi Body Foam", "Category (AR)": "العناية الشخصية", "Category (EN)": "Personal Care Series", "DP (JOD)": 7.8, "NMP (JOD)": 9.36, "PV": 11.0, "SV": 4.1, "Benefits": "ينظف البشرة دون إزالة الزيوت الطبيعية ويتركها ناعمة", "Uses": "للاستحمام اليومي", "Ingredients": "خلاصة الجانوديرما, فيتامين E", "Nutritional Facts": "N/A", "Other Details": "250ml"},
-            {"Product Code": "PC006", "Product Name (AR)": "معجون أسنان جانوزي", "Product Name (EN)": "Ganozhi Toothpaste", "Category (AR)": "العناية الشخصية", "Category (EN)": "Personal Care Series", "DP (JOD)": 5.85, "NMP (JOD)": 7.02, "PV": 6.0, "SV": 2.85, "Benefits": "طبيعي بخلاصة الجانوديرما، بدون فلورايد. ينظف الأسنان واللثة", "Uses": "للعناية اليومية بالأسنان واللثة", "Ingredients": "خلاصة الجانوديرما", "Nutritional Facts": "N/A", "Other Details": "150g"},
-            {"Product Code": "PC007", "Product Name (AR)": "زيت جانو للتدليك", "Product Name (EN)": "Gano Massage Oil", "Category (AR)": "العناية الشخصية", "Category (EN)": "Personal Care Series", "DP (JOD)": 7.6, "NMP (JOD)": 9.12, "PV": 9.0, "SV": 4.1, "Benefits": "مثالي لتهدئة العضلات والمفاصل والبشرة", "Uses": "للتدليك الموضعي", "Ingredients": "خلاصة الجانوديرما, زيت النخيل", "Nutritional Facts": "N/A", "Other Details": "75ml"},
-            {"Product Code": "PC015", "Product Name (AR)": "بودرة التلك", "Product Name (EN)": "DXN Talcum Powder", "Category (AR)": "العناية الشخصية", "Category (EN)": "Personal Care Series", "DP (JOD)": 7.45, "NMP (JOD)": 8.94, "PV": 9.0, "SV": 3.5, "Benefits": "معطرة ومهدئة للبشرة بخلاصة الجانوديرما", "Uses": "للحفاظ على جفاف وانتعاش البشرة", "Ingredients": "خلاصة الجانوديرما", "Nutritional Facts": "N/A", "Other Details": "250g"},
-            {"Product Code": "PC016", "Product Name (AR)": "حقيبة السفر للعناية الشخصية", "Product Name (EN)": "DXN Ganozhi Toiletries Travel Kit", "Category (AR)": "العناية الشخصية", "Category (EN)": "Personal Care Series", "DP (JOD)": 8.2, "NMP (JOD)": 9.84, "PV": 6.0, "SV": 2.35, "Benefits": "مجموعة متكاملة بحجم صغير مناسب للسفر", "Uses": "للسفر والرحلات", "Ingredients": "شامبو, رغوة جسم, معجون أسنان", "Nutritional Facts": "N/A", "Other Details": "حقيبة سفر"},
-            {"Product Code": "PC020", "Product Name (AR)": "معجون جانوزي بلس", "Product Name (EN)": "DXN Ganozhi Plus Toothpaste", "Category (AR)": "العناية الشخصية", "Category (EN)": "Personal Care Series", "DP (JOD)": 5.85, "NMP (JOD)": 7.02, "PV": 6.0, "SV": 2.55, "Benefits": "نفس فوائد معجون جانوزي العادي، يعتبر إصدار مطابق أو محدث قليلاً", "Uses": "للعناية اليومية بالأسنان واللثة", "Ingredients": "خلاصة الجانوديرما", "Nutritional Facts": "N/A", "Other Details": "150g"},
-            {"Product Code": "PC032", "Product Name (AR)": "معجون جانوزي (حزمة 4)", "Product Name (EN)": "DXN Ganozhi Toothpaste 4x40g", "Category (AR)": "العناية الشخصية", "Category (EN)": "Personal Care Series", "DP (JOD)": 7.4, "NMP (JOD)": 8.88, "PV": 8.0, "SV": 3.35, "Benefits": "نفس فوائد معجون جانوزي العادي", "Uses": "للعناية اليومية بالأسنان واللثة", "Ingredients": "خلاصة الجانوديرما", "Nutritional Facts": "N/A", "Other Details": "4x40g"},
-            {"Product Code": "PC036", "Product Name (AR)": "صابون جانوزي", "Product Name (EN)": "DXN Ganozhi Soap", "Category (AR)": "العناية الشخصية", "Category (EN)": "Personal Care Series", "DP (JOD)": 2.7, "NMP (JOD)": 3.24, "PV": 3.0, "SV": 1.15, "Benefits": "ينظف البشرة بلطف ويحافظ على رطوبتها", "Uses": "للاستخدام اليومي للوجه والجسم", "Ingredients": "خلاصة الجانوديرما, زيت النخيل", "Nutritional Facts": "N/A", "Other Details": "2 قطعة * 80g"},
-            {"Product Code": "PC039", "Product Name (AR)": "شامبو جانوزي بلس", "Product Name (EN)": "DXN Ganozhi Plus Shampoo", "Category (AR)": "العناية الشخصية", "Category (EN)": "Personal Care Series", "DP (JOD)": 8.2, "NMP (JOD)": 9.84, "PV": 12.0, "SV": 4.45, "Benefits": "تركيبة مطورة من شامبو جانوزي، قد توفر ترطيباً أو عناية إضافية", "Uses": "للاستخدام اليومي للعناية بالشعر", "Ingredients": "خلاصة الجانوديرما, فيتامين B5", "Nutritional Facts": "N/A", "Other Details": "250ml"},
-            {"Product Code": "PC041", "Product Name (AR)": "فرشاة أسنان (للكبار)", "Product Name (EN)": "DXN Toothbrush (For Adults)", "Category (AR)": "العناية الشخصية", "Category (EN)": "Personal Care Series", "DP (JOD)": 2.45, "NMP (JOD)": 2.94, "PV": 1.5, "SV": 1.05, "Benefits": "تصميم مناسب لتنظيف فعال", "Uses": "لتنظيف الأسنان", "Ingredients": "N/A", "Nutritional Facts": "N/A", "Other Details": ""},
-            {"Product Code": "PC042", "Product Name (AR)": "فرشاة أسنان (للأطفال)", "Product Name (EN)": "DXN Toothbrush (For Children)", "Category (AR)": "العناية الشخصية", "Category (EN)": "Personal Care Series", "DP (JOD)": 2.45, "NMP (JOD)": 2.94, "PV": 1.5, "SV": 1.05, "Benefits": "تصميم وحجم مناسب للأطفال", "Uses": "لتنظيف الأسنان", "Ingredients": "N/A", "Nutritional Facts": "N/A", "Other Details": ""},
-            {"Product Code": "PC118", "Product Name (AR)": "معجون جانوزي بلس", "Product Name (EN)": "DXN Ganozhi Plus Toothpaste", "Category (AR)": "العناية الشخصية", "Category (EN)": "Personal Care Series", "DP (JOD)": 5.85, "NMP (JOD)": 7.02, "PV": 6.0, "SV": 2.85, "Benefits": "نفس فوائد معجون جانوزي العادي", "Uses": "للعناية اليومية بالأسنان واللثة", "Ingredients": "خلاصة الجانوديرما", "Nutritional Facts": "N/A", "Other Details": "150g"},
-            {"Product Code": "PC014", "Product Name (AR)": "كريم شجرة الشاي", "Product Name (EN)": "Tea Tree Cream", "Category (AR)": "العناية بالبشرة ومستحضرات التجميل", "Category (EN)": "Skin Care & Cosmetics Series", "DP (JOD)": 5.85, "NMP (JOD)": 7.02, "PV": 6.0, "SV": 2.95, "Benefits": "مهدئ ومطهر للبشرة بفضل زيت شجرة الشاي", "Uses": "للمشاكل الجلدية البسيطة وحب الشباب", "Ingredients": "زيت شجرة الشاي", "Nutritional Facts": "N/A", "Other Details": "30g"},
-            {"Product Code": "SC009N", "Product Name (AR)": "تونر جانوزي", "Product Name (EN)": "Ganozhi Toner", "Category (AR)": "العناية بالبشرة ومستحضرات التجميل", "Category (EN)": "Skin Care & Cosmetics Series", "DP (JOD)": 27.65, "NMP (JOD)": 33.18, "PV": 36.0, "SV": 12.75, "Benefits": "مرطب ومنظف للمسامات بخلاصة الجانوديرما", "Uses": "لإغلاق المسام وترطيب البشرة بعد التنظيف", "Ingredients": "خلاصة الجانوديرما", "Nutritional Facts": "N/A", "Other Details": "150ml"},
-            {"Product Code": "SC010N", "Product Name (AR)": "مستحلب جانوزي المرطب", "Product Name (EN)": "Ganozhi Moisturizing Micro Emulsion", "Category (AR)": "العناية بالبشرة ومستحضرات التجميل", "Category (EN)": "Skin Care & Cosmetics Series", "DP (JOD)": 31.65, "NMP (JOD)": 37.98, "PV": 40.0, "SV": 13.95, "Benefits": "مرطب خفيف تمتصه البشرة بسرعة", "Uses": "لترطيب البشرة صباحاً ومساءً", "Ingredients": "خلاصة الجانوديرما", "Nutritional Facts": "N/A", "Other Details": "50ml"},
-            {"Product Code": "SC011N", "Product Name (AR)": "منظف جانوزي السائل", "Product Name (EN)": "Ganozhi Liquid Cleanser", "Category (AR)": "العناية بالبشرة ومستحضرات التجميل", "Category (EN)": "Skin Care & Cosmetics Series", "DP (JOD)": 27.65, "NMP (JOD)": 33.18, "PV": 36.0, "SV": 12.75, "Benefits": "يزيل الشوائب والزيوت الزائدة دون أن يسبب جفاف البشرة", "Uses": "لتنظيف الوجه صباحاً ومساءً", "Ingredients": "خلاصة الجانوديرما", "Nutritional Facts": "N/A", "Other Details": "150ml"},
-            {"Product Code": "SC012", "Product Name (AR)": "زيت الأطفال تشوبي", "Product Name (EN)": "DXN Chubby Baby Oil", "Category (AR)": "العناية بالبشرة ومستحضرات التجميل", "Category (EN)": "Skin Care & Cosmetics Series", "DP (JOD)": 5.65, "NMP (JOD)": 6.78, "PV": 7.0, "SV": 2.45, "Benefits": "لطيف ومناسب لترطيب وحماية بشرة الأطفال الحساسة", "Uses": "لتدليك وترطيب بشرة الطفل", "Ingredients": "خلاصة الجانوديرما, زيت دوار الشمس", "Nutritional Facts": "N/A", "Other Details": "200ml"},
-            {"Product Code": "SC014", "Product Name (AR)": "أحمر شفاه جانوزي - أحمر كوكو", "Product Name (EN)": "Ganozhi Lipstick - Coco Red", "Category (AR)": "العناية بالبشرة ومستحضرات التجميل", "Category (EN)": "Skin Care & Cosmetics Series", "DP (JOD)": 12.4, "NMP (JOD)": 14.88, "PV": 17.0, "SV": 6.0, "Benefits": "مرطب بخلاصة الصبار وزبدة الشيا وفيتامين E", "Uses": "لتلوين وترطيب الشفاه", "Ingredients": "خلاصة جانوديرما, صبار, زبدة الشيا, فيتامين E", "Nutritional Facts": "N/A", "Other Details": "3.5g"},
-            {"Product Code": "SC015", "Product Name (AR)": "أحمر شفاه جانوزي - أحمر لؤلؤي", "Product Name (EN)": "Ganozhi Lipstick - Pearly Red", "Category (AR)": "العناية بالبشرة ومستحضرات التجميل", "Category (EN)": "Skin Care & Cosmetics Series", "DP (JOD)": 12.4, "NMP (JOD)": 14.88, "PV": 17.0, "SV": 6.0, "Benefits": "مرطب بخلاصة الصبار وزبدة الشيا وفيتامين E", "Uses": "لتلوين وترطيب الشفاه", "Ingredients": "خلاصة جانوديرما, صبار, زبدة الشيا, فيتامين E", "Nutritional Facts": "N/A", "Other Details": "3.5g"},
-            {"Product Code": "SC016", "Product Name (AR)": "أحمر شفاه جانوزي - وردي لؤلؤي", "Product Name (EN)": "Ganozhi Lipstick - Pearly Pink", "Category (AR)": "العناية بالبشرة ومستحضرات التجميل", "Category (EN)": "Skin Care & Cosmetics Series", "DP (JOD)": 12.4, "NMP (JOD)": 14.88, "PV": 17.0, "SV": 6.0, "Benefits": "مرطب بخلاصة الصبار وزبدة الشيا وفيتامين E", "Uses": "لتلوين وترطيب الشفاه", "Ingredients": "خلاصة جانوديرما, صبار, زبدة الشيا, فيتامين E", "Nutritional Facts": "N/A", "Other Details": "3.5g"},
-            {"Product Code": "SC017", "Product Name (AR)": "أحمر شفاه جانوزي - عنّابي لؤلؤي", "Product Name (EN)": "Ganozhi Lipstick - Pearly Grape", "Category (AR)": "العناية بالبشرة ومستحضرات التجميل", "Category (EN)": "Skin Care & Cosmetics Series", "DP (JOD)": 12.4, "NMP (JOD)": 14.88, "PV": 17.0, "SV": 6.0, "Benefits": "مرطب بخلاصة الصبار وزبدة الشيا وفيتامين E", "Uses": "لتلوين وترطيب الشفاه", "Ingredients": "خلاصة جانوديرما, صبار, زبدة الشيا, فيتامين E", "Nutritional Facts": "N/A", "Other Details": "3.5g"},
-            {"Product Code": "SC020", "Product Name (AR)": "جل الصبار المنظف", "Product Name (EN)": "DXN Aloe V Cleansing Gel", "Category (AR)": "العناية بالبشرة ومستحضرات التجميل", "Category (EN)": "Skin Care & Cosmetics Series", "DP (JOD)": 5.65, "NMP (JOD)": 6.78, "PV": 7.0, "SV": 2.6, "Benefits": "جل منظف خالٍ من الصابون، ينظف البشرة بلطف مع الحفاظ على رطوبتها", "Uses": "لتنظيف الوجه", "Ingredients": "خلاصة الألوفيرا", "Nutritional Facts": "N/A", "Other Details": "100ml"},
-            {"Product Code": "SC021", "Product Name (AR)": "تونر الصبار المرطب", "Product Name (EN)": "DXN Aloe V Hydrating Toner", "Category (AR)": "العناية بالبشرة ومستحضرات التجميل", "Category (EN)": "Skin Care & Cosmetics Series", "DP (JOD)": 6.1, "NMP (JOD)": 7.32, "PV": 7.0, "SV": 2.6, "Benefits": "تونر منعش يرطب البشرة ويجهزها لخطوات العناية التالية", "Uses": "لترطيب البشرة بعد التنظيف", "Ingredients": "خلاصة الألوفيرا", "Nutritional Facts": "N/A", "Other Details": "100ml"},
-            {"Product Code": "SC022", "Product Name (AR)": "جل الصبار المائي", "Product Name (EN)": "DXN Aloe V Aqua Gel", "Category (AR)": "العناية بالبشرة ومستحضرات التجميل", "Category (EN)": "Skin Care & Cosmetics Series", "DP (JOD)": 11.65, "NMP (JOD)": 13.98, "PV": 14.0, "SV": 5.0, "Benefits": "جل مرطب خفيف القوام، يمتصه الجلد بسرعة لترطيب وتهدئة البشرة", "Uses": "كمرطب يومي للوجه", "Ingredients": "خلاصة الألوفيرا", "Nutritional Facts": "N/A", "Other Details": "50ml"},
-            {"Product Code": "SC023", "Product Name (AR)": "كريم ألوفي المغذي", "Product Name (EN)": "DXN Aloe V Nutricare Cream", "Category (AR)": "العناية بالبشرة ومستحضرات التجميل", "Category (EN)": "Skin Care & Cosmetics Series", "DP (JOD)": 8.3, "NMP (JOD)": 9.96, "PV": 10.0, "SV": 3.65, "Benefits": "كريم ليلي غني، يرطب ويهدئ ويجدد البشرة أثناء النوم", "Uses": "ككريم ليلي مغذي", "Ingredients": "خلاصة الألوفيرا, خلاصات نباتية", "Nutritional Facts": "N/A", "Other Details": "50ml"},
-            {"Product Code": "SC024", "Product Name (AR)": "لوشن الألوة لليدين والجسم", "Product Name (EN)": "DXN Aloe V Hand & Body Lotion", "Category (AR)": "العناية بالبشرة ومستحضرات التجميل", "Category (EN)": "Skin Care & Cosmetics Series", "DP (JOD)": 6.0, "NMP (JOD)": 7.2, "PV": 7.0, "SV": 2.6, "Benefits": "لوشن غير دهني لترطيب الجسم بالكامل", "Uses": "مرطب يومي لليدين والجسم", "Ingredients": "خلاصة الألوفيرا", "Nutritional Facts": "N/A", "Other Details": "250ml"},
-            {"Product Code": "SC025", "Product Name (AR)": "حقيبة جانوزي للعناية بالبشرة", "Product Name (EN)": "Ganozhi Complete Skin Care Series Travel Kit", "Category (AR)": "العناية بالبشرة ومستحضرات التجميل", "Category (EN)": "Skin Care & Cosmetics Series", "DP (JOD)": 23.95, "NMP (JOD)": 28.74, "PV": 34.0, "SV": 11.15, "Benefits": "مجموعة سفر تحتوي على منتجات جانوزي للعناية بالبشرة", "Uses": "للسفر والرحلات", "Ingredients": "المنظف، التونر، والمستحلب المرطب", "Nutritional Facts": "N/A", "Other Details": "حقيبة سفر"},
-            {"Product Code": "SC032", "Product Name (AR)": "مقشر الألوة للوجه", "Product Name (EN)": "DXN Aloe. V Facial Scrub", "Category (AR)": "العناية بالبشرة ومستحضرات التجميل", "Category (EN)": "Skin Care & Cosmetics Series", "DP (JOD)": 6.35, "NMP (JOD)": 7.62, "PV": 7.4, "SV": 2.7, "Benefits": "مقشر لطيف يزيل خلايا الجلد الميتة وينظف المسام بعمق", "Uses": "لتقشير الوجه 1-2 مرات أسبوعياً", "Ingredients": "خلاصة الألوفيرا, حبيبات تقشير", "Nutritional Facts": "N/A", "Other Details": "75g"},
-            {"Product Code": "SC033", "Product Name (AR)": "ماسك الألوة المرطب", "Product Name (EN)": "DXN Aloe. V Hydrating Mask", "Category (AR)": "العناية بالبشرة ومستحضرات التجميل", "Category (EN)": "Skin Care & Cosmetics Series", "DP (JOD)": 8.3, "NMP (JOD)": 9.96, "PV": 9.6, "SV": 3.6, "Benefits": "يوفر ترطيباً مكثفاً ويعيد توازن رطوبة البشرة", "Uses": "ماسك للوجه يستخدم عند الحاجة لترطيب إضافي", "Ingredients": "خلاصة الألوفيرا", "Nutritional Facts": "N/A", "Other Details": "50ml"},
-            {"Product Code": "SC035", "Product Name (AR)": "أحمر شفاه جانوزي - وردي مرجاني", "Product Name (EN)": "Ganozhi Lipstick - Coral Pink", "Category (AR)": "العناية بالبشرة ومستحضرات التجميل", "Category (EN)": "Skin Care & Cosmetics Series", "DP (JOD)": 12.4, "NMP (JOD)": 14.88, "PV": 17.0, "SV": 6.0, "Benefits": "مرطب بخلاصة الصبار وزبدة الشيا وفيتامين E", "Uses": "لتلوين وترطيب الشفاه", "Ingredients": "خلاصة جانوديرما, صبار, زبدة الشيا, فيتامين E", "Nutritional Facts": "N/A", "Other Details": "3.5g"},
-            {"Product Code": "SC038", "Product Name (AR)": "مقشر البابايا للوجه", "Product Name (EN)": "DXN Papaya Facial Scrub", "Category (AR)": "العناية بالبشرة ومستحضرات التجميل", "Category (EN)": "Skin Care & Cosmetics Series", "DP (JOD)": 8.05, "NMP (JOD)": 9.66, "PV": 8.0, "SV": 3.6, "Benefits": "يساعد على تفتيح البشرة وإزالة الخلايا الميتة بفضل انزيم الباباين", "Uses": "لتقشير وتفتيح بشرة الوجه", "Ingredients": "خلاصة البابايا", "Nutritional Facts": "N/A", "Other Details": "75g"},
-            {"Product Code": "SC073", "Product Name (AR)": "زيت الأطفال تشوبي", "Product Name (EN)": "DXN Chubby Baby Oil", "Category (AR)": "العناية بالبشرة ومستحضرات التجميل", "Category (EN)": "Skin Care & Cosmetics Series", "DP (JOD)": 1.7, "NMP (JOD)": 2.04, "PV": 2.0, "SV": 0.75, "Benefits": "زيت لطيف ومناسب لترطيب وحماية بشرة الأطفال الحساسة", "Uses": "لتدليك وترطيب بشرة الطفل", "Ingredients": "خلاصة الجانوديرما, زيت دوار الشمس", "Nutritional Facts": "N/A", "Other Details": "40ml"}
-        ];
+        const fadeInSections = document.querySelectorAll('.fade-in-section');
 
-        // --- عناصر DOM العالمية (GLOBAL DOM Elements) ---
-        const categoryCheckboxesContainer = document.getElementById('category-checkboxes');
-        const budgetForm = document.getElementById('budget-form');
-        const budgetResultsContainer = document.getElementById('budget-results');
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
 
-        const productsGrid = document.getElementById('products-grid');
-        const productCategoryFilters = document.getElementById('product-category-filters');
-        const productSearchInput = document.getElementById('product-search');
-        const productDetailModal = document.getElementById('product-detail-modal');
-        const closeProductModalBtn = document.getElementById('close-product-modal');
-
-        let currentProductFilter = 'الكل'; // فلتر المنتجات الحالي (الكل افتراضياً)
-        let currentProductSearchTerm = ''; // مصطلح البحث الحالي للمنتجات
-
-        // --- منطق مخطط الميزانية (Budget Planner Logic) ---
-
-        // دالة لملء مربعات اختيار الفئات في مخطط الميزانية
-        function populateCategoryCheckboxes() {
-            const categories = [...new Set(allProducts.map(p => p['Category (AR)']))];
-            categoryCheckboxesContainer.innerHTML = categories.map(cat => `
-                <div class="flex items-center">
-                    <input id="cat-${cat}" name="category" type="checkbox" value="${cat}" class="h-4 w-4 text-green-600 border-gray-300 rounded focus:ring-green-500" checked>
-                    <label for="cat-${cat}" class="mr-2 block text-sm text-gray-900">${cat}</label>
-                </div>
-            `).join('');
-        }
-
-        // معالج حدث إرسال نموذج الميزانية
-        budgetForm.addEventListener('submit', function(e) {
-            e.preventDefault(); // منع الإرسال الافتراضي للنموذج
-            const budget = parseFloat(document.getElementById('monthly-budget').value);
-            const commissionRate = parseFloat(document.getElementById('commission-rate').value);
-            const selectedCategories = Array.from(document.querySelectorAll('input[name="category"]:checked')).map(cb => cb.value);
-
-            // التحقق من صحة المدخلات
-            if (isNaN(budget) || isNaN(commissionRate) || selectedCategories.length === 0) {
-                budgetResultsContainer.innerHTML = '<p class="text-red-500 text-center">الرجاء إدخال الميزانية ونسبة العمولة واختيار فئة واحدة على الأقل.</p>';
-                return;
-            }
-
-            // توليد وعرض خيارات الميزانية
-            const options = generateBudgetOptions(budget, commissionRate, selectedCategories);
-            displayBudgetOptions(options, budget, commissionRate);
-        });
-
-        // دالة لتوليد خيارات سلة المنتجات بناءً على الميزانية والفئات
-        function generateBudgetOptions(budget, commissionRate, categories) {
-            let filteredProducts = allProducts.filter(p => categories.includes(p['Category (AR)']));
-
-            let options = [];
-
-            // الخيار 1: التركيز على المنتجات ذات النقاط العالية (PV) أولاً
-            let sortedByPV = [...filteredProducts].sort((a, b) => b.PV - a.PV);
-            options.push(buildCart(sortedByPV, budget));
-
-            // الخيار 2: التركيز على أفضل قيمة (PV لكل دينار أردني)
-            let sortedByValue = [...filteredProducts].sort((a, b) => (b.PV / b['DP (JOD)']) - (a.PV / a['DP (JOD)']));
-            options.push(buildCart(sortedByValue, budget));
-            
-            // الخيار 3: التركيز على التنوع (خلط المنتجات وبناء السلة)
-            let shuffled = [...filteredProducts].sort(() => 0.5 - Math.random());
-            options.push(buildCart(shuffled, budget));
-
-            // تصفية الخيارات الفارغة أو المكررة
-            let uniqueOptions = [];
-            const seenCarts = new Set();
-            for (const option of options) {
-                if (option.products.length > 0) {
-                    const cartSignature = option.products.map(p => p.code).sort().join(',');
-                    if (!seenCarts.has(cartSignature)) {
-                        uniqueOptions.push(option);
-                        seenCarts.add(cartSignature);
-                    }
-                }
-            }
-            return uniqueOptions;
-        }
-
-        // دالة لبناء سلة المنتجات (عربة التسوق)
-        function buildCart(productList, budget) {
-            let cart = { products: [], totalPV: 0, totalSV: 0, totalCost: 0 };
-            let currentBudget = budget;
-
-            for (const product of productList) {
-                // التأكد من أن المنتج لا يتجاوز الميزانية المتبقية
-                if (product['DP (JOD)'] <= currentBudget) {
-                    // تجنب إضافة نفس المنتج مرتين في نفس السلة (لخيارات التنوع)
-                    const existingProduct = cart.products.find(p => p.code === product['Product Code']);
-                    if (existingProduct) {
-                        continue;
-                    } else {
-                        cart.products.push({
-                            code: product['Product Code'],
-                            name: product['Product Name (AR)'],
-                            quantity: 1,
-                            pv: product.PV,
-                            sv: product.SV,
-                            price: product['DP (JOD)']
-                        });
-                    }
-                    cart.totalPV += product.PV;
-                    cart.totalSV += product.SV;
-                    cart.totalCost += product['DP (JOD)'];
-                    currentBudget -= product['DP (JOD)'];
-                }
-            }
-            return cart;
-        }
-
-        // دالة لعرض خيارات الميزانية في الواجهة
-        function displayBudgetOptions(options, budget, commissionRate) {
-            if (options.length === 0) {
-                budgetResultsContainer.innerHTML = '<p class="text-center text-gray-600">لم نتمكن من العثور على مجموعة منتجات تناسب ميزانيتك. جربي زيادة الميزانية أو اختيار فئات إضافية.</p>';
-                return;
-            }
-
-            let html = `<h3 class="text-xl font-bold text-center text-gray-800 mb-4">الخيارات المقترحة:</h3>`;
-            options.forEach((option, index) => {
-                // حساب العمولة التقديرية (إذا كانت النقاط 100 أو أكثر)
-                const commission = option.totalPV >= 100 ? (option.totalSV * (commissionRate / 100)).toFixed(2) : 0;
-                const remainingBudget = (budget - option.totalCost).toFixed(2);
-
-                html += `
-                    <div class="border border-gray-200 rounded-lg shadow-sm overflow-hidden budget-result-card">
-                        <div class="p-4 bg-gray-50 border-b">
-                            <h4 class="text-lg font-semibold text-green-800">الخيار رقم ${index + 1}</h4>
-                            <div class="flex flex-wrap justify-between items-center mt-2 text-sm text-gray-600">
-                                <span class="mb-1 md:mb-0"><strong>إجمالي النقاط (PV):</strong> ${option.totalPV.toFixed(2)}</span>
-                                <span class="mb-1 md:mb-0"><strong>التكلفة:</strong> ${option.totalCost.toFixed(2)} د.أ</span>
-                                <span class="mb-1 md:mb-0"><strong>الميزانية المتبقية:</strong> ${remainingBudget} د.أ</span>
-                            </div>
-                        </div>
-                        <div class="p-4">
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-2 mb-4 text-sm">
-                                <p><strong>إجمالي (SV):</strong> ${option.totalSV.toFixed(2)}</p>
-                                <p><strong>العمولة التقديرية:</strong> ${commission} د.أ</p>
-                            </div>
-                            <h5 class="font-semibold mb-2 text-base">المنتجات في هذه المجموعة:</h5>
-                            <ul class="list-disc pr-5 space-y-1 text-sm text-gray-700">
-                                ${option.products.map(p => `<li>${p.name} (PV: ${p.pv}, السعر: ${p.price} د.أ)</li>`).join('')}
-                            </ul>
-                        </div>
-                    </div>
-                `;
-            });
-            budgetResultsContainer.innerHTML = html;
-        }
-
-        // --- منطق قسم المنتجات (Products Section Logic) ---
-
-        // دالة لعرض المنتجات في الشبكة
-        function displayProducts(productsToDisplay) {
-            productsGrid.innerHTML = ''; // مسح المنتجات المعروضة حالياً
-            if (productsToDisplay.length === 0) {
-                productsGrid.innerHTML = '<p class="col-span-full text-center text-gray-600">لا توجد منتجات مطابقة لفلترة أو بحث.</p>';
-                return;
-            }
-
-            productsToDisplay.forEach(product => {
-                const productCard = document.createElement('div');
-                productCard.className = 'product-card cursor-pointer hover:shadow-lg transition duration-200 ease-in-out';
-                productCard.innerHTML = `
-                    <h3 class="text-lg font-bold text-green-800">${product['Product Name (AR)']}</h3>
-                    <p class="text-sm text-gray-600 mb-2">${product['Category (AR)']}</p>
-                    <div class="flex justify-between items-center text-sm">
-                        <span class="text-gray-700"><strong>PV:</strong> ${product.PV}</span>
-                        <span class="text-gray-700"><strong>السعر:</strong> ${product['DP (JOD)']} د.أ</span>
-                    </div>
-                `;
-                // إضافة معالج حدث للنقر على البطاقة لعرض التفاصيل
-                productCard.addEventListener('click', () => showProductDetails(product));
-                productsGrid.appendChild(productCard);
-            });
-        }
-
-        // دالة لملء أزرار الفلترة حسب الفئة في قسم المنتجات
-        function populateProductFilters() {
-            const categories = ['الكل', ...new Set(allProducts.map(p => p['Category (AR)']))];
-            productCategoryFilters.innerHTML = categories.map(cat => `
-                <button data-category="${cat}" class="product-filter-btn px-4 py-2 rounded-full text-sm font-medium ${cat === 'الكل' ? 'bg-green-700 text-white' : 'bg-gray-200 text-gray-700 hover:bg-green-600 hover:text-white transition duration-200'}">
-                    ${cat}
-                </button>
-            `).join('');
-
-            // إضافة معالجات الأحداث لأزرار الفلترة
-            document.querySelectorAll('.product-filter-btn').forEach(button => {
-                button.addEventListener('click', function() {
-                    // إزالة النمط النشط من جميع الأزرار
-                    document.querySelectorAll('.product-filter-btn').forEach(btn => {
-                        btn.classList.remove('bg-green-700', 'text-white');
-                        btn.classList.add('bg-gray-200', 'text-gray-700');
-                    });
-                    // إضافة النمط النشط للزر الحالي
-                    this.classList.remove('bg-gray-200', 'text-gray-700');
-                    this.classList.add('bg-green-700', 'text-white');
-
-                    currentProductFilter = this.dataset.category;
-                    filterAndSearchProducts(); // إعادة فلترة وبحث المنتجات
-                });
-            });
-        }
-
-        // معالج حدث لإدخال البحث في قسم المنتجات
-        productSearchInput.addEventListener('input', function() {
-            currentProductSearchTerm = this.value.toLowerCase();
-            filterAndSearchProducts(); // إعادة فلترة وبحث المنتجات
-        });
-
-        // دالة لتطبيق الفلترة والبحث على المنتجات
-        function filterAndSearchProducts() {
-            let filtered = allProducts;
-
-            // تطبيق فلتر الفئة
-            if (currentProductFilter !== 'الكل') {
-                filtered = filtered.filter(product => product['Category (AR)'] === currentProductFilter);
-            }
-
-            // تطبيق فلتر البحث
-            if (currentProductSearchTerm) {
-                filtered = filtered.filter(product =>
-                    product['Product Name (AR)'].toLowerCase().includes(currentProductSearchTerm) ||
-                    product['Product Name (EN)'].toLowerCase().includes(currentProductSearchTerm) ||
-                    product['Product Code'].toLowerCase().includes(currentProductSearchTerm)
-                );
-            }
-            displayProducts(filtered); // عرض المنتجات المفلترة
-        }
-
-        // دالة لعرض تفاصيل المنتج في النافذة المنبثقة (Modal)
-        function showProductDetails(product) {
-            document.getElementById('modal-product-name').textContent = product['Product Name (AR)'];
-            document.getElementById('modal-product-code').textContent = product['Product Code'];
-            document.getElementById('modal-product-category').textContent = product['Category (AR)'];
-            document.getElementById('modal-product-price').textContent = product['DP (JOD)'].toFixed(2);
-            document.getElementById('modal-product-pv').textContent = product.PV;
-            document.getElementById('modal-product-sv').textContent = product.SV;
-            document.getElementById('modal-product-benefits').textContent = product.Benefits;
-            document.getElementById('modal-product-uses').textContent = product.Uses;
-            document.getElementById('modal-product-ingredients').textContent = product.Ingredients;
-            
-            // التعامل مع "Nutritional Facts" التي قد تكون نصاً أو نص JSON
-            try {
-                // محاولة تحليل النص كـ JSON (مع استبدال علامات الاقتباس الفردية)
-                const nf = JSON.parse(product['Nutritional Facts'].replace(/'/g, '"'));
-                document.getElementById('modal-product-nutritional-facts').textContent = Object.entries(nf).map(([key, value]) => `${key}: ${value}`).join(', ');
-            } catch (e) {
-                // إذا فشل التحليل، عرض النص كما هو
-                document.getElementById('modal-product-nutritional-facts').textContent = product['Nutritional Facts'];
-            }
-
-            document.getElementById('modal-product-other-details').textContent = product['Other Details'];
-
-            productDetailModal.classList.remove('hidden'); // إظهار المودال
-        }
-
-        // معالج حدث لإغلاق نافذة تفاصيل المنتج المنبثقة
-        closeProductModalBtn.addEventListener('click', () => {
-            productDetailModal.classList.add('hidden'); // إخفاء المودال
-        });
-
-        // إخفاء المودال عند النقر خارج محتواه
-        productDetailModal.addEventListener('click', (e) => {
-            if (e.target === productDetailModal) { // إذا كان النقر على الخلفية المعتمة
-                productDetailModal.classList.add('hidden'); // إخفاء المودال
-            }
-        });
-
-        // --- منطق التنقل (Navigation Logic) ---
-        const btn = document.querySelector("button.mobile-menu-button");
-        const menu = document.querySelector(".mobile-menu");
-        const mobileLinks = document.querySelectorAll(".mobile-nav-link");
-
-        // تبديل رؤية قائمة الجوال عند النقر على الزر
-        btn.addEventListener("click", () => { menu.classList.toggle("hidden"); });
-        
-        // إخفاء قائمة الجوال عند النقر على أي رابط داخلها
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => { menu.classList.add('hidden'); });
-        });
-
-        const sections = document.querySelectorAll("section");
-        const navLinks = document.querySelectorAll("nav .hidden a.nav-link");
-
-        // تحديث الرابط النشط في شريط التنقل عند التمرير
-        window.addEventListener("scroll", () => {
-            let current = "home"; // القسم الافتراضي النشط
-            sections.forEach((section) => {
-                const sectionTop = section.offsetTop;
-                // تحديد القسم الحالي بناءً على موضع التمرير
-                if (pageYOffset >= sectionTop - 80) { // 80px إزاحة لارتفاع شريط التنقل
-                    current = section.getAttribute("id");
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
                 }
             });
+        }, observerOptions);
 
-            // إزالة وتعيين الفئة "active" للرابط المناسب
-            navLinks.forEach((a) => {
-                a.classList.remove("active");
-                if (a.getAttribute('href') == `#${current}`) {
-                    a.classList.add("active");
-                }
-            });
+        fadeInSections.forEach(section => {
+            observer.observe(section);
         });
-
-        // --- تهيئة التطبيق عند تحميل الصفحة ---
-        populateCategoryCheckboxes(); // ملء فئات مخطط الميزانية
-        populateProductFilters(); // ملء فئات فلتر المنتجات
-        displayProducts(allProducts); // عرض جميع المنتجات عند التحميل الأولي
     });
     </script>
 </body>
