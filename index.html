@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+    <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0055aa">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>دليل هناده دكسن</title>
@@ -162,5 +165,14 @@
         });
     });
     </script>
+    <script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('service-worker.js')
+      .then(function(reg) {
+        console.log("Service Worker registered!", reg);
+      });
+  }
+</script>
+
 </body>
 </html>
