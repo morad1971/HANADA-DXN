@@ -37,7 +37,13 @@
 
     <!-- Header -->
     <header class="bg-white shadow-md">
-        <div class="max-w-5xl mx-auto py-6 px-4 text-center">
+        <div class="max-w-5xl mx-auto py-6 px-4 text-center relative">
+            <!-- Share Button -->
+            <button id="share-button" class="absolute top-1/2 -translate-y-1/2 left-4 p-2 rounded-full text-gray-600 hover:bg-gray-200 transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z" />
+                </svg>
+            </button>
             <h1 class="text-4xl font-bold text-brand-green font-title">هناده دكسن</h1>
             <p class="mt-2 text-lg text-gray-600">دليلك لاستكشاف عالم الصحة والفرص مع دكسن</p>
         </div>
@@ -64,68 +70,44 @@
                     <p class="mt-2 text-gray-600">أدوات تفاعلية صممتها لمساعدتك في رحلتك مع دكسن.</p>
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Tool Card 1 -->
                     <div class="bg-brand-beige p-8 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
                         <h3 class="text-2xl font-bold text-brand-green font-title">كتالوج المنتجات</h3>
-                        <p class="mt-4 text-gray-700">
-                            استكشفي كتالوج المنتجات الكامل، واعرفي كل تفاصيله وفوائده الصحية.
-                        </p>
+                        <p class="mt-4 text-gray-700">استكشفي كتالوج المنتجات الكامل، واعرفي كل تفاصيله وفوائده الصحية.</p>
                         <a href="https://morad1971.github.io/hanada-product-catalog/" class="mt-6 inline-block font-semibold text-brand-green hover:underline">استكشفي الآن &rarr;</a>
                     </div>
-                    <!-- Tool Card 2 -->
                     <div class="bg-brand-beige p-8 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
                         <h3 class="text-2xl font-bold text-brand-green font-title">دليل الفوائد الصحية</h3>
-                        <p class="mt-4 text-gray-700">
-                            تعمقي في فهم القوة الحقيقية لمنتجات دكسن وفوائدها لصحتك وحيويتك.
-                        </p>
+                        <p class="mt-4 text-gray-700">تعمقي في فهم القوة الحقيقية لمنتجات دكسن وفوائدها لصحتك وحيويتك.</p>
                          <a href="https://morad1971.github.io/hanada-health-guide/" class="mt-6 inline-block font-semibold text-brand-green hover:underline">اعرفي المزيد &rarr;</a>
                     </div>
-                    <!-- Tool Card 3 -->
                     <div class="bg-brand-beige p-8 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
                         <h3 class="text-2xl font-bold text-brand-green font-title">المقارنة المالية</h3>
-                        <p class="mt-4 text-gray-700">
-                           هل منتجات دكسن أوفر؟ قارني مصاريفك الحالية مع منتجات دكسن وشوفي الفرق.
-                        </p>
+                        <p class="mt-4 text-gray-700">هل منتجات دكسن أوفر؟ قارني مصاريفك الحالية مع منتجات دكسن وشوفي الفرق.</p>
                          <a href="https://morad1971.github.io/hanada-comparison-tool/" class="mt-6 inline-block font-semibold text-brand-green hover:underline">ابدأي المقارنة &rarr;</a>
                     </div>
-                     <!-- Tool Card 4 -->
                     <div class="bg-brand-beige p-8 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
                         <h3 class="text-2xl font-bold text-brand-green font-title">دكسن كمشروع</h3>
-                        <p class="mt-4 text-gray-700">
-                           افهمي الخطة المالية بالأمثلة وكيف يمكن لمشترياتك أن تصبح مصدر دخل.
-                        </p>
+                        <p class="mt-4 text-gray-700">افهمي الخطة المالية بالأمثلة وكيف يمكن لمشترياتك أن تصبح مصدر دخل.</p>
                          <a href="https://morad1971.github.io/DXN-AS-BUSINESS/" class="mt-6 inline-block font-semibold text-brand-green hover:underline">اكتشفي المشروع &rarr;</a>
                     </div>
-                    <!-- Tool Card 5 -->
                     <div class="bg-brand-beige p-8 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
                         <h3 class="text-2xl font-bold text-brand-green font-title">مركز التدريب</h3>
-                        <p class="mt-4 text-gray-700">
-                           هون بتبلش رحلتك لتطوير حالك وبناء عقلية النجاح لتكوني قائدة مستقلة.
-                        </p>
+                        <p class="mt-4 text-gray-700">هون بتبلش رحلتك لتطوير حالك وبناء عقلية النجاح لتكوني قائدة مستقلة.</p>
                          <a href="https://morad1971.github.io/hanada-training-center/" class="mt-6 inline-block font-semibold text-brand-green hover:underline">ابدأي التدريب &rarr;</a>
                     </div>
-                    <!-- Tool Card 6 -->
                     <div class="bg-brand-beige p-8 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
                         <h3 class="text-2xl font-bold text-brand-green font-title">اسأل هناده</h3>
-                        <p class="mt-4 text-gray-700">
-                           عندك سؤال سريع؟ هون بتلاقي جواب فوري لكل إشي بخص الشغل والمنتجات.
-                        </p>
+                        <p class="mt-4 text-gray-700">عندك سؤال سريع؟ هون بتلاقي جواب فوري لكل إشي بخص الشغل والمنتجات.</p>
                          <a href="https://morad1971.github.io/ask/" class="mt-6 inline-block font-semibold text-brand-green hover:underline">اسألي الآن &rarr;</a>
                     </div>
-                    <!-- Registration Card -->
                     <div class="bg-brand-beige p-8 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
                         <h3 class="text-2xl font-bold text-brand-green font-title">انضمي لفريقنا</h3>
-                        <p class="mt-4 text-gray-700">
-                           جاهزة لتبدئي رحلتك؟ قدمي طلب الانضمام الآن وكوني جزءًا من قصة نجاحنا.
-                        </p>
+                        <p class="mt-4 text-gray-700">جاهزة لتبدئي رحلتك؟ قدمي طلب الانضمام الآن وكوني جزءًا من قصة نجاحنا.</p>
                          <a href="https://morad1971.github.io/hanada-public-form/" class="mt-6 inline-block font-semibold text-brand-green hover:underline">سجلي الآن &rarr;</a>
                     </div>
-                    <!-- Contact Card -->
                     <div class="bg-brand-beige p-8 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
                         <h3 class="text-2xl font-bold text-brand-green font-title">تواصلي معي مباشرة</h3>
-                        <p class="mt-4 text-gray-700">
-                           عندك أي استفسار أو حابة تحكي معي؟ اكبسي هون واحكي معي مباشرة على الواتساب.
-                        </p>
+                        <p class="mt-4 text-gray-700">عندك أي استفسار أو حابة تحكي معي؟ اكبسي هون واحكي معي مباشرة على الواتساب.</p>
                          <a href="https://wa.me/message/4KM3HRA62B3BK1" class="mt-6 inline-block font-semibold text-brand-green hover:underline">احكي مع هناده &rarr;</a>
                     </div>
                 </div>
@@ -138,29 +120,65 @@
         <p>&copy; 2025 دليل هناده دكسن. جميع الحقوق محفوظة.</p>
     </footer>
 
+    <!-- Share functionality script -->
     <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const fadeInSections = document.querySelectorAll('.fade-in-section');
+        document.addEventListener('DOMContentLoaded', function () {
+            const shareButton = document.getElementById('share-button');
+            
+            shareButton.addEventListener('click', async () => {
+                const shareData = {
+                    title: 'دليل هناده دكسن',
+                    text: 'اكتشفي عالم الصحة والفرص مع دكسن من خلال هذا الدليل الشامل!',
+                    url: window.location.href
+                };
 
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.1
-        };
-
-        const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-                    observer.unobserve(entry.target);
+                try {
+                    // محاولة استخدام واجهة المشاركة الحديثة أولاً
+                    await navigator.share(shareData);
+                    console.log('تمت المشاركة بنجاح');
+                } catch (err) {
+                    // إذا فشلت (بسبب عدم الدعم، رفض الإذن، إلخ)، يتم اللجوء إلى نسخ الرابط
+                    console.log('فشلت واجهة المشاركة، سيتم اللجوء لنسخ الرابط:', err);
+                    
+                    // إنشاء عنصر textarea مؤقت لحمل النص المراد نسخه
+                    const textArea = document.createElement('textarea');
+                    textArea.value = window.location.href;
+                    
+                    // جعل العنصر غير مرئي
+                    textArea.style.position = 'fixed';
+                    textArea.style.top = '-9999px';
+                    textArea.style.left = '-9999px';
+                    
+                    document.body.appendChild(textArea);
+                    
+                    // تحديد النص ونسخه
+                    textArea.select();
+                    try {
+                        document.execCommand('copy');
+                        alert('تم نسخ رابط التطبيق إلى الحافظة!');
+                    } catch (copyErr) {
+                        console.error('فشل النسخ الاحتياطي:', copyErr);
+                        alert('عفواً، لم نتمكن من نسخ الرابط. الرجاء نسخه يدوياً.');
+                    }
+                    
+                    // إزالة العنصر المؤقت
+                    document.body.removeChild(textArea);
                 }
             });
-        }, observerOptions);
 
-        fadeInSections.forEach(section => {
-            observer.observe(section);
+            // الكود الخاص بالـ fade-in sections
+            const fadeInSections = document.querySelectorAll('.fade-in-section');
+            const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            fadeInSections.forEach(section => observer.observe(section));
         });
-    });
     </script>
 </body>
 </html>
