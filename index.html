@@ -38,12 +38,20 @@
     <!-- Header -->
     <header class="bg-white shadow-md">
         <div class="max-w-5xl mx-auto py-6 px-4 text-center relative">
-            <!-- Share Button -->
-            <button id="share-button" class="absolute top-1/2 -translate-y-1/2 left-4 p-2 rounded-full text-gray-600 hover:bg-gray-200 transition">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z" />
-                </svg>
-            </button>
+            <div class="absolute top-1/2 -translate-y-1/2 left-4 flex gap-2">
+                <!-- Share Button -->
+                <button id="share-button" class="p-2 rounded-full text-gray-600 hover:bg-gray-200 transition" title="مشاركة التطبيق">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z" />
+                    </svg>
+                </button>
+                <!-- Install App Button (Hidden by default) -->
+                <button id="install-button" class="hidden p-2 rounded-full text-gray-600 hover:bg-gray-200 transition" title="تثبيت التطبيق">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                    </svg>
+                </button>
+            </div>
             <h1 class="text-4xl font-bold text-brand-green font-title">هناده دكسن</h1>
             <p class="mt-2 text-lg text-gray-600">دليلك لاستكشاف عالم الصحة والفرص مع دكسن</p>
         </div>
@@ -120,53 +128,66 @@
         <p>&copy; 2025 دليل هناده دكسن. جميع الحقوق محفوظة.</p>
     </footer>
 
-    <!-- Share functionality script -->
+    <!-- Scripts -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const shareButton = document.getElementById('share-button');
+            const installButton = document.getElementById('install-button');
             
+            // --- Share Functionality ---
             shareButton.addEventListener('click', async () => {
                 const shareData = {
                     title: 'دليل هناده دكسن',
                     text: 'اكتشفي عالم الصحة والفرص مع دكسن من خلال هذا الدليل الشامل!',
                     url: window.location.href
                 };
-
                 try {
-                    // محاولة استخدام واجهة المشاركة الحديثة أولاً
                     await navigator.share(shareData);
-                    console.log('تمت المشاركة بنجاح');
                 } catch (err) {
-                    // إذا فشلت (بسبب عدم الدعم، رفض الإذن، إلخ)، يتم اللجوء إلى نسخ الرابط
                     console.log('فشلت واجهة المشاركة، سيتم اللجوء لنسخ الرابط:', err);
-                    
-                    // إنشاء عنصر textarea مؤقت لحمل النص المراد نسخه
                     const textArea = document.createElement('textarea');
                     textArea.value = window.location.href;
-                    
-                    // جعل العنصر غير مرئي
                     textArea.style.position = 'fixed';
                     textArea.style.top = '-9999px';
                     textArea.style.left = '-9999px';
-                    
                     document.body.appendChild(textArea);
-                    
-                    // تحديد النص ونسخه
                     textArea.select();
                     try {
                         document.execCommand('copy');
                         alert('تم نسخ رابط التطبيق إلى الحافظة!');
                     } catch (copyErr) {
-                        console.error('فشل النسخ الاحتياطي:', copyErr);
                         alert('عفواً، لم نتمكن من نسخ الرابط. الرجاء نسخه يدوياً.');
                     }
-                    
-                    // إزالة العنصر المؤقت
                     document.body.removeChild(textArea);
                 }
             });
 
-            // الكود الخاص بالـ fade-in sections
+            // --- PWA Install Functionality ---
+            let deferredPrompt;
+            window.addEventListener('beforeinstallprompt', (e) => {
+                // منع المتصفح من إظهار رسالة التثبيت التلقائية
+                e.preventDefault();
+                // حفظ الحدث لاستخدامه لاحقًا
+                deferredPrompt = e;
+                // إظهار زر التثبيت الخاص بنا
+                installButton.classList.remove('hidden');
+            });
+
+            installButton.addEventListener('click', async () => {
+                if (deferredPrompt) {
+                    // إظهار رسالة التثبيت
+                    deferredPrompt.prompt();
+                    // انتظار المستخدم لاتخاذ قرار
+                    const { outcome } = await deferredPrompt.userChoice;
+                    console.log(`User response to the install prompt: ${outcome}`);
+                    // لم يعد بإمكاننا استخدام نفس الحدث مرة أخرى
+                    deferredPrompt = null;
+                    // إخفاء الزر بعد اتخاذ القرار
+                    installButton.classList.add('hidden');
+                }
+            });
+
+            // --- Fade-in Sections ---
             const fadeInSections = document.querySelectorAll('.fade-in-section');
             const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
             const observer = new IntersectionObserver((entries, observer) => {
