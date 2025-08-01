@@ -1,20 +1,16 @@
-self.addEventListener("install", function(e) {
-  e.waitUntil(
-    caches.open("hanada-cache").then(function(cache) {
-      return cache.addAll([
-        "/HANADA-DXN/",
-        "/HANADA-DXN/index.html",
-        "/HANADA-DXN/icons/icon-192.png",
-        "/HANADA-DXN/icons/icon-512.png"
-      ]);
-    })
-  );
+// This is a basic service worker file.
+
+self.addEventListener('install', event => {
+  console.log('Service worker installing...');
+  // Add a call to skipWaiting here
+  self.skipWaiting();
 });
 
-self.addEventListener("fetch", function(e) {
-  e.respondWith(
-    caches.match(e.request).then(function(response) {
-      return response || fetch(e.request);
-    })
-  );
+self.addEventListener('activate', event => {
+  console.log('Service worker activating...');
+});
+
+self.addEventListener('fetch', event => {
+  // We are not caching anything in this basic example
+  event.respondWith(fetch(event.request));
 });
